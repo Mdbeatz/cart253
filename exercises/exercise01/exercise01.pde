@@ -17,11 +17,11 @@ void setup() {
   size(640, 480); // sets the size of the window
   circleX = width/2; // assigns circleX the value of half the width of the window
   circleY = height/2; // assigns circleY the value of half the height of the window
-  circleVX = CIRCLE_SPEED; // assigns the value of CIRCLE_SPEED of 7
-  circleVY = CIRCLE_SPEED;
-  stroke(STROKE_COLOR);
-  fill(NO_CLICK_FILL_COLOR);
-  background(BACKGROUND_COLOR);
+  circleVX = CIRCLE_SPEED; // assigns the value of CIRCLE_SPEED, which is 7
+  circleVY = CIRCLE_SPEED; // assigns the value of CIRCLE_SPEED, which is 7
+  stroke(STROKE_COLOR); // assigns the value of STROKE_COLOR to the stroke, which is (250, 150, 150)
+  fill(NO_CLICK_FILL_COLOR); // assigns the fill colour of the circle, which is (250, 100, 100)
+  background(BACKGROUND_COLOR); // assigns the background colour, which is (250, 150, 150)
 }
 
 // draw()
@@ -46,7 +46,17 @@ void draw() {
 
 // mousePressed()
 // 
-// Declares what happens the mouse is pressed/clicked
+// Called when the mouse button goes down
+// Resets the window
 void mousePressed() {
-  background(BACKGROUND_COLOR); // resets the window with the original background colour of (250, 150, 150)
+  //background(BACKGROUND_COLOR); // resets the window with the original background colour of (250, 150, 150)
+  background(random(250), random(250), random(250)); // assigns a random RGB value for the background so a random bg colour appears every time a user clicks
+}
+
+// keyPressed()
+//
+// Called when any key is pressed
+// Resets the window
+void keyPressed() {
+  background(random(250), random(250), random(250));
 }
