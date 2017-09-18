@@ -26,15 +26,17 @@ void setup() {
 
 // draw()
 //
-// Draws
+// 
 void draw() {
+  // if the mouse position is in the center of the circle, then the circles
+  // will change colour for as long as the mouse stays in the center
   if (dist(mouseX, mouseY, circleX, circleY) < CIRCLE_SIZE/2) {
     fill(CLICK_FILL_COLOR);
   } else {
     fill(NO_CLICK_FILL_COLOR);
   }
-  ellipse(circleX, circleY, CIRCLE_SIZE, CIRCLE_SIZE);
-  circleX += circleVX;
+  ellipse(circleX, circleY, CIRCLE_SIZE, CIRCLE_SIZE); // creates the circle starting in the middle of the window and with a size of 50
+  circleX += circleVX; // 
   circleY += circleVY;
   if (circleX + CIRCLE_SIZE/2 > width || circleX - CIRCLE_SIZE/2 < 0) {
     circleVX = -circleVX;
