@@ -5,11 +5,13 @@ final color BACKGROUND_COLOR = color(250, 150, 150);
 final color STROKE_COLOR = color(250, 150, 150);
 final int CIRCLE_SIZE = 50;
 
-int circleX; 
-int circleY; 
-int circleVX; 
-int circleVY; 
+int circleX; // Declare an int named circleX
+int circleY; // Declare an int named circleY
+int circleVX; // Declare an int named circleVX for horizontal velocity
+int circleVY; // Declare an int named circleVY for vertical velocity
 
+// setup()
+//
 void setup() {
   size(640, 480);
   circleX = width/2;
@@ -21,6 +23,8 @@ void setup() {
   background(BACKGROUND_COLOR);
 }
 
+// draw()
+//
 void draw() {
   if (dist(mouseX, mouseY, circleX, circleY) < CIRCLE_SIZE/2) {
     fill(CLICK_FILL_COLOR);
@@ -38,6 +42,9 @@ void draw() {
   }
 }
 
+// mousePressed()
+// 
+// Declare what happens on mouse down
 void mousePressed() {
-  background(BACKGROUND_COLOR);
+  background(BACKGROUND_COLOR); // resets the window with the background colour
 }
