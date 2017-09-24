@@ -26,7 +26,7 @@ void setup() {
 
 // draw()
 //
-// 
+// where the magic happens
 void draw() {
   // if the mouse position is in the center of the circle, then the circles
   // will change colour for as long as the mouse stays in the center
@@ -38,9 +38,15 @@ void draw() {
   ellipse(circleX, circleY, CIRCLE_SIZE, CIRCLE_SIZE); // creates the circle starting in the middle of the window and with a size of 50
   circleX += circleVX; // 
   circleY += circleVY;
+  
+  // Stops the circle from exiting the window from the left or right
+  // Uses a negative velocity so the circle "bounces" off the left and right sides of the window
   if (circleX + CIRCLE_SIZE/2 > width || circleX - CIRCLE_SIZE/2 < 0) {
     circleVX = -circleVX;
   }
+  
+  // Stops the circle from exiting the window from the top or bottom
+  // Uses a negative velocity so the circle "bounces" off the top and bottom sides of the window
   if (circleY + CIRCLE_SIZE/2 > height || circleY - CIRCLE_SIZE/2 < 0) {
     circleVY = -circleVY;
   }
