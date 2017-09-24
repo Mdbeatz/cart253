@@ -10,6 +10,8 @@ int circleY; // Declares an int named circleY, the y coordinate of the center of
 int circleVX; // Declares an int named circleVX for horizontal velocity
 int circleVY; // Declares an int named circleVY for vertical velocity
 
+int fillColourCount; // Declared an int named fillColourCount to store/hold the count of how many times the fill colour changes
+
 // setup()
 //
 // Sets the size, circle location, velocity, stroke, fill and background.
@@ -32,6 +34,12 @@ void draw() {
   // will change colour for as long as the mouse stays in the center
   if (dist(mouseX, mouseY, circleX, circleY) < CIRCLE_SIZE/2) {
     fill(CLICK_FILL_COLOR);
+    
+    fillColourCount++;
+    // Changes the fill colour when it is in the center of the circle to yellow after it's been changed 20 times
+    if (fillColourCount > 20) {
+      fill(255, 255, 0);
+    }
   } else {
     fill(NO_CLICK_FILL_COLOR);
   }
@@ -67,6 +75,7 @@ void draw() {
 void mousePressed() {
   //background(BACKGROUND_COLOR); // resets the window with the original background colour of (250, 150, 150)
   background(random(250), random(250), random(250)); // assigns a random RGB value for the background so a random bg colour appears every time a user clicks
+  fillColourCount = 0; // Resets the count to 0 so it can start over again once the window is refreshed
 }
 
 // keyPressed()
@@ -75,4 +84,5 @@ void mousePressed() {
 // Resets the window
 void keyPressed() {
   background(random(250), random(250), random(250)); // assigns a random RGB value for the background so a random bg colour appears every time a user clicks
+    fillColourCount = 0; // Resets the count to 0 so it can start over again once the window is refreshed
 }
