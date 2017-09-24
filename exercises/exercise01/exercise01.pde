@@ -35,8 +35,16 @@ void draw() {
   } else {
     fill(NO_CLICK_FILL_COLOR);
   }
-  ellipse(circleX, circleY, CIRCLE_SIZE, CIRCLE_SIZE); // creates the circle starting in the middle of the window and with a size of 50
-  circleX += circleVX; // 
+  
+  // if the mouse position is anywhere in the bottom right corner the circle size will increase,
+  // else, the circle will be created with the values being called
+  if (mouseX > (width/2) && mouseY > (height/2)) {
+    ellipse(circleX, circleY, 80, 80);
+  } else {
+    ellipse(circleX, circleY, CIRCLE_SIZE, CIRCLE_SIZE); // creates the circle starting in the middle of the window and with a size of 50
+  }
+  
+  circleX += circleVX; 
   circleY += circleVY;
   
   // Stops the circle from exiting the window from the left or right
