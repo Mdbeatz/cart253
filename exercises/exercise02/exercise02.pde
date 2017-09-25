@@ -143,7 +143,7 @@ void drawBall() {
 // handleBallHitPaddle()
 //
 // function is called when ballOverlapsPaddle() returns TRUE
-// when is it TRUE, the ball will bounce off the paddle in a negative velocity going upwards
+// when TRUE, the ball will bounce off the paddle in a negative velocity going upwards
 void handleBallHitPaddle() {
   if (ballOverlapsPaddle()) {
     ballY = paddleY - paddleHeight/2 - ballSize/2;
