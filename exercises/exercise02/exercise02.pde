@@ -186,8 +186,14 @@ boolean ballOverlapsPaddle() {
 // if the ball exits the window the ball gets spawned in the center of the window
 void handleBallOffBottom() {
   if (ballOffBottom()) {
-    ballX = width/2;
-    ballY = height/2;
+    //ballX = width/2;
+    //ballY = height/2;
+    
+    // CHANGED the location of where the ball will spawn
+    // the ball will now spawn at any random X and Y coordinate within the window
+    ballX = (int)random(width);
+    ballY = (int)random(height);
+    
     //backgroundColor = color(0);
   }
 }
