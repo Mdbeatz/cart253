@@ -82,13 +82,18 @@ void draw() {
 
 // drawStatic()
 //
-// 
+// creates an infinite loop for the static background effect
 void drawStatic() {
   for (int i = 0; i < numStatic; i++) {
+    // creates a random value between 0 and the width of the window for x
     float x = random(0, width);
+    // creates a random value between 0 and the height of the window for y
     float y = random(0, height);
+    // creates random sized static pixels between sizes 1 and 3
     float staticSize = random(staticSizeMin, staticSizeMax);
+    // calls the colour
     fill(staticColor);
+    // positions the static pixels randomly within the window
     rect(x, y, staticSize, staticSize);
   }
 }
@@ -103,7 +108,7 @@ void updatePaddle() {
 
 // updateBall()
 //
-//
+// calls the handleBallHitPaddle(), handleBallHitWall() and handleBallOffBottom() functions
 void updateBall() {
   ballX += ballVX;
   ballY += ballVY;
@@ -115,8 +120,9 @@ void updateBall() {
 
 // drawPaddle()
 //
-// 
+// creates the paddle
 void drawPaddle() {
+  // allows paddleX and paddleY to be the center point
   rectMode(CENTER);
   noStroke();
   fill(paddleColor);
@@ -125,8 +131,9 @@ void drawPaddle() {
 
 // drawBall()
 //
-// 
+// creates the ball
 void drawBall() {
+  // allows ballX and ballY to be the center point
   rectMode(CENTER);
   noStroke();
   fill(ballColor);
