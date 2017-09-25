@@ -70,7 +70,7 @@ void setupBall() {
 // calls the drawStatic(), updatePaddle(), updateBall(), drawPaddle() and drawBall() functions
 void draw() {
   background(backgroundColor);
-
+  
   drawStatic();
 
   updatePaddle();
@@ -78,6 +78,12 @@ void draw() {
 
   drawPaddle();
   drawBall();
+  
+  PFont font;
+  font = loadFont("AmericanTypewriter-CondensedBold-48.vlw");
+  textFont(font, 30);
+  textAlign(CENTER);
+  text("SCORE: THE SCORE",width/2,height/5);
 }
 
 // drawStatic()
