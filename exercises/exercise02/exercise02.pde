@@ -144,6 +144,7 @@ void drawBall() {
   ellipseMode(CENTER);
   noStroke();
   fill(ballColor);
+  // CHANGED the shape of the ball from rect to ellipse
   ellipse(ballX, ballY, ballSize, ballSize);
 }
 
