@@ -84,5 +84,5 @@ void mousePressed() {
 // Resets the window
 void keyPressed() {
   background(random(250), random(250), random(250)); // assigns a random RGB value for the background so a random bg colour appears every time a user clicks
-    fillColourCount = 0; // Resets the count to 0 so it can start over again once the window is refreshed
+  fillColourCount = 0; // Resets the count to 0 so it can start over again once the window is refreshed
 }
