@@ -140,6 +140,9 @@ void drawBall() {
   rect(ballX, ballY, ballSize, ballSize);
 }
 
+// handleBallHitPaddle()
+//
+// 
 void handleBallHitPaddle() {
   if (ballOverlapsPaddle()) {
     ballY = paddleY - paddleHeight/2 - ballSize/2;
@@ -147,35 +150,52 @@ void handleBallHitPaddle() {
   }
 }
 
+// ballOverlapsPaddle()
+//
+// 
 boolean ballOverlapsPaddle() {
   if (ballX - ballSize/2 > paddleX - paddleWidth/2 && ballX + ballSize/2 < paddleX + paddleWidth/2) {
     if (ballY > paddleY - paddleHeight/2) {
+      println("hit paddle");
       return true;
     }
   }
   return false;
 }
 
+// handleBallOffBottom()
+//
+// if the ball exits the window the ball gets spawned in the center of the window
 void handleBallOffBottom() {
   if (ballOffBottom()) {
     ballX = width/2;
     ballY = height/2;
+    //backgroundColor = color(0);
   }
 }
 
+// ballOffBottom()
+//
+// checking if the bottom of the ball is more than the height of the window
+// essentially checking if the ball exits the window by the bottom
 boolean ballOffBottom() {
   return (ballY - ballSize/2 > height);
 }
 
+// handleBallHitWall()
+//
+// makes sure the ball does not go off screen
 void handleBallHitWall() {
+  // if the ball hits the left border of the window it will bounce off
   if (ballX - ballSize/2 < 0) {
     ballX = 0 + ballSize/2;
     ballVX = -ballVX;
-  } else if (ballX + ballSize/2 > width) {
+  } else if (ballX + ballSize/2 > width) { // if the ball hits the right border of the window it will bounce off
     ballX = width - ballSize/2;
     ballVX = -ballVX;
   }
 
+  // if the ball hits the top border of the window it will bounce off
   if (ballY - ballSize/2 < 0) {
     ballY = 0 + ballSize/2;
     ballVY = -ballVY;
