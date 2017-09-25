@@ -82,9 +82,9 @@ void draw() {
   // Loads a .vlw formatted font into a PFont object
   PFont font;
   font = loadFont("AmericanTypewriter-CondensedBold-48.vlw");
-  textFont(font, 30);
+  textFont(font, 60);
   textAlign(CENTER);
-  text("SCORE: THE SCORE",width/2,height/5);
+  text("PONG",width/2,height/5);
 }
 
 // drawStatic()
