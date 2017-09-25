@@ -1,5 +1,5 @@
 // creates the background colour
-color backgroundColor = color(255,204,153); // CHANGED background colour
+color backgroundColor = color(255, 204, 153); // CHANGED background colour
 
 // assigns the pixels for the static
 int numStatic = 200; // CHANGED the value
@@ -103,7 +103,7 @@ void drawStatic() {
 //
 void updatePaddle() {
   paddleX += paddleVX;  
-  paddleX = constrain(paddleX, 0+paddleWidth/2, width-paddleWidth/2);
+  paddleX = constrain(paddleX, 0 + paddleWidth/2, width - paddleWidth/2);
 }
 
 // updateBall()
@@ -142,7 +142,8 @@ void drawBall() {
 
 // handleBallHitPaddle()
 //
-// 
+// function is called when ballOverlapsPaddle() returns TRUE
+// when is it TRUE, the ball will bounce off the paddle in a negative velocity going upwards
 void handleBallHitPaddle() {
   if (ballOverlapsPaddle()) {
     ballY = paddleY - paddleHeight/2 - ballSize/2;
@@ -152,11 +153,12 @@ void handleBallHitPaddle() {
 
 // ballOverlapsPaddle()
 //
-// 
+// if the ball hits the paddle, function will return TRUE
+// if the ball does NOT hit the paddle, function will return FALSE
 boolean ballOverlapsPaddle() {
   if (ballX - ballSize/2 > paddleX - paddleWidth/2 && ballX + ballSize/2 < paddleX + paddleWidth/2) {
     if (ballY > paddleY - paddleHeight/2) {
-      println("hit paddle");
+      //println("hit paddle"); // testing for my own purposes
       return true;
     }
   }
