@@ -24,6 +24,7 @@ void setup() {
   stroke(STROKE_COLOR); // assigns the value of STROKE_COLOR to the stroke, which is (250, 150, 150)
   fill(NO_CLICK_FILL_COLOR); // assigns the fill colour of the circle, which is (250, 100, 100)
   background(BACKGROUND_COLOR); // assigns the background colour, which is (250, 150, 150)
+  
 }
 
 // draw()
@@ -54,6 +55,10 @@ void draw() {
   
   circleX += circleVX; 
   circleY += circleVY;
+  
+  
+
+  
   
   // Stops the circle from exiting the window from the left or right
   // Uses a negative velocity so the circle "bounces" off the left and right sides of the window
