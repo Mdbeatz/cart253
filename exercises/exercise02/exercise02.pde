@@ -154,11 +154,14 @@ void drawBall() {
 // when TRUE, the ball will bounce off the paddle in a negative velocity going upwards
 void handleBallHitPaddle() {
   if (ballOverlapsPaddle()) {
-    // changing the fill of the ball to a random colour when it bounces off the paddle
-    ballColor= color (random(255), random(255), random(255));
+    // CHANGED the fill of the ball to a random colour when it bounces off the paddle
+    ballColor = color (random(255), random(255), random(255));
+    
     while (ballColor == backgroundColor) {
-      ballColor= color (random(255), random(255), random(255));
+      ballColor = color (random(255), random(255), random(255));
     }
+    
+    // when TRUE, the ball will bounce off the paddle in a negative velocity going upwards
     ballY = paddleY - paddleHeight/2 - ballSize/2;
     ballVY = -ballVY;
   } 
