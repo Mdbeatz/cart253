@@ -1,27 +1,41 @@
 // creates the background colour
 color backgroundColor = color(255,204,153); // CHANGED background colour
 
-int numStatic = 1000;
+// assigns the pixels for the static
+int numStatic = 200; // CHANGED the value
+// assigns the minimum size for the static pixels
 int staticSizeMin = 1;
+// assigns the maximum size for the static pixels
 int staticSizeMax = 3;
 color staticColor = color(255);
 
 int paddleX;
 int paddleY;
 int paddleVX;
+// assigns the velocity for the paddle
 int paddleSpeed = 10;
+// assigns the width for the paddle
 int paddleWidth = 128;
+// assigns the height for the paddle
 int paddleHeight = 16;
+// assigns the colour for the paddle
 color paddleColor = color(255);
 
 int ballX;
 int ballY;
 int ballVX;
 int ballVY;
+// assigns the velocity for the ball
 int ballSpeed = 5;
+// assigns the diameter for the ball
 int ballSize = 16;
+// assigns colour for the ball
 color ballColor = color(255);
 
+// setup()
+//
+// sets the size of the window
+// calls the setupPaddle() and setupBall() functions
 void setup() {
   size(640, 480);
 
@@ -29,12 +43,18 @@ void setup() {
   setupBall();
 }
 
+// setupPaddle()
+//
+// 
 void setupPaddle() {
   paddleX = width/2;
   paddleY = height - paddleHeight;
   paddleVX = 0;
 }
 
+// setupBall()
+//
+//
 void setupBall() {
   ballX = width/2;
   ballY = height/2;
@@ -42,6 +62,9 @@ void setupBall() {
   ballVY = ballSpeed;
 }
 
+// draw()
+//
+//
 void draw() {
   background(backgroundColor);
 
@@ -54,6 +77,9 @@ void draw() {
   drawBall();
 }
 
+// drawStatic()
+//
+//
 void drawStatic() {
   for (int i = 0; i < numStatic; i++) {
     float x = random(0, width);
@@ -64,11 +90,17 @@ void drawStatic() {
   }
 }
 
+// updatePaddle()
+//
+//
 void updatePaddle() {
   paddleX += paddleVX;  
   paddleX = constrain(paddleX, 0+paddleWidth/2, width-paddleWidth/2);
 }
 
+// updateBall()
+//
+//
 void updateBall() {
   ballX += ballVX;
   ballY += ballVY;
@@ -78,6 +110,9 @@ void updateBall() {
   handleBallOffBottom();
 }
 
+// drawPaddle()
+//
+//
 void drawPaddle() {
   rectMode(CENTER);
   noStroke();
