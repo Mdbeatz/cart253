@@ -32,6 +32,8 @@ int ballSize = 16;
 // assigns colour for the ball
 color ballColor = color(0); // CHANGED colour
 
+int score = 0;
+
 // setup()
 //
 // sets the size of the window
@@ -79,12 +81,7 @@ void draw() {
   drawPaddle();
   drawBall();
   
-  // Loads a .vlw formatted font into a PFont object
-  PFont font;
-  font = loadFont("AmericanTypewriter-CondensedBold-48.vlw");
-  textFont(font, 60);
-  textAlign(CENTER);
-  text("PONG",width/2,height/5);
+  scores();
 }
 
 // drawStatic()
@@ -161,6 +158,8 @@ void handleBallHitPaddle() {
       ballColor = color (random(255), random(255), random(255));
     }
     
+    score++;
+    
     // when TRUE, the ball will bounce off the paddle in a negative velocity going upwards
     ballY = paddleY - paddleHeight/2 - ballSize/2;
     ballVY = -ballVY;
@@ -194,7 +193,7 @@ void handleBallOffBottom() {
     ballX = (int)random(width);
     ballY = (int)random(height);
     
-    //backgroundColor = color(0);
+    score--;
   }
 }
 
@@ -224,6 +223,21 @@ void handleBallHitWall() {
     ballY = 0 + ballSize/2;
     ballVY = -ballVY;
   }
+}
+
+// scores()
+//
+//
+void scores() {
+  // Loads a .vlw formatted font into a PFont object
+  PFont font;
+  font = loadFont("AmericanTypewriter-CondensedBold-48.vlw");
+  textFont(font, 60);
+  textAlign(CENTER);
+  text("PONG",width/2,height/5);
+  textFont(font, 30);
+  textAlign(CENTER);
+  text("SCORE: " + score,width/2,height/3); 
 }
 
 // keyPressed()
