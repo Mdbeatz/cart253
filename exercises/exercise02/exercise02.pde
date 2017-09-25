@@ -1,9 +1,10 @@
-color backgroundColor = color(0);
+// creates the background colour
+color backgroundColor = color(255,204,153); // CHANGED background colour
 
 int numStatic = 1000;
 int staticSizeMin = 1;
 int staticSizeMax = 3;
-color staticColor = color(200);
+color staticColor = color(255);
 
 int paddleX;
 int paddleY;
@@ -133,6 +134,10 @@ void handleBallHitWall() {
   }
 }
 
+// keyPressed()
+//
+// if the left arrow key is pressed the paddle will have a negative velocity making it go left/backwards
+// if the right arrow key is pressed the paddle will have a positive velocity making it to right/forward
 void keyPressed() {
   if (keyCode == LEFT) {
     paddleVX = -paddleSpeed;
@@ -141,6 +146,10 @@ void keyPressed() {
   }
 }
 
+// keyReleased()
+//
+// if the left arrow key is released AND its velocity is less than 0, the paddle will not move/remain in its location
+// if the right arrow key is released AND its velocity is less than 0, the paddle will not move/remain in its location
 void keyReleased() {
   if (keyCode == LEFT && paddleVX < 0) {
     paddleVX = 0;
