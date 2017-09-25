@@ -19,7 +19,7 @@ int paddleWidth = 128;
 // assigns the height for the paddle
 int paddleHeight = 16;
 // assigns the colour for the paddle
-color paddleColor = color(255);
+color paddleColor = color(0); // CHANGED colour
 
 int ballX;
 int ballY;
@@ -30,7 +30,7 @@ int ballSpeed = 5;
 // assigns the diameter for the ball
 int ballSize = 16;
 // assigns colour for the ball
-color ballColor = color(255);
+color ballColor = color(0); // CHANGED colour
 
 // setup()
 //
@@ -45,7 +45,8 @@ void setup() {
 
 // setupPaddle()
 //
-// 
+// the paddle will start off in the bottom center of the window
+// the velocity of the paddle will start off at 0
 void setupPaddle() {
   paddleX = width/2;
   paddleY = height - paddleHeight;
@@ -54,7 +55,8 @@ void setupPaddle() {
 
 // setupBall()
 //
-//
+// the ball will spawn in the center of the window
+// the velocity is called for both the X and Y axis
 void setupBall() {
   ballX = width/2;
   ballY = height/2;
@@ -64,7 +66,8 @@ void setupBall() {
 
 // draw()
 //
-//
+// calls the backgroundColor variable
+// calls the drawStatic(), updatePaddle(), updateBall(), drawPaddle() and drawBall() functions
 void draw() {
   background(backgroundColor);
 
@@ -79,7 +82,7 @@ void draw() {
 
 // drawStatic()
 //
-//
+// 
 void drawStatic() {
   for (int i = 0; i < numStatic; i++) {
     float x = random(0, width);
@@ -112,7 +115,7 @@ void updateBall() {
 
 // drawPaddle()
 //
-//
+// 
 void drawPaddle() {
   rectMode(CENTER);
   noStroke();
@@ -120,6 +123,9 @@ void drawPaddle() {
   rect(paddleX, paddleY, paddleWidth, paddleHeight);
 }
 
+// drawBall()
+//
+// 
 void drawBall() {
   rectMode(CENTER);
   noStroke();
