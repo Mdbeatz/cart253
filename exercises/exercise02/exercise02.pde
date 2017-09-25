@@ -79,6 +79,7 @@ void draw() {
   drawPaddle();
   drawBall();
   
+  // Loads a .vlw formatted font into a PFont object
   PFont font;
   font = loadFont("AmericanTypewriter-CondensedBold-48.vlw");
   textFont(font, 30);
@@ -106,7 +107,7 @@ void drawStatic() {
 
 // updatePaddle()
 //
-//
+// 
 void updatePaddle() {
   paddleX += paddleVX;  
   paddleX = constrain(paddleX, 0 + paddleWidth/2, width - paddleWidth/2);
@@ -140,10 +141,10 @@ void drawPaddle() {
 // creates the ball
 void drawBall() {
   // allows ballX and ballY to be the center point
-  rectMode(CENTER);
+  ellipseMode(CENTER);
   noStroke();
   fill(ballColor);
-  rect(ballX, ballY, ballSize, ballSize);
+  ellipse(ballX, ballY, ballSize, ballSize);
 }
 
 // handleBallHitPaddle()
@@ -152,9 +153,14 @@ void drawBall() {
 // when TRUE, the ball will bounce off the paddle in a negative velocity going upwards
 void handleBallHitPaddle() {
   if (ballOverlapsPaddle()) {
+    // changing the fill of the ball to a random colour when it bounces off the paddle
+    ballColor= color (random(255), random(255), random(255));
+    while (ballColor == backgroundColor) {
+      ballColor= color (random(255), random(255), random(255));
+    }
     ballY = paddleY - paddleHeight/2 - ballSize/2;
     ballVY = -ballVY;
-  }
+  } 
 }
 
 // ballOverlapsPaddle()
