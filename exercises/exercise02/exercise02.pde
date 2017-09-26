@@ -33,8 +33,8 @@ int ballSize = 16;
 color ballColor = color(0); // CHANGED colour
 
 int score = 0;
-int winningScore = 2;
-int losingScore = -2;
+int winningScore = 10;
+int losingScore = -10;
 
 // setup()
 //
