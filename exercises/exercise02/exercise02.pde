@@ -267,11 +267,14 @@ void displayGameOver(String text, color c) {
   
   text("GAME OVER", width/2, height/2);
   fill(c);
-  text(text, width/2, height/2);
+  text(text, width/2, (height/2 + 30));
+  text("Click or Press Enter", width/2, (height/2 + 60));
   
   if (mousePressed || (keyCode == ENTER)) {
     score = 0;
+
     ballSpeed = 10;
+    
     ballVX = ballSpeed;
     ballVY = ballSpeed;
   }
