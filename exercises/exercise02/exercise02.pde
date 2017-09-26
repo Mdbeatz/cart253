@@ -69,7 +69,7 @@ void setupBall() {
 // draw()
 //
 // calls the backgroundColor variable
-// calls the drawStatic(), updatePaddle(), updateBall(), drawPaddle() and drawBall() functions
+// calls the drawStatic(), updatePaddle(), updateBall(), drawPaddle(), drawBall() and displayScore() functions
 void draw() {
   background(backgroundColor);
   
@@ -81,7 +81,7 @@ void draw() {
   drawPaddle();
   drawBall();
   
-  scores();
+  displayScore();
 }
 
 // drawStatic()
@@ -158,6 +158,7 @@ void handleBallHitPaddle() {
       ballColor = color (random(255), random(255), random(255));
     }
     
+    // adds 1 to the score value
     score++;
     
     // when TRUE, the ball will bounce off the paddle in a negative velocity going upwards
@@ -193,6 +194,7 @@ void handleBallOffBottom() {
     ballX = (int)random(width);
     ballY = (int)random(height);
     
+    // subtracts the score value by 1
     score--;
   }
 }
@@ -225,10 +227,10 @@ void handleBallHitWall() {
   }
 }
 
-// scores()
+// displayScore()
 //
 //
-void scores() {
+void displayScore() {
   // Loads a .vlw formatted font into a PFont object
   PFont font;
   font = loadFont("AmericanTypewriter-CondensedBold-48.vlw");
