@@ -26,13 +26,15 @@ int ballY;
 int ballVX;
 int ballVY;
 // assigns the velocity for the ball
-int ballSpeed = 5;
+int ballSpeed = 6; // CHANGEd value of the ball velocity
 // assigns the diameter for the ball
 int ballSize = 16;
 // assigns colour for the ball
 color ballColor = color(0); // CHANGED colour
 
 int score = 0;
+int winningScore = 2;
+int losingScore = -2;
 
 // setup()
 //
@@ -82,6 +84,7 @@ void draw() {
   drawBall();
   
   displayScore();
+  gameOver();
 }
 
 // drawStatic()
@@ -238,8 +241,40 @@ void displayScore() {
   textAlign(CENTER);
   text("PONG",width/2,height/5);
   textFont(font, 30);
-  textAlign(CENTER);
   text("SCORE: " + score,width/2,height/3); 
+}
+
+// gameOver()
+//
+//
+void gameOver() {
+  if (score == winningScore) {
+    displayGameOver("YOU WIN!", color(255));
+  }
+  
+  if (score == losingScore) {
+    displayGameOver("YOU LOSE!", color(255));
+  }
+}
+
+// displayGameOver
+//
+//
+void displayGameOver(String text, color c) {
+  paddleVX = 0;
+  ballVX = 0;
+  ballVY = 0;
+  
+  text("GAME OVER", width/2, height/2);
+  fill(c);
+  text(text, width/2, height/2);
+  
+  if (mousePressed || (keyCode == ENTER)) {
+    score = 0;
+    ballSpeed = 10;
+    ballVX = ballSpeed;
+    ballVY = ballSpeed;
+  }
 }
 
 // keyPressed()
