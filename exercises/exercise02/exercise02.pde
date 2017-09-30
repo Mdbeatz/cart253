@@ -76,7 +76,8 @@ void setupBall() {
 // calls the backgroundColor variable
 // calls the drawStatic(), updatePaddle(), updateBall(), drawPaddle(), drawBall() and displayScore() functions
 void draw() {
-  background(backgroundColor1);
+  changeBackgroundColor();
+  //background(backgroundColor1);
 
   drawStatic();
 
@@ -91,7 +92,25 @@ void draw() {
 }
 
 void changeBackgroundColor() {
-  
+
+  if (ballX > (width/2)) {
+    background(backgroundColor1);
+  } else {
+    background(backgroundColor2);
+  }
+
+  //if (ballX > (width/2) && ballY > (height/2)){
+  //  background(backgroundColor1);
+  //}
+  //if (){
+  //  background(backgroundColor2);
+  //}
+  //if (){
+  //  background(backgroundColor3);
+  //}
+  //if (){
+  //  background(backgroundColor4);
+  //}
 }
 
 // drawStatic()
