@@ -169,7 +169,8 @@ void handleBallHitPaddle() {
   if (ballOverlapsPaddle()) {
     // CHANGED the fill of the ball to a random colour when it bounces off the paddle
     ballColor = color (random(255), random(255), random(255));
-
+    
+    // making sure the random ball color never gets assigned the same RGB values as the background colors
     while (ballColor == backgroundColor1 || ballColor == backgroundColor2 || ballColor == backgroundColor3 || ballColor == backgroundColor3) {
       ballColor = color (random(255), random(255), random(255));
     }
