@@ -94,8 +94,7 @@ void draw() {
 //
 // Background color changes based on the X and Y coordinates of the ball's center
 void changeBackgroundColor() {
-  // upper left, peach orange
-  if (ballX < (width/2) && ballY < (height/2)) {
+  if (ballX < (width/2) && ballY < (height/2)) { // upper left, peach orange
     background(backgroundColor1);
   } else if (ballX > (width/2) && ballY < (height/2)) { // upper right, bubblegum pink
     background(backgroundColor2);
