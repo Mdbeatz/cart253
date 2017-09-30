@@ -1,4 +1,4 @@
-// creates the background colour
+// background colours
 color backgroundColor1 = color(255, 204, 153); // peach orange
 color backgroundColor2 = color(255, 153, 204); // bubblegum pink
 color backgroundColor3 = color(153, 204, 255); // sky blue 
@@ -102,7 +102,7 @@ void changeBackgroundColor() {
     background(backgroundColor3);
   } else if (ballX > (width/2) && ballY > (height/2)) { // bottom right, pale green
     background(backgroundColor4);
-  }  
+  }
 }
 
 // drawStatic()
@@ -175,7 +175,7 @@ void handleBallHitPaddle() {
     // CHANGED the fill of the ball to a random colour when it bounces off the paddle
     ballColor = color (random(255), random(255), random(255));
 
-    while (ballColor == backgroundColor1) {
+    while (ballColor == backgroundColor1 || ballColor == backgroundColor2 || ballColor == backgroundColor3 || ballColor == backgroundColor3) {
       ballColor = color (random(255), random(255), random(255));
     }
 
@@ -268,10 +268,26 @@ void displayScore() {
 void gameOver() {
   if (score == winningScore) {
     displayGameOver("YOU WIN!", color(255));
+
+    if (mousePressed || (keyCode == ENTER)) {
+      score = 0;
+
+      ballSpeed = 10;
+
+      ballVX = ballSpeed;
+      ballVY = ballSpeed;
+    }
   }
 
   if (score == losingScore) {
     displayGameOver("YOU LOSE!", color(255));
+
+    if (mousePressed || (keyCode == ENTER)) {
+      score = 0;
+      
+      ballVX = ballSpeed;
+      ballVY = ballSpeed;
+    }
   }
 }
 
@@ -288,14 +304,14 @@ void displayGameOver(String text, color c) {
   text(text, width/2, (height/2 + 30));
   text("Click or Press Enter", width/2, (height/2 + 60));
 
-  if (mousePressed || (keyCode == ENTER)) {
-    score = 0;
+  //if (mousePressed || (keyCode == ENTER)) {
+  //  score = 0;
 
-    ballSpeed = 10;
+  //  ballSpeed = 10;
 
-    ballVX = ballSpeed;
-    ballVY = ballSpeed;
-  }
+  //  ballVX = ballSpeed;
+  //  ballVY = ballSpeed;
+  //}
 }
 
 // keyPressed()
