@@ -67,7 +67,7 @@ void setupBall() {
 // calls the backgroundColor variable
 // calls the drawStatic(), updatePaddle(), updateBall(), drawPaddle(), drawBall() and displayScore() functions
 void draw() {
-  changeBackgroundColor(); // CHANGED 
+  changeBackgroundColor();  
 
   drawStatic();
 
