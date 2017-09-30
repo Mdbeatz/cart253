@@ -97,11 +97,11 @@ void changeBackgroundColor() {
   // upper left, peach orange
   if (ballX < (width/2) && ballY < (height/2)) {
     background(backgroundColor1);
-  } else if (ballX > (width/2) && ballY < (height/2)) {
+  } else if (ballX > (width/2) && ballY < (height/2)) { // upper right, bubblegum pink
     background(backgroundColor2);
-  } else if (ballX < (width/2) && ballY > (height/2)) {
+  } else if (ballX < (width/2) && ballY > (height/2)) { // bottom left, sky blue
     background(backgroundColor3);
-  } else if (ballX > (width/2) && ballY > (height/2)) {
+  } else if (ballX > (width/2) && ballY > (height/2)) { // bottom right, pale green
     background(backgroundColor4);
   }  
 }
