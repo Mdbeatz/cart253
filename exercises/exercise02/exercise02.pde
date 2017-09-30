@@ -1,8 +1,8 @@
 // creates the background colour
-color backgroundColor1 = color(255, 204, 153);
-color backgroundColor2 = color(255, 153, 204);
-color backgroundColor3 = color(153, 204, 255);
-color backgroundColor4 = color(153, 255, 204);
+color backgroundColor1 = color(255, 204, 153); // peach orange
+color backgroundColor2 = color(255, 153, 204); // bubblegum pink
+color backgroundColor3 = color(153, 204, 255); // sky blue 
+color backgroundColor4 = color(153, 255, 204); // pale green
 
 // assigns the pixels for the static
 int numStatic = 200; // CHANGED the value
@@ -76,8 +76,7 @@ void setupBall() {
 // calls the backgroundColor variable
 // calls the drawStatic(), updatePaddle(), updateBall(), drawPaddle(), drawBall() and displayScore() functions
 void draw() {
-  changeBackgroundColor();
-  //background(backgroundColor1);
+  changeBackgroundColor(); // CHANGED 
 
   drawStatic();
 
@@ -91,26 +90,20 @@ void draw() {
   gameOver();
 }
 
+// changeBackgroundColor()
+//
+// Background color changes based on the X and Y coordinates of the ball's center
 void changeBackgroundColor() {
-
-  if (ballX > (width/2)) {
+  // upper left, peach orange
+  if (ballX < (width/2) && ballY < (height/2)) {
     background(backgroundColor1);
-  } else {
+  } else if (ballX > (width/2) && ballY < (height/2)) {
     background(backgroundColor2);
-  }
-
-  //if (ballX > (width/2) && ballY > (height/2)){
-  //  background(backgroundColor1);
-  //}
-  //if (){
-  //  background(backgroundColor2);
-  //}
-  //if (){
-  //  background(backgroundColor3);
-  //}
-  //if (){
-  //  background(backgroundColor4);
-  //}
+  } else if (ballX < (width/2) && ballY > (height/2)) {
+    background(backgroundColor3);
+  } else if (ballX > (width/2) && ballY > (height/2)) {
+    background(backgroundColor4);
+  }  
 }
 
 // drawStatic()
