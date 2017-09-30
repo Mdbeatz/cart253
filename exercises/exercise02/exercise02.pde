@@ -22,13 +22,13 @@ int ballX;
 int ballY;
 int ballVX;
 int ballVY;
-int ballSpeed = 6; // CHANGEd value of the ball velocity. assigns the velocity for the ball
+int ballSpeed = 7; // CHANGEd value of the ball velocity. assigns the velocity for the ball
 int ballSize = 16; // assigns the diameter for the ball
 color ballColor = color(0); // CHANGED colour. assigns colour for the ball
 
 int score = 0;
-int winningScore = 10;
-int losingScore = -10;
+int winningScore = 3;
+int losingScore = -3;
 
 // setup()
 //
@@ -142,8 +142,7 @@ void updateBall() {
 //
 // creates the paddle
 void drawPaddle() {
-  // allows paddleX and paddleY to be the center point
-  rectMode(CENTER);
+  rectMode(CENTER); // allows paddleX and paddleY to be the center point
   noStroke();
   fill(paddleColor);
   rect(paddleX, paddleY, paddleWidth, paddleHeight);
@@ -153,12 +152,10 @@ void drawPaddle() {
 //
 // creates the ball
 void drawBall() {
-  // allows ballX and ballY to be the center point
-  ellipseMode(CENTER);
+  ellipseMode(CENTER); // allows ballX and ballY to be the center point
   noStroke();
   fill(ballColor);
-  // CHANGED the shape of the ball from rect to ellipse
-  ellipse(ballX, ballY, ballSize, ballSize);
+  ellipse(ballX, ballY, ballSize, ballSize);  // CHANGED the shape of the ball from rect to ellipse
 }
 
 // handleBallHitPaddle()
