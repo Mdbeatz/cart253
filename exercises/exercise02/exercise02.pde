@@ -1,5 +1,8 @@
 // creates the background colour
-color backgroundColor = color(255, 204, 153); // CHANGED background colour
+color backgroundColor1 = color(255, 204, 153);
+color backgroundColor2 = color(255, 153, 204);
+color backgroundColor3 = color(153, 204, 255);
+color backgroundColor4 = color(153, 255, 204);
 
 // assigns the pixels for the static
 int numStatic = 200; // CHANGED the value
@@ -73,8 +76,8 @@ void setupBall() {
 // calls the backgroundColor variable
 // calls the drawStatic(), updatePaddle(), updateBall(), drawPaddle(), drawBall() and displayScore() functions
 void draw() {
-  background(backgroundColor);
-  
+  background(backgroundColor1);
+
   drawStatic();
 
   updatePaddle();
@@ -82,9 +85,13 @@ void draw() {
 
   drawPaddle();
   drawBall();
-  
+
   displayScore();
   gameOver();
+}
+
+void changeBackgroundColor() {
+  
 }
 
 // drawStatic()
@@ -156,18 +163,18 @@ void handleBallHitPaddle() {
   if (ballOverlapsPaddle()) {
     // CHANGED the fill of the ball to a random colour when it bounces off the paddle
     ballColor = color (random(255), random(255), random(255));
-    
-    while (ballColor == backgroundColor) {
+
+    while (ballColor == backgroundColor1) {
       ballColor = color (random(255), random(255), random(255));
     }
-    
+
     // adds 1 to the score value
     score++;
-    
+
     // when TRUE, the ball will bounce off the paddle in a negative velocity going upwards
     ballY = paddleY - paddleHeight/2 - ballSize/2;
     ballVY = -ballVY;
-  } 
+  }
 }
 
 // ballOverlapsPaddle()
@@ -191,12 +198,12 @@ void handleBallOffBottom() {
   if (ballOffBottom()) {
     //ballX = width/2;
     //ballY = height/2;
-    
+
     // CHANGED the location of where the ball will spawn
     // the ball will now spawn at any random X and Y coordinate within the window
     ballX = (int)random(width);
     ballY = (int)random(height);
-    
+
     // subtracts the score value by 1
     score--;
   }
@@ -239,9 +246,9 @@ void displayScore() {
   font = loadFont("AmericanTypewriter-CondensedBold-48.vlw");
   textFont(font, 60);
   textAlign(CENTER);
-  text("PONG",width/2,height/5);
+  text("PONG", width/2, height/5);
   textFont(font, 30);
-  text("SCORE: " + score,width/2,height/3); 
+  text("SCORE: " + score, width/2, height/3);
 }
 
 // gameOver()
@@ -251,7 +258,7 @@ void gameOver() {
   if (score == winningScore) {
     displayGameOver("YOU WIN!", color(255));
   }
-  
+
   if (score == losingScore) {
     displayGameOver("YOU LOSE!", color(255));
   }
@@ -264,17 +271,17 @@ void displayGameOver(String text, color c) {
   paddleVX = 0;
   ballVX = 0;
   ballVY = 0;
-  
+
   text("GAME OVER", width/2, height/2);
   fill(c);
   text(text, width/2, (height/2 + 30));
   text("Click or Press Enter", width/2, (height/2 + 60));
-  
+
   if (mousePressed || (keyCode == ENTER)) {
     score = 0;
 
     ballSpeed = 10;
-    
+
     ballVX = ballSpeed;
     ballVY = ballSpeed;
   }
