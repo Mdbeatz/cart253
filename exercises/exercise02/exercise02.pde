@@ -268,7 +268,8 @@ void displayScore() {
 void gameOver() {
   if (score == winningScore) {
     displayGameOver("YOU WIN!", color(255));
-
+    
+    // the ball's velocity will increase if the user wins
     if (mousePressed || (keyCode == ENTER)) {
       score = 0;
 
@@ -278,7 +279,8 @@ void gameOver() {
       ballVY = ballSpeed;
     }
   }
-
+  
+  // the ball's velocity will remain the same if the user loses
   if (score == losingScore) {
     displayGameOver("YOU LOSE!", color(255));
 
