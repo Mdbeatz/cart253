@@ -4,36 +4,27 @@ color backgroundColor2 = color(255, 153, 204); // bubblegum pink
 color backgroundColor3 = color(153, 204, 255); // sky blue 
 color backgroundColor4 = color(153, 255, 204); // pale green
 
-// assigns the pixels for the static
-int numStatic = 200; // CHANGED the value
-// assigns the minimum size for the static pixels
-int staticSizeMin = 1;
-// assigns the maximum size for the static pixels
-int staticSizeMax = 3;
+int numStatic = 200; // CHANGED the value, assigns the pixels for the static
+int staticSizeMin = 1; // assigns the minimum size for the static pixels
+int staticSizeMax = 3; // assigns the maximum size for the static pixels
 color staticColor = color(255);
 
 int paddleX;
 int paddleY;
 int paddleVX;
-// assigns the velocity for the paddle
-int paddleSpeed = 10;
-// assigns the width for the paddle
-int paddleWidth = 128;
-// assigns the height for the paddle
-int paddleHeight = 16;
-// assigns the colour for the paddle
-color paddleColor = color(0); // CHANGED colour
+
+int paddleSpeed = 10; // assigns the velocity for the paddle
+int paddleWidth = 128; // assigns the width for the paddle
+int paddleHeight = 16; // assigns the height for the paddle
+color paddleColor = color(0); // CHANGED colour. assigns the colour for the paddle
 
 int ballX;
 int ballY;
 int ballVX;
 int ballVY;
-// assigns the velocity for the ball
-int ballSpeed = 6; // CHANGEd value of the ball velocity
-// assigns the diameter for the ball
-int ballSize = 16;
-// assigns colour for the ball
-color ballColor = color(0); // CHANGED colour
+int ballSpeed = 6; // CHANGEd value of the ball velocity. assigns the velocity for the ball
+int ballSize = 16; // assigns the diameter for the ball
+color ballColor = color(0); // CHANGED colour. assigns colour for the ball
 
 int score = 0;
 int winningScore = 10;
@@ -112,12 +103,16 @@ void drawStatic() {
   for (int i = 0; i < numStatic; i++) {
     // creates a random value between 0 and the width of the window for x
     float x = random(0, width);
+    
     // creates a random value between 0 and the height of the window for y
     float y = random(0, height);
+    
     // creates random sized static pixels between sizes 1 and 3
     float staticSize = random(staticSizeMin, staticSizeMax);
+    
     // calls the colour
     fill(staticColor);
+    
     // positions the static pixels randomly within the window
     rect(x, y, staticSize, staticSize);
   }
