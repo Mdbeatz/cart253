@@ -171,7 +171,7 @@ void handleBallHitPaddle() {
     ballColor = color (random(255), random(255), random(255));
     
     // making sure the random ball color never gets assigned the same RGB values as the background colors
-    while (ballColor == backgroundColor1 || ballColor == backgroundColor2 || ballColor == backgroundColor3 || ballColor == backgroundColor3) {
+    while (ballColor == backgroundColor1 || ballColor == backgroundColor2 || ballColor == backgroundColor3 || ballColor == backgroundColor4) {
       ballColor = color (random(255), random(255), random(255));
     }
 
