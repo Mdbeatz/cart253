@@ -13,7 +13,8 @@ int paddleX; // paddle's x location
 int paddleY; // paddle's y location
 int paddleVX; // paddle's x velocity
 int paddleSpeed = 10; // assigns the velocity for the paddle
-int paddleWidth = 130; // CHANGED. assigns the width for the paddle
+int paddleDefaultWidth = 130; // CHANGED. assigns the default width
+int paddleWidth = paddleDefaultWidth; // CHANGED. assigns the default width to paddleWidth
 int paddleHeight = 16; // assigns the height for the paddle
 color paddleColor = color(0); // CHANGED colour. assigns the colour for the paddle
 
@@ -287,9 +288,11 @@ void gameOver() {
 
       ballVX = ballSpeed;
       ballVY = ballSpeed;
-      
+
       // freezes the paddle
       paddleVX = 0;
+
+      paddleWidth = paddleDefaultWidth;
     }
   }
 
@@ -306,9 +309,11 @@ void gameOver() {
 
       ballVX = ballSpeed;
       ballVY = ballSpeed;
-      
+
       // freezes the paddle
       paddleVX = 0;
+
+      paddleWidth = paddleDefaultWidth;
     }
   }
 }
