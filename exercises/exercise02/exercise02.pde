@@ -27,7 +27,7 @@ color ballColor = color(0); // CHANGED colour. assigns colour for the ball
 
 // CHANGED
 int score = 0; // the score, starts with 0
-int winningScore = 5; // the winning score
+int winningScore = 10; // the winning score
 int losingScore = -5; // the losing score
 
 // setup()
@@ -254,14 +254,14 @@ void handleBallHitWall() {
 // CHANGED
 // displayScore()
 //
-//
+// Displays the title and the score
 void displayScore() {
   // Loads a .vlw formatted font into a PFont object
   PFont font;
   font = loadFont("AmericanTypewriter-CondensedBold-48.vlw");
-  textFont(font, 60);
-  textAlign(CENTER);
-  text("PONG", width/2, height/5);
+  textFont(font, 60); // sets which font is chosen and the size
+  textAlign(CENTER); // horizontal alignment and vertical alignment will be centered
+  text("PONG", width/2, height/5); // text and locations
   textFont(font, 30);
   text("SCORE: " + score, width/2, height/3);
 }
@@ -287,6 +287,9 @@ void gameOver() {
 
       ballVX = ballSpeed;
       ballVY = ballSpeed;
+      
+      // freezes the paddle
+      paddleVX = 0;
     }
   }
 
@@ -303,6 +306,9 @@ void gameOver() {
 
       ballVX = ballSpeed;
       ballVY = ballSpeed;
+      
+      // freezes the paddle
+      paddleVX = 0;
     }
   }
 }
