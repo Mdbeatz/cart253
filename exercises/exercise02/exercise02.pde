@@ -6,36 +6,36 @@ color backgroundColor4 = color(153, 255, 204); // pale green
 
 int numStatic = 200; // CHANGED the value, assigns the pixels for the static
 int staticSizeMin = 1; // assigns the minimum size for the static pixels
-int staticSizeMax = 3; // assigns the maximum size for the static pixels
+int staticSizeMax = 4; // CHANGED. assigns the maximum size for the static pixels
 color staticColor = color(255); // CHANGED
 
-int paddleX;
-int paddleY;
-int paddleVX;
+int paddleX; // paddle's x location
+int paddleY; // paddle's y location
+int paddleVX; // paddle's x velocity
 int paddleSpeed = 10; // assigns the velocity for the paddle
 int paddleWidth = 128; // assigns the width for the paddle
 int paddleHeight = 16; // assigns the height for the paddle
 color paddleColor = color(0); // CHANGED colour. assigns the colour for the paddle
 
-int ballX;
-int ballY;
-int ballVX;
-int ballVY;
-int ballSpeed = 7; // CHANGEd value of the ball velocity. assigns the velocity for the ball
+int ballX; // ball's x location
+int ballY; // ball's y location
+int ballVX; // ball's x velocity
+int ballVY; // ball's y velocity
+int ballSpeed = 7; // CHANGED value of the ball velocity. assigns the velocity for the ball
 int ballSize = 16; // assigns the diameter for the ball
 color ballColor = color(0); // CHANGED colour. assigns colour for the ball
 
 // CHANGED
-int score = 0;
-int winningScore = 3;
-int losingScore = -3;
+int score = 0; // the score, starts with 0
+int winningScore = 5; // the winning score
+int losingScore = -5; // the losing score
 
 // setup()
 //
 // sets the size of the window
 // calls the setupPaddle() and setupBall() functions
 void setup() {
-  size(640, 480);
+  size(640, 480); // size of the window
 
   setupPaddle();
   setupBall();
@@ -46,8 +46,8 @@ void setup() {
 // the paddle will start off in the bottom center of the window
 // the velocity of the paddle will start off at 0
 void setupPaddle() {
-  paddleX = width/2;
-  paddleY = height - paddleHeight;
+  paddleX = width/2; 
+  paddleY = height - paddleHeight;  
   paddleVX = 0;
 }
 
@@ -56,7 +56,7 @@ void setupPaddle() {
 // the ball will spawn in the center of the window
 // the velocity is called for both the X and Y axis
 void setupBall() {
-  ballX = width/2;
+  ballX = width/2; 
   ballY = height/2;
   ballVX = ballSpeed;
   ballVY = ballSpeed;
@@ -65,7 +65,7 @@ void setupBall() {
 // draw()
 //
 // calls the backgroundColor variable
-// calls the drawStatic(), updatePaddle(), updateBall(), drawPaddle(), drawBall() and displayScore() functions
+// calls the drawStatic(), updatePaddle(), updateBall(), drawPaddle(), drawBall(), displayScore() and gameOver() functions
 void draw() {
   changeBackgroundColor();  
 
@@ -113,16 +113,18 @@ void drawStatic() {
 
 // updatePaddle()
 //
-// 
+// allows the paddle to move within the window
 void updatePaddle() {
-  paddleX += paddleVX;  
-  paddleX = constrain(paddleX, 0 + paddleWidth/2, width - paddleWidth/2);
+  paddleX += paddleVX; // moves paddle
+  paddleX = constrain(paddleX, 0 + paddleWidth/2, width - paddleWidth/2); // window constraints
 }
 
 // updateBall()
 //
+// moves the ball.
 // calls the handleBallHitPaddle(), handleBallHitWall() and handleBallOffBottom() functions
 void updateBall() {
+  // moves the ball
   ballX += ballVX;
   ballY += ballVY;
 
@@ -191,19 +193,23 @@ boolean ballOverlapsPaddle() {
   return false;
 }
 
+// CHANGED 
+// randomSpawn()
+//
+// the random location of where the ball will spawn
+// the ball will now spawn at any random X and Y coordinate within the window
+void randomSpawn() {
+  ballX = (int)random(width);
+  ballY = (int)random(height - 50);
+}
+
 // handleBallOffBottom()
 //
 // if the ball exits the window the ball gets spawned in the center of the window
 void handleBallOffBottom() {
   if (ballOffBottom()) {
-    //ballX = width/2;
-    //ballY = height/2;
-
-    // CHANGED 
-    // the random location of where the ball will spawn
-    // the ball will now spawn at any random X and Y coordinate within the window
-    ballX = (int)random(width);
-    ballY = (int)random(height);
+    // spawns in random locations
+    randomSpawn();
 
     // CHANGED
     // subtracts the score value by 1
@@ -257,16 +263,21 @@ void displayScore() {
 // CHANGED
 // gameOver()
 //
-//
+// Handles what will happen if the user wins or loses
 void gameOver() {
   if (score == winningScore) {
     displayGameOver("YOU WIN!", color(255));
 
-    // the ball's velocity will increase if the user wins
+    // the ball's velocity will increase by 1 if the user wins
     if (mousePressed || (keyCode == ENTER)) {
+      // score will reset
       score = 0;
 
-      ballSpeed = 10;
+      // velocity increases by 1
+      ballSpeed++;
+
+      // spawns in random locations
+      randomSpawn();
 
       ballVX = ballSpeed;
       ballVY = ballSpeed;
@@ -278,7 +289,11 @@ void gameOver() {
     displayGameOver("YOU LOSE!", color(255));
 
     if (mousePressed || (keyCode == ENTER)) {
+      // score will reset
       score = 0;
+
+      // spawns in random locations
+      randomSpawn();
 
       ballVX = ballSpeed;
       ballVY = ballSpeed;
@@ -287,10 +302,11 @@ void gameOver() {
 }
 
 // CHANGED
-// displayGameOver
+// displayGameOver()
 //
-//
+// Displays the text and freezes the ball and paddle
 void displayGameOver(String text, color c) {
+  // freezes the ball and paddle by resetting their velocities back to 0
   paddleVX = 0;
   ballVX = 0;
   ballVY = 0;
@@ -299,15 +315,6 @@ void displayGameOver(String text, color c) {
   fill(c);
   text(text, width/2, (height/2 + 30));
   text("Click or Press Enter", width/2, (height/2 + 60));
-
-  //if (mousePressed || (keyCode == ENTER)) {
-  //  score = 0;
-
-  //  ballSpeed = 10;
-
-  //  ballVX = ballSpeed;
-  //  ballVY = ballSpeed;
-  //}
 }
 
 // keyPressed()
