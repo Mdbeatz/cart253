@@ -45,12 +45,17 @@ class Bouncer {
 
   // update()
   //
-  //
+  // Moves the bouncing balls each frame.
+  // Handles the wall collisions by calling handleBounce() and mouse position by calling handleMouse().
   void update() {
+    // Move the bouncing ball each frame by adding its velocity each frame
     x += vx;
     y += vy;
 
+    // Make the ball bounce off the walls
     handleBounce();
+    
+    // Make the ball's fill color change if the mouse is over the ball
     handleMouse();
   }
 

@@ -31,7 +31,7 @@ void draw() {
   bouncer.update();
   bouncer2.update();
   
-  
+  // Create the two bouncing balls by calling their draw methods
   bouncer.draw();
   bouncer2.draw();
 }
