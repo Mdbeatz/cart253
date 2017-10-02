@@ -291,7 +291,8 @@ void gameOver() {
 
       // freezes the paddle
       paddleVX = 0;
-
+      
+      // width of paddle goes back to the default width of 130 pixels
       paddleWidth = paddleDefaultWidth;
     }
   }
@@ -313,6 +314,7 @@ void gameOver() {
       // freezes the paddle
       paddleVX = 0;
 
+      // width of paddle goes back to the default width of 130 pixels
       paddleWidth = paddleDefaultWidth;
     }
   }
