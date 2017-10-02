@@ -263,8 +263,8 @@ void displayScore() {
   textFont(font, 60); // sets which font is chosen and the size
   textAlign(CENTER); // horizontal alignment and vertical alignment will be centered
   text("PONG", width/2, height/5); // text and locations
-  textFont(font, 30);
-  text("SCORE: " + score, width/2, height/3);
+  textFont(font, 30); // sets which font is chosen and the size
+  text("SCORE: " + score, width/2, height/3); // text and locations
 }
 
 // CHANGED
@@ -330,10 +330,10 @@ void displayGameOver(String text, color c) {
   ballVX = 0;
   ballVY = 0;
 
-  text("GAME OVER", width/2, height/2);
-  fill(c);
-  text(text, width/2, (height/2 + 30));
-  text("Click or Press Enter", width/2, (height/2 + 60));
+  text("GAME OVER", width/2, height/2); // text and locations
+  fill(c); // accepts the text color from the function above, which is 255 (white)
+  text(text, width/2, (height/2 + 30)); // text and locations
+  text("Click or Press Enter", width/2, (height/2 + 60)); // text and locations
 }
 
 // keyPressed()
