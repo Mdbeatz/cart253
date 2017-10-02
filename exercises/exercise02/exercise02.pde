@@ -1,4 +1,4 @@
-// background colours
+// CHANGED background colours
 color backgroundColor1 = color(255, 204, 153); // peach orange
 color backgroundColor2 = color(255, 153, 204); // bubblegum pink
 color backgroundColor3 = color(153, 204, 255); // sky blue 
@@ -7,12 +7,11 @@ color backgroundColor4 = color(153, 255, 204); // pale green
 int numStatic = 200; // CHANGED the value, assigns the pixels for the static
 int staticSizeMin = 1; // assigns the minimum size for the static pixels
 int staticSizeMax = 3; // assigns the maximum size for the static pixels
-color staticColor = color(255);
+color staticColor = color(255); // CHANGED
 
 int paddleX;
 int paddleY;
 int paddleVX;
-
 int paddleSpeed = 10; // assigns the velocity for the paddle
 int paddleWidth = 128; // assigns the width for the paddle
 int paddleHeight = 16; // assigns the height for the paddle
@@ -26,6 +25,7 @@ int ballSpeed = 7; // CHANGEd value of the ball velocity. assigns the velocity f
 int ballSize = 16; // assigns the diameter for the ball
 color ballColor = color(0); // CHANGED colour. assigns colour for the ball
 
+// CHANGED
 int score = 0;
 int winningScore = 3;
 int losingScore = -3;
@@ -77,10 +77,12 @@ void draw() {
   drawPaddle();
   drawBall();
 
+  // CHANGED
   displayScore();
   gameOver();
 }
 
+// CHANGED
 // changeBackgroundColor()
 //
 // Background color changes based on the X and Y coordinates of the ball's center
@@ -101,20 +103,11 @@ void changeBackgroundColor() {
 // creates an infinite loop for the static background effect
 void drawStatic() {
   for (int i = 0; i < numStatic; i++) {
-    // creates a random value between 0 and the width of the window for x
-    float x = random(0, width);
-    
-    // creates a random value between 0 and the height of the window for y
-    float y = random(0, height);
-    
-    // creates random sized static pixels between sizes 1 and 3
-    float staticSize = random(staticSizeMin, staticSizeMax);
-    
-    // calls the colour
-    fill(staticColor);
-    
-    // positions the static pixels randomly within the window
-    rect(x, y, staticSize, staticSize);
+    float x = random(0, width); // creates a random value between 0 and the width of the window for x
+    float y = random(0, height); // creates a random value between 0 and the height of the window for y
+    float staticSize = random(staticSizeMin, staticSizeMax); // creates random sized static pixels between sizes 1 and 3
+    fill(staticColor); // calls the colour   
+    rect(x, y, staticSize, staticSize); // positions the static pixels randomly within the window
   }
 }
 
@@ -164,14 +157,17 @@ void drawBall() {
 // when TRUE, the ball will bounce off the paddle in a negative velocity going upwards
 void handleBallHitPaddle() {
   if (ballOverlapsPaddle()) {
-    // CHANGED the fill of the ball to a random colour when it bounces off the paddle
+    // CHANGED 
+    // the fill of the ball will be a random colour when it bounces off the paddle
     ballColor = color (random(255), random(255), random(255));
-    
+
+    // CHANGED
     // making sure the random ball color never gets assigned the same RGB values as the background colors
     while (ballColor == backgroundColor1 || ballColor == backgroundColor2 || ballColor == backgroundColor3 || ballColor == backgroundColor4) {
       ballColor = color (random(255), random(255), random(255));
     }
 
+    // CHANGED
     // adds 1 to the score value
     score++;
 
@@ -203,11 +199,13 @@ void handleBallOffBottom() {
     //ballX = width/2;
     //ballY = height/2;
 
-    // CHANGED the location of where the ball will spawn
+    // CHANGED 
+    // the random location of where the ball will spawn
     // the ball will now spawn at any random X and Y coordinate within the window
     ballX = (int)random(width);
     ballY = (int)random(height);
 
+    // CHANGED
     // subtracts the score value by 1
     score--;
   }
@@ -241,6 +239,7 @@ void handleBallHitWall() {
   }
 }
 
+// CHANGED
 // displayScore()
 //
 //
@@ -255,13 +254,14 @@ void displayScore() {
   text("SCORE: " + score, width/2, height/3);
 }
 
+// CHANGED
 // gameOver()
 //
 //
 void gameOver() {
   if (score == winningScore) {
     displayGameOver("YOU WIN!", color(255));
-    
+
     // the ball's velocity will increase if the user wins
     if (mousePressed || (keyCode == ENTER)) {
       score = 0;
@@ -272,20 +272,21 @@ void gameOver() {
       ballVY = ballSpeed;
     }
   }
-  
+
   // the ball's velocity will remain the same if the user loses
   if (score == losingScore) {
     displayGameOver("YOU LOSE!", color(255));
 
     if (mousePressed || (keyCode == ENTER)) {
       score = 0;
-      
+
       ballVX = ballSpeed;
       ballVY = ballSpeed;
     }
   }
 }
 
+// CHANGED
 // displayGameOver
 //
 //
