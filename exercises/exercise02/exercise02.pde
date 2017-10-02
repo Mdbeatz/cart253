@@ -13,7 +13,7 @@ int paddleX; // paddle's x location
 int paddleY; // paddle's y location
 int paddleVX; // paddle's x velocity
 int paddleSpeed = 10; // assigns the velocity for the paddle
-int paddleWidth = 128; // assigns the width for the paddle
+int paddleWidth = 130; // CHANGED. assigns the width for the paddle
 int paddleHeight = 16; // assigns the height for the paddle
 color paddleColor = color(0); // CHANGED colour. assigns the colour for the paddle
 
@@ -205,7 +205,8 @@ void randomSpawn() {
 
 // handleBallOffBottom()
 //
-// if the ball exits the window the ball gets spawned in the center of the window
+// if the ball exits the window the ball gets spawned in the center of the window, 
+// the score is affected, and the size of the paddle decreases.
 void handleBallOffBottom() {
   if (ballOffBottom()) {
     // spawns in random locations
@@ -214,6 +215,11 @@ void handleBallOffBottom() {
     // CHANGED
     // subtracts the score value by 1
     score--;
+
+    // the paddle will decrease by 15 pixels, as long as the paddle width is more or equal to 50 pixels
+    if (paddleWidth > 50) {
+      paddleWidth = paddleWidth - 15;
+    }
   }
 }
 
