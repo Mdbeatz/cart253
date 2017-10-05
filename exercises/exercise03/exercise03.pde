@@ -35,6 +35,7 @@ void draw() {
   bouncer.update();
   bouncer2.update();
 
+  // CHANGED
   // If the mouse is pressed, than the bouncer that is being clicked will get bigger in size.
   // Clicking anywhere in the window will return the bouncers to their default size.
   // If the other bouncer that is still the default size is clicked, it will get bigger, 
@@ -47,4 +48,15 @@ void draw() {
   // Create the two bouncing balls by calling their draw methods
   bouncer.draw();
   bouncer2.draw();
+}
+
+// CHANGED
+// keyPressed()
+//
+// Resets the window by changing the background color.
+void keyPressed() {
+  // If the return key (enter key) is pressed, the window resets with the background color
+  if (keyCode == ENTER) {
+    background(backgroundColor);
+  }
 }

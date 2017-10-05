@@ -49,6 +49,7 @@ class Bouncer {
     // Set vy to new temp y velocity value
     vy = tempVY;
 
+    // CHANGED
     // Set size to new temp size value
     defaultSize = tempSize;
 
