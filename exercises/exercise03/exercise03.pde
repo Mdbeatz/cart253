@@ -1,5 +1,6 @@
+// CHANGED
 // Assigns a background color variable
-color backgroundColor = color(200, 150, 150);
+color backgroundColor = color(246, 185, 164);
 
 // Global variable for the first bouncing ball
 Bouncer bouncer;
@@ -17,10 +18,11 @@ void setup() {
   // Set the background color
   background(backgroundColor);
 
+  // CHANGED fill and hover colors
   // Create the two bouncing balls mirroring each other.
   // Set their locations, velocities, sizes, fill colors and hover colors. 
-  bouncer = new Bouncer(width/2, height/2, 2, 2, 50, color(150, 0, 0, 50), color(255, 0, 0, 50));
-  bouncer2 = new Bouncer(width/2, height/2, -2, 2, 50, color(0, 0, 150, 50), color(0, 0, 255, 50));
+  bouncer = new Bouncer(width/2, height/2, 2, 2, 50, color(150, 117, 242, 50), color(117, 209, 242, 50));
+  bouncer2 = new Bouncer(width/2, height/2, -2, 2, 50, color(209, 242, 117, 50), color(242, 117, 209, 50));
 }
 
 // draw()
@@ -31,7 +33,14 @@ void draw() {
   bouncer.update();
   bouncer2.update();
   
+  bouncer.mouseClicked();
+  bouncer2.mouseClicked();
+
   // Create the two bouncing balls by calling their draw methods
   bouncer.draw();
   bouncer2.draw();
 }
+
+//void mouseClicked() {
+  
+//}

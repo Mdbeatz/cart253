@@ -13,6 +13,9 @@ class Bouncer {
   // The size of the ball
   int size;
 
+  // The new size of the ball once clicked on
+  int newSize = 70;
+
   // The fill color of the ball
   color fillColor;
 
@@ -83,7 +86,7 @@ class Bouncer {
     if (x - size/2 < 0 || x + size/2 > width) {
       // If it is, make it bounce by reversing its vx velocity
       vx = -vx;
-      
+
       // CHANGED
       // Teleport the bouncer's x coordinate to a random location
       x = (int) random(width);
@@ -93,7 +96,7 @@ class Bouncer {
     if (y - size/2 < 0 || y + size/2 > height) {
       // If it is, make it bounce by reversing its vy velocity
       vy = -vy;
-      
+
       // CHANGED
       // Teleport the bouncer's y coordinate to a random location
       y = (int) random(height);
@@ -117,6 +120,16 @@ class Bouncer {
       // If it is not, then the fill color remains the same.
       fillColor = defaultColor;
     }
+  }
+
+  // mouseClicked()
+  //
+  // Checks if the mouse is clicked in the ball.
+  // If it is, then the bouncer will get bigger in size.
+  void mouseClicked() {
+    if (dist(mouseX, mouseY, x, y) < size/2) {
+      size = newSize;
+    } 
   }
 
   // draw()
