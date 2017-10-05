@@ -131,8 +131,8 @@ class Bouncer {
     }
   }
 
-  int getX = mouseX;
-  int getY = mouseY;
+  //int getX = mouseX;
+  //int getY = mouseY;
   
   
   // CHANGED

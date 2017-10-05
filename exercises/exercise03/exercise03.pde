@@ -13,7 +13,8 @@ Bouncer bouncer2;
 // Sets the window size, calls the background color and creates the bouncing balls
 void setup() {
   // Set the size
-  size(640, 480);
+  // CHANGED
+  size(700, 500);
 
   // Set the background color
   background(backgroundColor);
@@ -33,15 +34,17 @@ void draw() {
   // Update the two bouncing balls by calling their update methods
   bouncer.update();
   bouncer2.update();
-  
-  bouncer.mouseClicked();
-  bouncer2.mouseClicked();
+
+  // If the mouse is pressed, than the bouncer that is being clicked will get bigger in size.
+  // Clicking anywhere in the window will return the bouncers to their default size.
+  // If the other bouncer that is still the default size is clicked, it will get bigger, 
+  // and it will make the other bouncer (if the other bouncer was turned bigger) return to its default size.
+  if (mousePressed == true) {
+    bouncer.mouseClicked();
+    bouncer2.mouseClicked();
+  }
 
   // Create the two bouncing balls by calling their draw methods
   bouncer.draw();
   bouncer2.draw();
 }
-
-//void mouseClicked() {
-  
-//}
