@@ -18,7 +18,7 @@ class Bouncer {
 
   // The default fill color of the ball
   color defaultColor;
-  
+
   // The hover color of the ball
   color hoverColor;
 
@@ -30,13 +30,28 @@ class Bouncer {
   // Sets the variables to their starting values.
   // x, y, vx, vy, size, fillColor and hoverColor are set to the arguments passed through from the main program (exercise03).
   Bouncer(int tempX, int tempY, int tempVX, int tempVY, int tempSize, color tempDefaultColor, color tempHoverColor) {
+    // Set x to new temp y value
     x = tempX;
+
+    // Set y to new temp y value
     y = tempY;
+
+    // Set vx to new temp x velocity value
     vx = tempVX;
+
+    // Set vy to new temp y velocity value
     vy = tempVY;
+
+    // Set size to new temp size value
     size = tempSize;
+
+    // Set default color to new temp default color value
     defaultColor = tempDefaultColor;
+
+    // Set hover color to new temp hover color value
     hoverColor = tempHoverColor;
+
+    // Set fill color to default color value
     fillColor = defaultColor;
   }
 
@@ -54,7 +69,7 @@ class Bouncer {
 
     // Make the ball bounce off the walls
     handleBounce();
-    
+
     // Make the ball's fill color change if the mouse is over the ball
     handleMouse();
   }
@@ -68,14 +83,23 @@ class Bouncer {
     if (x - size/2 < 0 || x + size/2 > width) {
       // If it is, make it bounce by reversing its vx velocity
       vx = -vx;
+      
+      // CHANGED
+      // Teleport the bouncer's x coordinate to a random location
+      x = (int) random(width/2);
     }
 
     // Check if the ball is colliding with the top or bottom walls
     if (y - size/2 < 0 || y + size/2 > height) {
       // If it is, make it bounce by reversing its vy velocity
       vy = -vy;
+      
+      // CHANGED
+      // Teleport the bouncer's y coordinate to a random location
+      y = (int) random(height/2);
     }
 
+    // Constrain bouncer to window
     x = constrain(x, size/2, width-size/2);
     y = constrain(y, size/2, height-size/2);
   }
