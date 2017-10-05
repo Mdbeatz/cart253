@@ -86,7 +86,7 @@ class Bouncer {
       
       // CHANGED
       // Teleport the bouncer's x coordinate to a random location
-      x = (int) random(width/2);
+      x = (int) random(width);
     }
 
     // Check if the ball is colliding with the top or bottom walls
@@ -96,7 +96,7 @@ class Bouncer {
       
       // CHANGED
       // Teleport the bouncer's y coordinate to a random location
-      y = (int) random(height/2);
+      y = (int) random(height);
     }
 
     // Constrain bouncer to window
