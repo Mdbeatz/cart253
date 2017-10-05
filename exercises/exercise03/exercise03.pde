@@ -23,8 +23,8 @@ void setup() {
   // CHANGED velocity values
   // Create the two bouncing balls mirroring each other.
   // Set their locations, velocities, sizes, fill colors and hover colors. 
-  bouncer = new Bouncer(width/2, height/2, 3, 3, 50, color(150, 117, 242, 50), color(117, 209, 242, 50));
-  bouncer2 = new Bouncer(width/2, height/2, -3, 3, 50, color(209, 242, 117, 50), color(242, 117, 209, 50));
+  bouncer = new Bouncer(width/2, height/2, 3, 3, 50, color(150, 117, 242, 50), color(117, 209, 242, 50), color(255, 255, 255, 50));
+  bouncer2 = new Bouncer(width/2, height/2, -3, 3, 50, color(209, 242, 117, 50), color(242, 117, 209, 50), color(0, 0, 0, 50));
 }
 
 // draw()
@@ -38,8 +38,8 @@ void draw() {
   // CHANGED
   // If the mouse is pressed, than the bouncer that is being clicked will get bigger in size.
   // Clicking anywhere in the window will return the bouncers to their default size.
-  // If the other bouncer that is still the default size is clicked, it will get bigger, 
-  // and it will make the other bouncer (if the other bouncer was turned bigger) return to its default size.
+  // If the other bouncer that is still the default size is clicked, it will get bigger, and it will make the other bouncer (if the other bouncer was turned bigger) return to its default size.
+  // If the mouse remains over the bouncer while it is still being pressed, then the fill color of the bouncer will change to white for bouncer and black for bouncer2.
   if (mousePressed == true) {
     bouncer.mouseClicked();
     bouncer2.mouseClicked();

@@ -29,6 +29,12 @@ class Bouncer {
   // The hover color of the ball
   color hoverColor;
 
+  // The temp fill color of the bouncer when the mouse is being pressed
+  color tempMousePressedFillColor;
+
+  // The fill color of the bouncer when the mouse is being pressed.
+  color mousePressedFillColor;
+
 
   /////////////// Constructor ///////////////
 
@@ -36,7 +42,7 @@ class Bouncer {
   //
   // Sets the variables to their starting values.
   // x, y, vx, vy, size, fillColor and hoverColor are set to the arguments passed through from the main program (exercise03).
-  Bouncer(int tempX, int tempY, int tempVX, int tempVY, int tempSize, color tempDefaultColor, color tempHoverColor) {
+  Bouncer(int tempX, int tempY, int tempVX, int tempVY, int tempSize, color tempDefaultColor, color tempHoverColor, color tempMousePressedFillColor) {
     // Set x to new temp y value
     x = tempX;
 
@@ -65,6 +71,10 @@ class Bouncer {
 
     // Set fill color to default color value
     fillColor = defaultColor;
+
+    // CHANGED
+    // Set the fill color of the ball when the mouse is being pressed to the temp fill color of the ball when the mouse is being pressed
+    mousePressedFillColor = tempMousePressedFillColor;
   }
 
 
@@ -125,7 +135,6 @@ class Bouncer {
     if (dist(mouseX, mouseY, x, y) < size/2) {
       // If it is, then make the fill color change to the hover color.
       fillColor = hoverColor;
-      
     } else {
       // If it is not, then the fill color returns to the default color.
       fillColor = defaultColor;
@@ -134,17 +143,23 @@ class Bouncer {
 
   //int getX = mouseX;
   //int getY = mouseY;
-  
-  
+
+
   // CHANGED
   // mouseClicked()
   //
   // Checks if the mouse is clicked in the ball.
-  // If it is, then the bouncer will get bigger in size.
   void mouseClicked() {
+
+    // If the mouse is pressed, than the bouncer that is being clicked will get bigger in size.
+    // Clicking anywhere in the window will return the bouncers to their default size.
+    // If the other bouncer that is still the default size is clicked, it will get bigger, and it will make the other bouncer (if the other bouncer was turned bigger) return to its default size.
+    
     if (dist(mouseX, mouseY, x, y) < size/2) {
       // If it is, then make the size the new bigger size.
       size = newSize;
+      // It will also change the fill color to its new temp fill color.
+      fillColor = mousePressedFillColor;
     } else {
       // If it is not, then the size returns to the default size.
       size = defaultSize;
