@@ -19,10 +19,11 @@ void setup() {
   background(backgroundColor);
 
   // CHANGED fill and hover colors
+  // CHANGED velocity values
   // Create the two bouncing balls mirroring each other.
   // Set their locations, velocities, sizes, fill colors and hover colors. 
-  bouncer = new Bouncer(width/2, height/2, 2, 2, 50, color(150, 117, 242, 50), color(117, 209, 242, 50));
-  bouncer2 = new Bouncer(width/2, height/2, -2, 2, 50, color(209, 242, 117, 50), color(242, 117, 209, 50));
+  bouncer = new Bouncer(width/2, height/2, 3, 3, 50, color(150, 117, 242, 50), color(117, 209, 242, 50));
+  bouncer2 = new Bouncer(width/2, height/2, -3, 3, 50, color(209, 242, 117, 50), color(242, 117, 209, 50));
 }
 
 // draw()

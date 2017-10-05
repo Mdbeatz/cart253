@@ -12,7 +12,9 @@ class Bouncer {
 
   // The size of the ball
   int size;
-  
+
+  // CHANGED
+  // The default size of the ball
   int defaultSize;
 
   // The new size of the ball once clicked on
@@ -49,7 +51,9 @@ class Bouncer {
 
     // Set size to new temp size value
     defaultSize = tempSize;
-    
+
+    // CHANGED
+    // Set the size back to the default size value
     size = defaultSize;
 
     // Set default color to new temp default color value
@@ -120,13 +124,18 @@ class Bouncer {
     if (dist(mouseX, mouseY, x, y) < size/2) {
       // If it is, then make the fill color change to the hover color.
       fillColor = hoverColor;
+      
     } else {
       // If it is not, then the fill color returns to the default color.
       fillColor = defaultColor;
     }
   }
 
-
+  int getX = mouseX;
+  int getY = mouseY;
+  
+  
+  // CHANGED
   // mouseClicked()
   //
   // Checks if the mouse is clicked in the ball.
