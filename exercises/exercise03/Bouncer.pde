@@ -12,6 +12,8 @@ class Bouncer {
 
   // The size of the ball
   int size;
+  
+  int defaultSize;
 
   // The new size of the ball once clicked on
   int newSize = 70;
@@ -46,7 +48,9 @@ class Bouncer {
     vy = tempVY;
 
     // Set size to new temp size value
-    size = tempSize;
+    defaultSize = tempSize;
+    
+    size = defaultSize;
 
     // Set default color to new temp default color value
     defaultColor = tempDefaultColor;
@@ -117,10 +121,11 @@ class Bouncer {
       // If it is, then make the fill color change to the hover color.
       fillColor = hoverColor;
     } else {
-      // If it is not, then the fill color remains the same.
+      // If it is not, then the fill color returns to the default color.
       fillColor = defaultColor;
     }
   }
+
 
   // mouseClicked()
   //
@@ -128,8 +133,12 @@ class Bouncer {
   // If it is, then the bouncer will get bigger in size.
   void mouseClicked() {
     if (dist(mouseX, mouseY, x, y) < size/2) {
+      // If it is, then make the size the new bigger size.
       size = newSize;
-    } 
+    } else {
+      // If it is not, then the size returns to the default size.
+      size = defaultSize;
+    }
   }
 
   // draw()
