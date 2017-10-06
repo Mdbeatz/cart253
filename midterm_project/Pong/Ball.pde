@@ -117,12 +117,12 @@ class Ball {
   // Draw the ball at its position
 
   void display() {
-    // Set up the appearance of the ball (no stroke, a fill, and rectMode as CENTER)
+    // Set up the appearance of the ball (no stroke and fill)
     noStroke();
     fill(ballColor);
-    rectMode(CENTER);
-
+    
+    // CHANGED rect to ellipse
     // Draw the ball
-    rect(x, y, SIZE, SIZE);
+    ellipse(x, y, SIZE, SIZE);
   }
 }

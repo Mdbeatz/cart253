@@ -20,6 +20,9 @@ int PADDLE_INSET = 8;
 // The background colour during play (black)
 color backgroundColor = color(0);
 
+int player1Score;
+int player2Score;
+
 
 // setup()
 //
