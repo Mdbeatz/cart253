@@ -20,9 +20,13 @@ int PADDLE_INSET = 8;
 // The background colour during play (black)
 color backgroundColor = color(0);
 
-int player1Score;
-int player2Score;
+// CHANGED 
+// The score for the left player
+int leftScore;
 
+// CHANGED
+// The score for the right player
+int rightScore;
 
 // setup()
 //
@@ -72,6 +76,31 @@ void draw() {
   leftPaddle.display();
   rightPaddle.display();
   ball.display();
+  
+  // CHANGED
+  // Display the scores
+  displayScore();
+}
+
+// CHANGED
+// displayScore()
+//
+// Displays the scores
+
+void displayScore() {
+  // Loads a .vlw formatted font into a PFont object
+  PFont font;
+  font = loadFont("AmericanTypewriter-CondensedBold-48.vlw");
+  // Set text color
+  fill(255, 225, 0);
+  // Horizontal alignment and vertical alignment will be centered
+  textAlign(CENTER);
+  // Set font family and size
+  textFont(font, 60);
+  // Set text for left player's score and location
+  text(leftScore, (width/3), 70);
+  // Set text for right player's score location
+  text(rightScore, width - (width/3), 70);
 }
 
 // keyPressed()
