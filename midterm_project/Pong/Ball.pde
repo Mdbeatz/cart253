@@ -72,6 +72,7 @@ class Ball {
     y = height/2;
   }
 
+  // CHANGED
   // isOffScreen()
   //
   // Returns true if the ball is off the left or right side of the window, otherwise false.
