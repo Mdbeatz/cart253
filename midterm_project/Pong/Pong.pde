@@ -28,6 +28,10 @@ int leftScore;
 // The score for the right player
 int rightScore;
 
+// CHANGED
+// The winning score
+int winningScore = 3;
+
 // setup()
 //
 // Sets the size and creates the paddles and ball
@@ -76,10 +80,12 @@ void draw() {
   leftPaddle.display();
   rightPaddle.display();
   ball.display();
-  
+
   // CHANGED
   // Display the scores
   displayScores();
+  
+  gameOver();
 }
 
 // CHANGED
@@ -102,6 +108,35 @@ void displayScores() {
   // Set text for right player's score location
   text(rightScore, width - (width/3), 70);
 }
+
+// CHANGED
+// gameOver()
+//
+//
+void gameOver() {
+  if (leftScore == winningScore) {
+    displayGameOver("LEFT PLAYER WINS!",color(255));
+    leftScore = 0;
+    rightScore = 0;
+
+  }
+  
+  if (rightScore == winningScore) {
+    displayGameOver("RIGHT PLAYER WINS!",color(255));
+    leftScore = 0;
+    rightScore = 0;
+  }
+}
+
+// CHANGED
+// displayGameOver()
+//
+void displayGameOver(String gameOverText, color gameOverColor) {
+  fill(gameOverColor);
+  text("GAME OVER", width/2, height/2);
+  text(gameOverText, width/2, (height/2 + 30));  
+}
+
 
 // keyPressed()
 //
