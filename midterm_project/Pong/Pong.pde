@@ -79,7 +79,7 @@ void draw() {
   
   // CHANGED
   // Display the scores
-  displayScore();
+  displayScores();
 }
 
 // CHANGED
@@ -87,7 +87,7 @@ void draw() {
 //
 // Displays the scores
 
-void displayScore() {
+void displayScores() {
   // Loads a .vlw formatted font into a PFont object
   PFont font;
   font = loadFont("AmericanTypewriter-CondensedBold-48.vlw");

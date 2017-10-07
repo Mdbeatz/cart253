@@ -61,27 +61,41 @@ class Ball {
       vy = -vy;
     }
   }
-  
+
   // reset()
   //
   // Resets the ball to the centre of the screen.
   // Note that it KEEPS its velocity
-  
+
   void reset() {
     x = width/2;
     y = height/2;
   }
-  
+
   // isOffScreen()
   //
-  // Returns true if the ball is off the left or right side of the window
-  // otherwise false
-  // (If we wanted to return WHICH side it had gone off, we'd have to return
-  // something like an int (e.g. 0 = not off, 1 = off left, 2 = off right)
-  // or a String (e.g. "ON SCREEN", "OFF LEFT", "OFF RIGHT")
-  
+  // Returns true if the ball is off the left or right side of the window, otherwise false.
+  // Adds 1 to the right player's score if the ball is off the left side of the window.
+  // Adds 1 to the left player's score if the ball is off the right side of the window. 
+
   boolean isOffScreen() {
-    return (x + SIZE/2 < 0 || x - SIZE/2 > width);
+    //return (x + SIZE/2 < 0 || x - SIZE/2 > width);
+
+    // CHANGED
+    // Check if the ball is off the left side of the window by checking if it's location is less than 0.
+    if (x + SIZE/2 < 0) {
+      // If it is, make the right player's score increase by 1
+      rightScore++;
+      return true;
+    } // Check if the ball is off the right side of the window by checking if it's location is greater than the width of the window.
+      else if (x - SIZE/2 > width) {
+      // If it is, make the left player's score increase by 1
+      leftScore++;
+      return true;
+    } else {
+      // If all is not true, return false.
+      return false;
+    }
   }
 
   // collide(Paddle paddle)
@@ -96,7 +110,7 @@ class Ball {
     boolean insideRight = (x - SIZE/2 < paddle.x + paddle.WIDTH/2);
     boolean insideTop = (y + SIZE/2 > paddle.y - paddle.HEIGHT/2);
     boolean insideBottom = (y - SIZE/2 < paddle.y + paddle.HEIGHT/2);
-    
+
     // Check if the ball overlaps with the paddle
     if (insideLeft && insideRight && insideTop && insideBottom) {
       // If it was moving to the left
@@ -120,7 +134,7 @@ class Ball {
     // Set up the appearance of the ball (no stroke and fill)
     noStroke();
     fill(ballColor);
-    
+
     // CHANGED rect to ellipse
     // Draw the ball
     ellipse(x, y, SIZE, SIZE);
