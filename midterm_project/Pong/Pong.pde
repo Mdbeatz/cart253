@@ -84,14 +84,16 @@ void draw() {
   // CHANGED
   // Display the scores
   displayScores();
-  
-  gameOver();
+
+  // CHANGED
+  // Display winner and reset game
+  whoWins();
 }
 
 // CHANGED
 // displayScore()
 //
-// Displays the scores
+// Displays the scores of the left and right players.
 
 void displayScores() {
   // Loads a .vlw formatted font into a PFont object
@@ -110,31 +112,84 @@ void displayScores() {
 }
 
 // CHANGED
-// gameOver()
+// whoWins()
 //
-//
-void gameOver() {
-  if (leftScore == winningScore) {
-    displayGameOver("LEFT PLAYER WINS!",color(255));
-    leftScore = 0;
-    rightScore = 0;
+// Checks if the left or right player wins.
 
+void whoWins() {
+  // Check if left score is equal to winning score
+  if (leftScore == winningScore) {
+    // If it is, display text "Left player wins!"
+    displayGameOver("Left player wins!", color(255));
+
+    // Set the ball's x and y velocity to 0
+    ball.vx = 0;
+    ball.vy = 0;
+
+    // Set the x and y velocity of both paddles to 0
+    leftPaddle.vx = 0;
+    leftPaddle.vy = 0;
+    rightPaddle.vx = 0;
+    rightPaddle.vy = 0;
+
+    // Check if the enter/return key is pressed
+    if (keyCode == ENTER) {
+      //  If it is, set both scores to 0
+      leftScore = 0;
+      rightScore = 0;
+
+      // Set the ball's x and y velocity back to their default values
+      ball.vx = ball.SPEED;
+      ball.vy = ball.SPEED;
+    }
   }
   
+  // Check if right score is equal to winning score
   if (rightScore == winningScore) {
-    displayGameOver("RIGHT PLAYER WINS!",color(255));
-    leftScore = 0;
-    rightScore = 0;
+    // If it is, display text "Right player wins!"
+    displayGameOver("Right player wins!", color(255));
+
+    // Set the ball's velocity to 0
+    ball.vx = 0;
+    ball.vy = 0;
+
+    // Set the x and y velocity of both paddles to 0
+    leftPaddle.vx = 0;
+    leftPaddle.vy = 0;
+    rightPaddle.vx = 0;
+    rightPaddle.vy = 0;
+
+    // Check if the enter/return key is pressed
+    if (keyCode == ENTER) {
+      //  If it is, set both scores to 0
+      leftScore = 0;
+      rightScore = 0;
+
+      // Set the ball's x and y velocity back to their default values
+      ball.vx = ball.SPEED;
+      ball.vy = ball.SPEED;
+    }
   }
 }
 
 // CHANGED
 // displayGameOver()
 //
-void displayGameOver(String gameOverText, color gameOverColor) {
-  fill(gameOverColor);
+// Displays the game over text and the control key text to restart the game.
+
+void displayGameOver(String whoWinsText, color whoWinsColor) {
+  // Set text color for "GAME OVER"
+  fill(255, 0, 0);
+  // Set text and location
   text("GAME OVER", width/2, height/2);
-  text(gameOverText, width/2, (height/2 + 30));  
+  // Set text color for whoWinsText
+  fill(whoWinsColor);
+  // Set text of player who wins and location
+  text(whoWinsText, width/2, (height/2 + 60));
+  // Set text size for control key text
+  textSize(30);
+  // Set text and location
+  text("Press ENTER to restart.", width/2, (height/2 + 120));
 }
 
 

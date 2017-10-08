@@ -89,7 +89,7 @@ class Ball {
       rightScore++;
       return true;
     } // Check if the ball is off the right side of the window by checking if it's location is greater than the width of the window.
-      else if (x - SIZE/2 > width) {
+    else if (x - SIZE/2 > width) {
       // If it is, make the left player's score increase by 1
       leftScore++;
       return true;
