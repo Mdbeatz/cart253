@@ -35,8 +35,9 @@ float r;
 // Sets the size and creates the paddles and ball
 
 void setup() {
+  // CHANGED
   // Set the size
-  size(640, 480);
+  size(700, 500);
 
   // CHANGED
   // Set the color mode to HSB (Hue Saturation Brightness)
