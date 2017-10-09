@@ -4,9 +4,6 @@
 // Allows to people to bounce a ball back and forth between
 // two paddles that they control.
 //
-// No scoring. (Yet!)
-// No score display. (Yet!)
-// Pretty ugly. (Now!)
 // Only two paddles. (So far!)
 
 // Global variables for the paddles and the ball
@@ -16,9 +13,6 @@ Ball ball;
 
 // The distance from the edge of the window a paddle should be
 int PADDLE_INSET = 8;
-
-// The background colour during play (black)
-color backgroundColor = color(0);
 
 // CHANGED 
 // The score for the left player
@@ -32,6 +26,10 @@ int rightScore;
 // The winning score
 int winningScore = 3;
 
+// CHANGED
+// The floating-point number for the R value in RGB for the background color
+float r;
+
 // setup()
 //
 // Sets the size and creates the paddles and ball
@@ -39,6 +37,10 @@ int winningScore = 3;
 void setup() {
   // Set the size
   size(640, 480);
+
+  // CHANGED
+  // Set the color mode to HSB (Hue Saturation Brightness)
+  colorMode(HSB);
 
   // Create the paddles on either side of the screen. 
   // Use PADDLE_INSET to to position them on x, position them both at centre on y
@@ -58,8 +60,20 @@ void setup() {
 // if the ball has hit a paddle, and displaying everything.
 
 void draw() {
-  // Fill the background each frame so we have animation
-  background(backgroundColor);
+  // CHANGED
+  // Checks if the value in r is greater or equal to 255
+  if (r >= 255) {
+    // If it is, reset it to 0
+    r = 0;
+  } else {
+    // If it is not, add 1 to its current value
+    r++;
+  }
+  
+  // CHANGED
+  // Fill the background each frame so we have smooth transition animation of different background colors.
+  // Calls the r variable with its value to plug in as the R value in RGB.
+  background(r, 255, 255);
 
   // Update the paddles and ball by calling their update methods
   leftPaddle.update();
@@ -143,7 +157,7 @@ void whoWins() {
       ball.vy = ball.SPEED;
     }
   }
-  
+
   // Check if right score is equal to winning score
   if (rightScore == winningScore) {
     // If it is, display text "Right player wins!"
