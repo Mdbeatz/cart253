@@ -43,13 +43,15 @@ void setup() {
   // Set the color mode to HSB (Hue Saturation Brightness)
   colorMode(HSB);
 
+  // CHANGED
+  //
   // Create the paddles on either side of the screen. 
   // Use PADDLE_INSET to to position them on x, position them both at centre on y
   // Also pass through the two keys used to control 'up' and 'down' respectively
   // NOTE: On a mac you can run into trouble if you use keys that create that popup of
   // different accented characters in text editors (so avoid those if you're changing this)
-  leftPaddle = new Paddle(PADDLE_INSET, height/2, '1', 'q');
-  rightPaddle = new Paddle(width - PADDLE_INSET, height/2, '0', 'p');
+  leftPaddle = new Paddle(PADDLE_INSET + 20, height/2, '1', 'q');
+  rightPaddle = new Paddle((width - PADDLE_INSET) - 20, height/2, '0', 'p');
 
   // Create the ball at the centre of the screen
   ball = new Ball(width/2, height/2);
@@ -70,7 +72,7 @@ void draw() {
     // If it is not, add 1 to its current value
     r++;
   }
-  
+
   // CHANGED
   // Fill the background each frame so we have smooth transition animation of different background colors.
   // Calls the r variable with its value to plug in as the R value in RGB.

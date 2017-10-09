@@ -10,7 +10,7 @@ class Ball {
   // Default values for speed and size
   int SPEED = 5;
   
-  //int SIZE = 16;
+  int SIZE;
 
   float time = 0.1;
   float increment = 0.04;

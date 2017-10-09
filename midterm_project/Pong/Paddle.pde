@@ -19,7 +19,7 @@ class Paddle {
   int vy;
   
   // The fill color of the paddle
-  color paddleColor = color(255);
+  color paddleColor = color(0);
 
   // The characters used to make the paddle move up and down, defined in constructor
   char upKey;
@@ -65,7 +65,16 @@ class Paddle {
   
   void display() {
     // Set display properties
-    noStroke();
+    //noStroke();
+    
+    // CHANGED
+    // Set stroke color
+    stroke(255);
+    
+    // CHANGED
+    // Set stroke weight/thickness
+    strokeWeight(3);
+    
     fill(paddleColor);
     rectMode(CENTER);
     
