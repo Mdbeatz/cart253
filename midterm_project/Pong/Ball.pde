@@ -9,7 +9,11 @@ class Ball {
 
   // Default values for speed and size
   int SPEED = 5;
-  int SIZE = 16;
+  
+  //int SIZE = 16;
+
+  float time = 0.1;
+  float increment = 0.04;
 
   // The location of the ball
   int x;
@@ -132,12 +136,18 @@ class Ball {
   // Draw the ball at its position
 
   void display() {
-    // Set up the appearance of the ball (no stroke and fill)
+    // Set up the appearance of the ball (no stroke and the fill color is called)
     noStroke();
     fill(ballColor);
 
+    // CHANGED
+    // 
+    float noiseValue = noise(time) * (width/6);
+
     // CHANGED rect to ellipse
     // Draw the ball
-    ellipse(x, y, SIZE, SIZE);
+    ellipse(x, y, noiseValue, noiseValue);
+
+    time += increment;
   }
 }
