@@ -11,6 +11,12 @@ Paddle leftPaddle;
 Paddle rightPaddle;
 Ball ball;
 
+// CHANGED
+int numStatic = 700; // CHANGED the value, assigns the pixels for the static
+int staticSizeMin = 1; // assigns the minimum size for the static pixels
+int staticSizeMax = 2; // CHANGED. assigns the maximum size for the static pixels
+color staticColor = color(255); // CHANGED
+
 // The distance from the edge of the window a paddle should be
 int PADDLE_INSET = 8;
 
@@ -93,6 +99,8 @@ void draw() {
   // Fill the background each frame so we have smooth transition animation of different background colors.
   // Calls the r variable with its value to plug in as the R value in RGB.
   background(r, 255, 255);
+  
+  drawStatic();
 
   // Update the paddles and ball by calling their update methods
   leftPaddle.update();
@@ -131,12 +139,9 @@ void displayScrollingText() {
   // CHANGED
   // An array of text
   String[] scrollingText = {
-    "Keep Calm And Play Pong!", 
-    "Who will win?", 
-    "Made you look!", 
-    "No, seriously. Who's going to win?", 
-    "Why did the chicken cross the road?", 
-    "Who cares?! Pay attention to the game."
+    "PEEK-A-BOO!", 
+    "Ha! Made you look.", 
+    "Keep Calm And Play Pong!"
   };
 
   // Checks if either score is greater or equal to 1.
@@ -160,7 +165,7 @@ void displayScrollingText() {
     if (x < -scrollingTextWidth) {
       // Set x back to the width again
       x = width;
-      
+
       // Increment index by 1 when the current string has left the window and display the next string.
       index = (index + 1) % scrollingText.length;
     }
@@ -266,6 +271,19 @@ void displayGameOver(String whoWinsText, color whoWinsColor) {
   textSize(30);
   // Set text and location
   text("Press ENTER to restart.", width/2, (height/2 + 140));
+}
+
+// drawStatic()
+//
+// creates an infinite loop for the static background effect
+void drawStatic() {
+  for (int i = 0; i < numStatic; i++) {
+    float x = random(0, width); // creates a random value between 0 and the width of the window for x
+    float y = random(0, height); // creates a random value between 0 and the height of the window for y
+    float staticSize = random(staticSizeMin, staticSizeMax); // creates random sized static pixels between sizes 1 and 3
+    fill(staticColor); // calls the colour   
+    rect(x, y, staticSize, staticSize); // positions the static pixels randomly within the window
+  }
 }
 
 
