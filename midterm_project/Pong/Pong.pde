@@ -11,6 +11,12 @@ Paddle leftPaddle;
 Paddle rightPaddle;
 Ball ball;
 
+// CHANGED
+int numStatic = 700; 
+int staticSizeMin = 1; 
+int staticSizeMax = 2; 
+color staticColor = color(255);
+
 // The distance from the edge of the window a paddle should be
 int PADDLE_INSET = 8;
 
@@ -94,6 +100,9 @@ void draw() {
   // Calls the r variable with its value to plug in as the R value in RGB.
   background(r, 255, 255);
 
+  // CHANGED
+  drawStatic();
+
   // Update the paddles and ball by calling their update methods
   leftPaddle.update();
   rightPaddle.update();
@@ -125,6 +134,20 @@ void draw() {
   // CHANGED
   // Display the scrolling text
   displayScrollingText();
+}
+
+// CHANGED
+// drawStatic()
+//
+// creates an infinite loop for the static background effect
+void drawStatic() {
+  for (int i = 0; i < numStatic; i++) {
+    float x = random(0, width); // creates a random value between 0 and the width of the window for x
+    float y = random(0, height); // creates a random value between 0 and the height of the window for y
+    float staticSize = random(staticSizeMin, staticSizeMax); // creates random sized static pixels between sizes 1 and 3
+    fill(staticColor); // calls the colour   
+    rect(x, y, staticSize, staticSize); // positions the static pixels randomly within the window
+  }
 }
 
 void displayScrollingText() {
@@ -160,7 +183,7 @@ void displayScrollingText() {
     if (x < -scrollingTextWidth) {
       // Set x back to the width again
       x = width;
-      
+
       // Increment index by 1 when the current string has left the window and display the next string.
       index = (index + 1) % scrollingText.length;
     }
