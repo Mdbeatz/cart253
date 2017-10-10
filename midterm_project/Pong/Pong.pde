@@ -24,11 +24,23 @@ int rightScore;
 
 // CHANGED
 // The winning score
-int winningScore = 3;
+int winningScore = 4;
 
 // CHANGED
 // The floating-point number for the R value in RGB for the background color
 float r;
+
+// CHANGED
+// Global font variable
+PFont font;
+
+// CHANGED
+// Horizontal location for the scrolling text
+float x;
+
+// CHANGED
+// index for scrollingText array
+int index = 0;
 
 // setup()
 //
@@ -42,6 +54,10 @@ void setup() {
   // CHANGED
   // Set the color mode to HSB (Hue Saturation Brightness)
   colorMode(HSB);
+
+  // CHANGED
+  // Set scrollingText's x location offscreen
+  x = width;
 
   // CHANGED
   //
@@ -103,8 +119,52 @@ void draw() {
   displayScores();
 
   // CHANGED
-  // Display winner and reset game
+  // Display the winner and reset the game
   whoWins();
+
+  // CHANGED
+  // Display the scrolling text
+  displayScrollingText();
+}
+
+void displayScrollingText() {
+  // CHANGED
+  // An array of text
+  String[] scrollingText = {
+    "Keep Calm And Play Pong!", 
+    "Who will win?", 
+    "Made you look!", 
+    "No, seriously. Who's going to win?", 
+    "Why did the chicken cross the road?", 
+    "Who cares?! Pay attention to the game."
+  };
+
+  // Checks if either score is greater or equal to 1.
+  // If it is, it will display the scrolling text
+  if (leftScore >= 1 || rightScore >= 1) {
+    // Set the font family and font size
+    textFont(font, 50);
+    // Align the text to the left
+    textAlign(LEFT);
+    // Display a string from the array based on the index value
+    text(scrollingText[index], x, height - 30);
+
+    // Decrement x by 3
+    x = x - 3;
+
+    // Calculate the width of the current string
+    float scrollingTextWidth = textWidth(scrollingText[index]);
+
+    // Cheks if x is less than the negative width.
+    // If it is, then that means it is off the screen.
+    if (x < -scrollingTextWidth) {
+      // Set x back to the width again
+      x = width;
+      
+      // Increment index by 1 when the current string has left the window and display the next string.
+      index = (index + 1) % scrollingText.length;
+    }
+  }
 }
 
 // CHANGED
@@ -114,7 +174,6 @@ void draw() {
 
 void displayScores() {
   // Loads a .vlw formatted font into a PFont object
-  PFont font;
   font = loadFont("AmericanTypewriter-CondensedBold-48.vlw");
   // Set text color
   fill(255, 225, 0);
@@ -198,15 +257,15 @@ void displayGameOver(String whoWinsText, color whoWinsColor) {
   // Set text color for "GAME OVER"
   fill(255, 0, 0);
   // Set text and location
-  text("GAME OVER", width/2, height/2);
+  text("GAME OVER", width/2, height/3);
   // Set text color for whoWinsText
   fill(whoWinsColor);
   // Set text of player who wins and location
-  text(whoWinsText, width/2, (height/2 + 60));
+  text(whoWinsText, width/2, (height/2 + 80));
   // Set text size for control key text
   textSize(30);
   // Set text and location
-  text("Press ENTER to restart.", width/2, (height/2 + 120));
+  text("Press ENTER to restart.", width/2, (height/2 + 140));
 }
 
 
