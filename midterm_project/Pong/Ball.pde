@@ -9,7 +9,6 @@ class Ball {
 
   // Default values for speed and size
   int SPEED = 5;
-  
   int SIZE;
 
   float time = 0.1;
@@ -91,11 +90,21 @@ class Ball {
     if (x + SIZE/2 < 0) {
       // If it is, make the right player's score increase by 1
       rightScore++;
+
+      if (leftPaddle.HEIGHT > 40) {
+        leftPaddle.HEIGHT = leftPaddle.HEIGHT-10;
+      }    
+
       return true;
     } // Check if the ball is off the right side of the window by checking if it's location is greater than the width of the window.
     else if (x - SIZE/2 > width) {
       // If it is, make the left player's score increase by 1
       leftScore++;
+
+      if (rightPaddle.HEIGHT > 40) {
+        rightPaddle.HEIGHT = rightPaddle.HEIGHT-10;
+      }
+
       return true;
     } else {
       // If all is not true, return false.
@@ -128,6 +137,14 @@ class Ball {
       }
       // And make it bounce
       vx = -vx;
+
+      // CHANGED
+      // An array of colors (white, black and grey)
+      color[] ballColors = {color(255), color(0), color(128, 128, 128)};
+      
+      // CHANGED
+      // Set the ball's fill color randomly to either white, black or grey
+      ballColor = ballColors[(int)random(3)];
     }
   }
 
@@ -142,7 +159,7 @@ class Ball {
 
     // CHANGED
     // 
-    float noiseValue = noise(time) * (width/6);
+    float noiseValue = noise(time) * (width/7);
 
     // CHANGED rect to ellipse
     // Draw the ball

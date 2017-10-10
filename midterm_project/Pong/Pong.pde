@@ -12,10 +12,12 @@ Paddle rightPaddle;
 Ball ball;
 
 // CHANGED
-int numStatic = 700; // CHANGED the value, assigns the pixels for the static
-int staticSizeMin = 1; // assigns the minimum size for the static pixels
-int staticSizeMax = 2; // CHANGED. assigns the maximum size for the static pixels
-color staticColor = color(255); // CHANGED
+int numStatic = 700; 
+int staticSizeMin = 1; 
+int staticSizeMax = 2; 
+color staticColor = color(255);
+
+boolean gameOver = false;
 
 // The distance from the edge of the window a paddle should be
 int PADDLE_INSET = 8;
@@ -30,7 +32,7 @@ int rightScore;
 
 // CHANGED
 // The winning score
-int winningScore = 4;
+int winningScore = 5;
 
 // CHANGED
 // The floating-point number for the R value in RGB for the background color
@@ -72,8 +74,8 @@ void setup() {
   // Also pass through the two keys used to control 'up' and 'down' respectively
   // NOTE: On a mac you can run into trouble if you use keys that create that popup of
   // different accented characters in text editors (so avoid those if you're changing this)
-  leftPaddle = new Paddle(PADDLE_INSET + 20, height/2, '1', 'q');
-  rightPaddle = new Paddle((width - PADDLE_INSET) - 20, height/2, '0', 'p');
+  leftPaddle = new Paddle(PADDLE_INSET + 20, height/2, 'a', 'z');
+  rightPaddle = new Paddle((width - PADDLE_INSET) - 20, height/2, '4', '1');
 
   // Create the ball at the centre of the screen
   ball = new Ball(width/2, height/2);
@@ -99,7 +101,9 @@ void draw() {
   // Fill the background each frame so we have smooth transition animation of different background colors.
   // Calls the r variable with its value to plug in as the R value in RGB.
   background(r, 255, 255);
-  
+
+  // CHANGED
+  // Fill the background each frame with static pixels.
   drawStatic();
 
   // Update the paddles and ball by calling their update methods
@@ -132,16 +136,36 @@ void draw() {
 
   // CHANGED
   // Display the scrolling text
-  displayScrollingText();
+  if (!gameOver) {
+    displayScrollingText();
+  }
 }
 
+// CHANGED
+// drawStatic()
+//
+// Creates an infinite loop for the static background effect
+void drawStatic() {
+  for (int i = 0; i < numStatic; i++) {
+    float x = random(0, width); // creates a random value between 0 and the width of the window for x
+    float y = random(0, height); // creates a random value between 0 and the height of the window for y
+    float staticSize = random(staticSizeMin, staticSizeMax); // creates random sized static pixels between sizes 1 and 3
+    fill(staticColor); // calls the colour   
+    rect(x, y, staticSize, staticSize); // positions the static pixels randomly within the window
+  }
+}
+
+// CHANGED
+// displayScrollingText()
+//
+// Displays the scrolling text.
+
 void displayScrollingText() {
-  // CHANGED
+
   // An array of text
   String[] scrollingText = {
-    "PEEK-A-BOO!", 
-    "Ha! Made you look.", 
-    "Keep Calm And Play Pong!"
+    "PEEK-A-BOO! Reach 5 to win.",  
+    "KEEP CALM AND PLAY PONG!"
   };
 
   // Checks if either score is greater or equal to 1.
@@ -160,7 +184,7 @@ void displayScrollingText() {
     // Calculate the width of the current string
     float scrollingTextWidth = textWidth(scrollingText[index]);
 
-    // Cheks if x is less than the negative width.
+    // Checks if x is less than the negative width.
     // If it is, then that means it is off the screen.
     if (x < -scrollingTextWidth) {
       // Set x back to the width again
@@ -175,7 +199,7 @@ void displayScrollingText() {
 // CHANGED
 // displayScore()
 //
-// Displays the scores of the left and right players.
+// Displays the scores of the both players.
 
 void displayScores() {
   // Loads a .vlw formatted font into a PFont object
@@ -200,6 +224,9 @@ void displayScores() {
 void whoWins() {
   // Check if left score is equal to winning score
   if (leftScore == winningScore) {
+
+    gameOver = true;
+
     // If it is, display text "Left player wins!"
     displayGameOver("Left player wins!", color(255));
 
@@ -213,8 +240,10 @@ void whoWins() {
     rightPaddle.vx = 0;
     rightPaddle.vy = 0;
 
+
+
     // Check if the enter/return key is pressed
-    if (keyCode == ENTER) {
+    if (keyPressed && keyCode == 0) {
       //  If it is, set both scores to 0
       leftScore = 0;
       rightScore = 0;
@@ -222,11 +251,24 @@ void whoWins() {
       // Set the ball's x and y velocity back to their default values
       ball.vx = ball.SPEED;
       ball.vy = ball.SPEED;
+
+      // Set the paddle heights back to their default heights
+      leftPaddle.HEIGHT = leftPaddle.defaultHEIGHT;
+      rightPaddle.HEIGHT = rightPaddle.defaultHEIGHT;
+
+      // Decrement x by 3
+      x = width - 3;
+
+      index = 0;
+
+      gameOver = false;
     }
   }
 
   // Check if right score is equal to winning score
   if (rightScore == winningScore) {
+
+    gameOver = true;
     // If it is, display text "Right player wins!"
     displayGameOver("Right player wins!", color(255));
 
@@ -241,7 +283,7 @@ void whoWins() {
     rightPaddle.vy = 0;
 
     // Check if the enter/return key is pressed
-    if (keyCode == ENTER) {
+    if (keyPressed && keyCode == 0) {
       //  If it is, set both scores to 0
       leftScore = 0;
       rightScore = 0;
@@ -249,6 +291,17 @@ void whoWins() {
       // Set the ball's x and y velocity back to their default values
       ball.vx = ball.SPEED;
       ball.vy = ball.SPEED;
+
+      // Set the paddle heights back to their default heights
+      leftPaddle.HEIGHT = leftPaddle.defaultHEIGHT;
+      rightPaddle.HEIGHT = rightPaddle.defaultHEIGHT;
+
+      // Decrement x by 3
+      x = width - 3;
+
+      index = 0;
+
+      gameOver = false;
     }
   }
 }
@@ -271,19 +324,6 @@ void displayGameOver(String whoWinsText, color whoWinsColor) {
   textSize(30);
   // Set text and location
   text("Press ENTER to restart.", width/2, (height/2 + 140));
-}
-
-// drawStatic()
-//
-// creates an infinite loop for the static background effect
-void drawStatic() {
-  for (int i = 0; i < numStatic; i++) {
-    float x = random(0, width); // creates a random value between 0 and the width of the window for x
-    float y = random(0, height); // creates a random value between 0 and the height of the window for y
-    float staticSize = random(staticSizeMin, staticSizeMax); // creates random sized static pixels between sizes 1 and 3
-    fill(staticColor); // calls the colour   
-    rect(x, y, staticSize, staticSize); // positions the static pixels randomly within the window
-  }
 }
 
 
