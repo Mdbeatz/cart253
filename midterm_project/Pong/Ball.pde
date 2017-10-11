@@ -10,6 +10,10 @@ class Ball {
   // Default values for speed and size
   int SPEED = 5;
   int SIZE;
+  
+  // CHANGED
+  // The new velocity for the newly restarted game
+  int newSPEED = 6;
 
   float time = 0.1;
   float increment = 0.04;
@@ -141,7 +145,7 @@ class Ball {
       // CHANGED
       // An array of colors (white, black and grey)
       color[] ballColors = {color(255), color(0), color(128, 128, 128)};
-      
+
       // CHANGED
       // Set the ball's fill color randomly to either white, black or grey
       ballColor = ballColors[(int)random(3)];

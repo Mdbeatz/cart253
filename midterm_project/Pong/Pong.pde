@@ -260,6 +260,9 @@ void whoWins() {
       index = 0;
 
       gameOver = false;
+      
+      ball.vx = ball.newSPEED;
+      ball.vy = ball.newSPEED;
     }
   }
 
@@ -300,6 +303,9 @@ void whoWins() {
       index = 0;
 
       gameOver = false;
+      
+      ball.vx = ball.newSPEED;
+      ball.vy = ball.newSPEED;
     }
   }
 }
