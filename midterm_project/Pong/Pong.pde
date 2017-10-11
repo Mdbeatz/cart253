@@ -74,8 +74,8 @@ void setup() {
   // Also pass through the two keys used to control 'up' and 'down' respectively
   // NOTE: On a mac you can run into trouble if you use keys that create that popup of
   // different accented characters in text editors (so avoid those if you're changing this)
-  leftPaddle = new Paddle(PADDLE_INSET + 20, height/2, 'a', 'z');
-  rightPaddle = new Paddle((width - PADDLE_INSET) - 20, height/2, '4', '1');
+  leftPaddle = new Paddle(PADDLE_INSET + 20, height/2, '1', 'q');
+  rightPaddle = new Paddle((width - PADDLE_INSET) - 20, height/2, '0', 'p');
 
   // Create the ball at the centre of the screen
   ball = new Ball(width/2, height/2);
@@ -240,10 +240,8 @@ void whoWins() {
     rightPaddle.vx = 0;
     rightPaddle.vy = 0;
 
-
-
     // Check if the enter/return key is pressed
-    if (keyPressed && keyCode == 0) {
+    if (keyPressed && keyCode == SHIFT) {
       //  If it is, set both scores to 0
       leftScore = 0;
       rightScore = 0;
@@ -283,7 +281,7 @@ void whoWins() {
     rightPaddle.vy = 0;
 
     // Check if the enter/return key is pressed
-    if (keyPressed && keyCode == 0) {
+    if (keyPressed && keyCode == SHIFT) {
       //  If it is, set both scores to 0
       leftScore = 0;
       rightScore = 0;
@@ -323,7 +321,7 @@ void displayGameOver(String whoWinsText, color whoWinsColor) {
   // Set text size for control key text
   textSize(30);
   // Set text and location
-  text("Press ENTER to restart.", width/2, (height/2 + 140));
+  text("Press SHIFT to restart.", width/2, (height/2 + 140));
 }
 
 
