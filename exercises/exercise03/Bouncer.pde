@@ -17,6 +17,7 @@ class Bouncer {
   // The default size of the ball
   int defaultSize;
 
+  // CHANGED
   // The new size of the ball once clicked on
   int newSize = 70;
 
@@ -29,11 +30,13 @@ class Bouncer {
   // The hover color of the ball
   color hoverColor;
 
+  // CHANGED
   // The temp fill color of the bouncer when the mouse is being pressed
-  color tempMousePressedFillColor;
+  color tempMouseClickedFillColor;
 
+  // CHANGED
   // The fill color of the bouncer when the mouse is being pressed.
-  color mousePressedFillColor;
+  color mouseClickedFillColor;
 
 
   /////////////// Constructor ///////////////
@@ -42,7 +45,7 @@ class Bouncer {
   //
   // Sets the variables to their starting values.
   // x, y, vx, vy, size, fillColor and hoverColor are set to the arguments passed through from the main program (exercise03).
-  Bouncer(int tempX, int tempY, int tempVX, int tempVY, int tempSize, color tempDefaultColor, color tempHoverColor, color tempMousePressedFillColor) {
+  Bouncer(int tempX, int tempY, int tempVX, int tempVY, int tempSize, color tempDefaultColor, color tempHoverColor, color tempMouseClickedFillColor) {
     // Set x to new temp y value
     x = tempX;
 
@@ -74,7 +77,7 @@ class Bouncer {
 
     // CHANGED
     // Set the fill color of the ball when the mouse is being pressed to the temp fill color of the ball when the mouse is being pressed
-    mousePressedFillColor = tempMousePressedFillColor;
+    mouseClickedFillColor = tempMouseClickedFillColor;
   }
 
 
@@ -131,8 +134,9 @@ class Bouncer {
   // Checks if the mouse cursor is hovering over the ball.
   // If it is, then the fill color of the ball will change.
   void handleMouse() {
-    // Check if the distance of the cursor location is less than half the size of the ball.
-    if (dist(mouseX, mouseY, x, y) < size/2) {
+    // CHANGED
+    // Check if the distance of the cursor location is less than the size of the ball.
+    if (dist(mouseX, mouseY, x, y) < size) {
       // If it is, then make the fill color change to the hover color.
       fillColor = hoverColor;
     } else {
@@ -141,29 +145,18 @@ class Bouncer {
     }
   }
 
-  //int getX = mouseX;
-  //int getY = mouseY;
-
-
   // CHANGED
   // mouseClicked()
   //
-  // Checks if the mouse is clicked in the ball.
+  // Checks if the mouse is clicked on a ball.
   void mouseClicked() {
-
-    // If the mouse is pressed, than the bouncer that is being clicked will get bigger in size.
-    // Clicking anywhere in the window will return the bouncers to their default size.
-    // If the other bouncer that is still the default size is clicked, it will get bigger, and it will make the other bouncer (if the other bouncer was turned bigger) return to its default size.
-    
-    if (dist(mouseX, mouseY, x, y) < size/2) {
+    // Check if the distance of the cursor location is less than the size of the ball.
+    if (dist(mouseX, mouseY, x, y) < size) {
       // If it is, then make the size the new bigger size.
       size = newSize;
       // It will also change the fill color to its new temp fill color.
-      fillColor = mousePressedFillColor;
-    } else {
-      // If it is not, then the size returns to the default size.
-      size = defaultSize;
-    }
+      defaultColor = mouseClickedFillColor;
+    } 
   }
 
   // draw()
