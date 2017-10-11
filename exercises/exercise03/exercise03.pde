@@ -21,7 +21,7 @@ void setup() {
 
   // CHANGED fill and hover colors
   // CHANGED velocity values
-  // Create the two bouncing balls mirroring each other.
+  // Create the two bouncing balls.
   // Set their locations, velocities, sizes, fill colors and hover colors. 
   bouncer = new Bouncer(width/2, height/2, 3, 3, 50, color(150, 117, 242, 50), color(117, 209, 242, 50), color(255, 255, 255, 50));
   bouncer2 = new Bouncer(width/2, height/2, -3, 3, 50, color(209, 242, 117, 50), color(242, 117, 209, 50), color(0, 0, 0, 50));
@@ -35,19 +35,19 @@ void draw() {
   bouncer.update();
   bouncer2.update();
 
-  // CHANGED
-  // If the mouse is pressed, than the bouncer that is being clicked will get bigger in size.
-  // Clicking anywhere in the window will return the bouncers to their default size.
-  // If the other bouncer that is still the default size is clicked, it will get bigger, and it will make the other bouncer (if the other bouncer was turned bigger) return to its default size.
-  // If the mouse remains over the bouncer while it is still being pressed, then the fill color of the bouncer will change to white for bouncer and black for bouncer2.
-  if (mousePressed == true) {
-    bouncer.mouseClicked();
-    bouncer2.mouseClicked();
-  }
-
   // Create the two bouncing balls by calling their draw methods
   bouncer.draw();
   bouncer2.draw();
+}
+
+// CHANGED
+// mouseClicked()
+//
+// Checks if the mouse is clicked on the balls.
+// If a ball is clicked, it will get bigger and its color will change.
+void mouseClicked() {
+  bouncer.mouseClicked();
+  bouncer2.mouseClicked();
 }
 
 // CHANGED
@@ -55,8 +55,13 @@ void draw() {
 //
 // Resets the window by changing the background color.
 void keyPressed() {
-  // If the return key (enter key) is pressed, the window resets with the background color
-  if (keyCode == ENTER) {
+  // Check if the SHIFT key is pressed
+  if (keyCode == SHIFT) {
+    // If it is, reset the window with the background color
     background(backgroundColor);
+    
+    // Balls will also return to their default size
+    bouncer.size = bouncer.defaultSize;
+    bouncer2.size = bouncer2.defaultSize;
   }
 }
