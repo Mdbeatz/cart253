@@ -135,7 +135,8 @@ void draw() {
   whoWins();
 
   // CHANGED
-  // Display the scrolling text
+  // Display the scrolling text when the users are playing.
+  // The scrolling text will not display if the game over text is prompted.
   if (!gameOver) {
     displayScrollingText();
   }
@@ -152,47 +153,6 @@ void drawStatic() {
     float staticSize = random(staticSizeMin, staticSizeMax); // creates random sized static pixels between sizes 1 and 3
     fill(staticColor); // calls the colour   
     rect(x, y, staticSize, staticSize); // positions the static pixels randomly within the window
-  }
-}
-
-// CHANGED
-// displayScrollingText()
-//
-// Displays the scrolling text.
-
-void displayScrollingText() {
-
-  // An array of text
-  String[] scrollingText = {
-    "PEEK-A-BOO! Reach 5 to win.",  
-    "KEEP CALM AND PLAY PONG!"
-  };
-
-  // Checks if either score is greater or equal to 1.
-  // If it is, it will display the scrolling text
-  if (leftScore >= 1 || rightScore >= 1) {
-    // Set the font family and font size
-    textFont(font, 50);
-    // Align the text to the left
-    textAlign(LEFT);
-    // Display a string from the array based on the index value
-    text(scrollingText[index], x, height - 30);
-
-    // Decrement x by 3
-    x = x - 3;
-
-    // Calculate the width of the current string
-    float scrollingTextWidth = textWidth(scrollingText[index]);
-
-    // Checks if x is less than the negative width.
-    // If it is, then that means it is off the screen.
-    if (x < -scrollingTextWidth) {
-      // Set x back to the width again
-      x = width;
-
-      // Increment index by 1 when the current string has left the window and display the next string.
-      index = (index + 1) % scrollingText.length;
-    }
   }
 }
 
@@ -224,9 +184,6 @@ void displayScores() {
 void whoWins() {
   // Check if left score is equal to winning score
   if (leftScore == winningScore) {
-
-    gameOver = true;
-
     // If it is, display text "Left player wins!"
     displayGameOver("Left player wins!", color(255));
 
@@ -240,36 +197,15 @@ void whoWins() {
     rightPaddle.vx = 0;
     rightPaddle.vy = 0;
 
-    // Check if the enter/return key is pressed
-    if (keyPressed && keyCode == SHIFT) {
-      //  If it is, set both scores to 0
-      leftScore = 0;
-      rightScore = 0;
+    // Set the gameOver to true so the scrolling text will not appear
+    gameOver = true;
 
-      // Set the ball's x and y velocity back to their default values
-      ball.vx = ball.SPEED;
-      ball.vy = ball.SPEED;
-
-      // Set the paddle heights back to their default heights
-      leftPaddle.HEIGHT = leftPaddle.defaultHEIGHT;
-      rightPaddle.HEIGHT = rightPaddle.defaultHEIGHT;
-
-      // Decrement x by 3
-      x = width - 3;
-
-      index = 0;
-
-      gameOver = false;
-      
-      ball.vx = ball.newSPEED;
-      ball.vy = ball.newSPEED;
-    }
+    // The function called to reset the window/game
+    resets();
   }
 
   // Check if right score is equal to winning score
   if (rightScore == winningScore) {
-
-    gameOver = true;
     // If it is, display text "Right player wins!"
     displayGameOver("Right player wins!", color(255));
 
@@ -283,30 +219,48 @@ void whoWins() {
     rightPaddle.vx = 0;
     rightPaddle.vy = 0;
 
-    // Check if the enter/return key is pressed
-    if (keyPressed && keyCode == SHIFT) {
-      //  If it is, set both scores to 0
-      leftScore = 0;
-      rightScore = 0;
+    // Set the gameOver to true so the scrolling text will not appear
+    gameOver = true;
 
-      // Set the ball's x and y velocity back to their default values
-      ball.vx = ball.SPEED;
-      ball.vy = ball.SPEED;
+    // The function called to reset the window/game
+    resets();
+  }
+}
 
-      // Set the paddle heights back to their default heights
-      leftPaddle.HEIGHT = leftPaddle.defaultHEIGHT;
-      rightPaddle.HEIGHT = rightPaddle.defaultHEIGHT;
+// CHANGED
+// resets()
+//
+// Function to reset values.
 
-      // Decrement x by 3
-      x = width - 3;
+void resets() {
+  // Check if the shift key is pressed
+  if (keyPressed && keyCode == SHIFT) {
+    // Set both scores to 0
+    leftScore = 0;
+    rightScore = 0;
 
-      index = 0;
+    // Set the ball's x and y velocity back to their default values
+    ball.vx = ball.SPEED;
+    ball.vy = ball.SPEED;
 
-      gameOver = false;
-      
-      ball.vx = ball.newSPEED;
-      ball.vy = ball.newSPEED;
-    }
+    // Set the paddle heights back to their default heights
+    leftPaddle.HEIGHT = leftPaddle.defaultHEIGHT;
+    rightPaddle.HEIGHT = rightPaddle.defaultHEIGHT;
+
+    // Decrement x by 3
+    // The scrolling text will start off the window again, and will come scrolling in again
+    x = width - 3;
+
+    // Reset the index for the scrolling text array to 0
+    // This makes the array start from the first sentences again
+    index = 0;
+
+    // Set the gameOver to false so the scrolling text will appear
+    gameOver = false;
+
+    // Reset the ball's speed to the new speed of 6
+    ball.vx = ball.newSPEED;
+    ball.vy = ball.newSPEED;
   }
 }
 
@@ -330,6 +284,46 @@ void displayGameOver(String whoWinsText, color whoWinsColor) {
   text("Press SHIFT to restart.", width/2, (height/2 + 140));
 }
 
+// CHANGED
+// displayScrollingText()
+//
+// Displays the scrolling text.
+
+void displayScrollingText() {
+
+  // An array of text
+  String[] scrollingText = {
+    "PEEK-A-BOO! Reach 5 to win.", 
+    "KEEP CALM AND PLAY PONG!"
+  };
+
+  // Checks if either score is greater or equal to 1.
+  // If it is, it will display the scrolling text
+  if (leftScore >= 1 || rightScore >= 1) {
+    // Set the font family and font size
+    textFont(font, 50);
+    // Align the text to the left
+    textAlign(LEFT);
+    // Display a string from the array based on the index value
+    text(scrollingText[index], x, height - 30);
+
+    // Decrement x by 3
+    x = x - 3;
+
+    // Calculate the width of the current string
+    float scrollingTextWidth = textWidth(scrollingText[index]);
+
+    // Checks if x is less than the negative width.
+    // If it is, then that means it is off the screen.
+    if (x < -scrollingTextWidth) {
+      // Set x back to the width again
+      x = width;
+
+      // Increment index by 1 when the current string has left the window and display the next string.
+      index = (index + 1) % scrollingText.length;
+    }
+  }
+}
 
 // keyPressed()
 //
