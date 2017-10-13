@@ -13,14 +13,18 @@ class Blocker {
   int x;
   int y;
 
+  // The width and height of the blocker
   int blockerWidth;
   int blockerHeight;
 
+
+  /////////////// Constructor ///////////////
+
   // Blocker(int tempX, int tempY)
   //
-  // The constructor sets the variable to their starting values x and y 
-  // are set to the arguments passed through (from the main program).
-
+  // Sets the position, width and height based on arguments 
+  // passed through (from the main program).
+  
   Blocker(int tempX, int tempY, int tempBlockerWidth, int tempBlockerHeight) {
     x = tempX;
     y = tempY;
@@ -28,6 +32,9 @@ class Blocker {
     blockerWidth = tempBlockerWidth;
     blockerHeight = tempBlockerHeight;
   }
+
+
+  /////////////// Methods ///////////////
 
   // display()
   //

@@ -84,7 +84,7 @@ void setup() {
   // Create the ball at the centre of the screen
   ball = new Ball(width/2, height/2);
 
-  blocker1 = new Blocker(width/3, (height/2) + 100, 60, 15);
+  blocker1 = new Blocker((width/3) + 85, (height/2) + 150, 60, 15);
   blocker2 = new Blocker(width/5, (height/2) - 100, 15, 60);
   blocker3 = new Blocker((width/2) + 100, (height/6) + 100, 60, 15);
 }
