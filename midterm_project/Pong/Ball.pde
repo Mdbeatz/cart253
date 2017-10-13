@@ -10,7 +10,7 @@ class Ball {
   // Default values for speed and size
   int SPEED = 5;
   int SIZE;
-  
+
   // CHANGED
   // The new velocity for the newly restarted game
   int newSPEED = 6;
@@ -149,6 +149,26 @@ class Ball {
       // CHANGED
       // Set the ball's fill color randomly to either white, black or grey
       ballColor = ballColors[(int)random(3)];
+    }
+  }
+
+  void collidesWithBlocker(Blocker blocker) {
+    boolean hitsLeft = (x + SIZE/2 > blocker.x - blocker.blockerWidth/2);
+    boolean hitsRight = (x - SIZE/2 < blocker.x + blocker.blockerWidth/2);
+    boolean hitsTop = (y + SIZE/2 > blocker.y - blocker.blockerHeight/2);
+    boolean hitsBottom = (y - SIZE/2 < blocker.y + blocker.blockerHeight/2);
+    
+    if (hitsLeft && hitsRight && hitsTop && hitsBottom) {
+      // If it was moving to the left
+      if (vx < 0) {
+        // Reset its position to align with the right side of the paddle
+        x = blocker.x + blocker.blockerWidth/2 + SIZE/2;
+      } else if (vx > 0) {
+        // Reset its position to align with the left side of the paddle
+        x = blocker.x - blocker.blockerWidth/2 - SIZE/2;
+      }
+      // And make it bounce
+      vx = -vx;
     }
   }
 
