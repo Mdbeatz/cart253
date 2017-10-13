@@ -10,6 +10,10 @@
 Paddle leftPaddle;
 Paddle rightPaddle;
 Ball ball;
+// CHANGED
+Blocker blocker1;
+Blocker blocker2;
+Blocker blocker3;
 
 // CHANGED
 int numStatic = 700; 
@@ -79,6 +83,10 @@ void setup() {
 
   // Create the ball at the centre of the screen
   ball = new Ball(width/2, height/2);
+
+  blocker1 = new Blocker(width/3, (height/2) + 100, 60, 15);
+  blocker2 = new Blocker(width/5, (height/2) - 100, 15, 60);
+  blocker3 = new Blocker((width/2) + 100, (height/6) + 100, 60, 15);
 }
 
 // draw()
@@ -115,6 +123,10 @@ void draw() {
   ball.collide(leftPaddle);
   ball.collide(rightPaddle);
 
+  ball.collidesWithBlocker(blocker1);
+  ball.collidesWithBlocker(blocker2);
+  ball.collidesWithBlocker(blocker3);
+
   // Check if the ball has gone off the screen
   if (ball.isOffScreen()) {
     // If it has, reset the ball
@@ -125,6 +137,11 @@ void draw() {
   leftPaddle.display();
   rightPaddle.display();
   ball.display();
+
+  // CHANGED
+  blocker1.display();
+  blocker2.display();
+  blocker3.display();
 
   // CHANGED
   // Display the scores
