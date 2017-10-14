@@ -235,20 +235,10 @@ void whoWins() {
     // If it is, display text "Left player wins!"
     displayGameOver("Left player wins!", color(255));
 
-    // Set the ball's x and y velocity to 0
-    ball.vx = 0;
-    ball.vy = 0;
-
-    // Set the x and y velocity of both paddles to 0
-    leftPaddle.vx = 0;
-    leftPaddle.vy = 0;
-    rightPaddle.vx = 0;
-    rightPaddle.vy = 0;
-
     // Set the gameOver to true so the scrolling text will not appear
     gameOver = true;
 
-    // The function called to reset the window/game
+    // The function called to reset variables
     resets();
   }
 
@@ -257,20 +247,10 @@ void whoWins() {
     // If it is, display text "Right player wins!"
     displayGameOver("Right player wins!", color(255));
 
-    // Set the ball's velocity to 0
-    ball.vx = 0;
-    ball.vy = 0;
-
-    // Set the x and y velocity of both paddles to 0
-    leftPaddle.vx = 0;
-    leftPaddle.vy = 0;
-    rightPaddle.vx = 0;
-    rightPaddle.vy = 0;
-
     // Set the gameOver to true so the scrolling text will not appear
     gameOver = true;
 
-    // The function called to reset the window/game
+    // The function called to reset variables
     resets();
   }
 }
@@ -278,9 +258,19 @@ void whoWins() {
 // CHANGED
 // resets()
 //
-// Function to reset values.
+// Function to reset values of variables.
 
 void resets() {
+  // Set the ball's x and y velocity to 0
+  ball.vx = 0;
+  ball.vy = 0;
+
+  // Set the x and y velocity of both paddles to 0
+  leftPaddle.vx = 0;
+  leftPaddle.vy = 0;
+  rightPaddle.vx = 0;
+  rightPaddle.vy = 0;
+
   // Check if the shift key is pressed
   if (keyPressed && keyCode == SHIFT) {
     // If it is being pressed, do all of the below...
@@ -303,7 +293,7 @@ void resets() {
     x = width - 3;
 
     // Reset the index for the scrolling text array to 0
-    // This makes the array start from the first sentences again
+    // This makes the array start from the first sentence again
     index = 0;
 
     // Set the gameOver to false so the scrolling text will appear
