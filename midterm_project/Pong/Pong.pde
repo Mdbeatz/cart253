@@ -45,7 +45,7 @@ int rightScore;
 
 // CHANGED
 // The winning score
-int winningScore = 5;
+int winningScore = 4;
 
 // CHANGED
 // The floating-point number for the R value in RGB for the background color
@@ -154,6 +154,8 @@ void draw() {
   if (!gameOver) {
     // If it is NOT being called, display the scrolling text
     displayScrollingText();
+  } else {
+    ball.y = height/2;
   }
 }
 
@@ -279,10 +281,6 @@ void resets() {
     leftScore = 0;
     rightScore = 0;
 
-    // Set the ball's x and y velocity back to their default values
-    ball.vx = ball.SPEED;
-    ball.vy = ball.SPEED;
-
     // Set the paddle heights back to their default heights
     leftPaddle.HEIGHT = leftPaddle.defaultHEIGHT;
     rightPaddle.HEIGHT = rightPaddle.defaultHEIGHT;
@@ -331,7 +329,6 @@ void displayGameOver(String whoWinsText, color whoWinsColor) {
 // Displays the scrolling text.
 
 void displayScrollingText() {
-
   // An array of text
   String[] scrollingText = {
     "PEEK-A-BOO! Reach 5 to win.", 
