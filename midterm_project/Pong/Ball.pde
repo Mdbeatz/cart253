@@ -71,12 +71,16 @@ class Ball {
 
   // reset()
   //
-  // Resets the ball to the centre of the screen.
+  // Resets the ball to the centre of the screen width wise, 
+  // but it will randomly assign the y coordinate.
   // Note that it KEEPS its velocity
 
   void reset() {
     x = width/2;
-    y = height/2;
+    
+    // CHANGED
+    // Set the y coordinate to a random integer within the height of the window
+    y = (int) random(height);
   }
 
   // CHANGED
@@ -157,7 +161,7 @@ class Ball {
     boolean hitsRight = (x - SIZE/2 < blocker.x + blocker.blockerWidth/2);
     boolean hitsTop = (y + SIZE/2 > blocker.y - blocker.blockerHeight/2);
     boolean hitsBottom = (y - SIZE/2 < blocker.y + blocker.blockerHeight/2);
-    
+
     if (hitsLeft && hitsRight && hitsTop && hitsBottom) {
       // If it was moving to the left
       if (vx < 0) {
