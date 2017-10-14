@@ -3,28 +3,37 @@
 // A simple version of Pong using object-oriented programming.
 // Allows to people to bounce a ball back and forth between
 // two paddles that they control.
-//
-// Only two paddles. (So far!)
+
 
 // Global variables for the paddles and the ball
 Paddle leftPaddle;
 Paddle rightPaddle;
 Ball ball;
+
 // CHANGED
+// Global variables for the blockers
 Blocker blocker1;
 Blocker blocker2;
 Blocker blocker3;
 
 // CHANGED
-int numStatic = 700; 
+// The number of pixels for the static
+int numStatic = 700;
+// The minimum size for the static pixels
 int staticSizeMin = 1; 
-int staticSizeMax = 2; 
+// The maximum size for the static pixels
+int staticSizeMax = 2;
+// The color for the static pixels
 color staticColor = color(255);
 
+// CHANGED
+// The variable checking if the gameOver text is displayed
+// Set to false when game starts
 boolean gameOver = false;
 
+// CHANGED
 // The distance from the edge of the window a paddle should be
-int PADDLE_INSET = 8;
+int PADDLE_INSET = 28;
 
 // CHANGED 
 // The score for the left player
@@ -78,12 +87,13 @@ void setup() {
   // Also pass through the two keys used to control 'up' and 'down' respectively
   // NOTE: On a mac you can run into trouble if you use keys that create that popup of
   // different accented characters in text editors (so avoid those if you're changing this)
-  leftPaddle = new Paddle(PADDLE_INSET + 20, height/2, '1', 'q');
-  rightPaddle = new Paddle((width - PADDLE_INSET) - 20, height/2, '0', 'p');
+  leftPaddle = new Paddle(PADDLE_INSET, height/2, '1', 'q');
+  rightPaddle = new Paddle(width - PADDLE_INSET, height/2, '0', 'p');
 
   // Create the ball at the centre of the screen
   ball = new Ball(width/2, height/2);
 
+  // Create the blockers at specified locations
   blocker1 = new Blocker((width/3) + 85, (height/2) + 150, 60, 15);
   blocker2 = new Blocker(width/5, (height/2) - 100, 15, 60);
   blocker3 = new Blocker((width/2) + 100, (height/6) + 100, 60, 15);
@@ -96,23 +106,8 @@ void setup() {
 
 void draw() {
   // CHANGED
-  // Checks if the value in r is greater or equal to 255
-  if (r >= 255) {
-    // If it is, reset it to 0
-    r = 0;
-  } else {
-    // If it is not, add 1 to its current value
-    r++;
-  }
-
-  // CHANGED
-  // Fill the background each frame so we have smooth transition animation of different background colors.
-  // Calls the r variable with its value to plug in as the R value in RGB.
-  background(r, 255, 255);
-
-  // CHANGED
-  // Fill the background each frame with static pixels.
-  drawStatic();
+  // Display the background
+  displayBackground();
 
   // Update the paddles and ball by calling their update methods
   leftPaddle.update();
@@ -123,6 +118,8 @@ void draw() {
   ball.collide(leftPaddle);
   ball.collide(rightPaddle);
 
+  // CHANGED
+  // Check if the ball has collided with either blocker
   ball.collidesWithBlocker(blocker1);
   ball.collidesWithBlocker(blocker2);
   ball.collidesWithBlocker(blocker3);
@@ -139,6 +136,7 @@ void draw() {
   ball.display();
 
   // CHANGED
+  // Display the blockers
   blocker1.display();
   blocker2.display();
   blocker3.display();
@@ -152,24 +150,57 @@ void draw() {
   whoWins();
 
   // CHANGED
-  // Display the scrolling text when the users are playing.
-  // The scrolling text will not display if the game over text is prompted.
+  // Check if the gameOver function is NOT being called
   if (!gameOver) {
+    // If it is NOT being called, display the scrolling text
     displayScrollingText();
   }
+}
+
+// CHANGED
+// displayBackground()
+//
+// Creates the background effect
+
+void displayBackground() {
+  // Checks if the value in r is greater or equal to 255
+  if (r >= 255) {
+    // If it is, reset it to 0
+    r = 0;
+  } else {
+    // If it is not, add 1 to its current value
+    r++;
+  }
+
+  // Fill the background each frame so we have smooth transition animation of different background colors.
+  // Calls the r variable with its value to plug in as the R value in RGB.
+  background(r, 255, 255);
+
+  // Fill the background each frame with static pixels.
+  drawStatic();
 }
 
 // CHANGED
 // drawStatic()
 //
 // Creates an infinite loop for the static background effect
+
 void drawStatic() {
   for (int i = 0; i < numStatic; i++) {
-    float x = random(0, width); // creates a random value between 0 and the width of the window for x
-    float y = random(0, height); // creates a random value between 0 and the height of the window for y
-    float staticSize = random(staticSizeMin, staticSizeMax); // creates random sized static pixels between sizes 1 and 3
-    fill(staticColor); // calls the colour   
-    rect(x, y, staticSize, staticSize); // positions the static pixels randomly within the window
+    // Create a random value between 0 and the width of the window for x
+    float x = random(0, width);
+
+    // Create a random value between 0 and the height of the window for y
+    float y = random(0, height); 
+
+    // Create random sized static pixels between sizes 1 and 3
+    float staticSize = random(staticSizeMin, staticSizeMax); 
+
+    // Call the static colour
+    fill(staticColor);  
+
+    // Positions the static pixels randomly within the window
+    rect(x, y, staticSize, staticSize);
   }
 }
 
@@ -252,6 +283,8 @@ void whoWins() {
 void resets() {
   // Check if the shift key is pressed
   if (keyPressed && keyCode == SHIFT) {
+    // If it is being pressed, do all of the below...
+
     // Set both scores to 0
     leftScore = 0;
     rightScore = 0;
@@ -265,7 +298,8 @@ void resets() {
     rightPaddle.HEIGHT = rightPaddle.defaultHEIGHT;
 
     // Decrement x by 3
-    // The scrolling text will start off the window again, and will come scrolling in again
+    // The scrolling text will start off the window again, 
+    // and will come scrolling in again.
     x = width - 3;
 
     // Reset the index for the scrolling text array to 0
