@@ -45,7 +45,7 @@ int rightScore;
 
 // CHANGED
 // The winning score
-int winningScore = 4;
+int winningScore = 8;
 
 // CHANGED
 // The floating-point number for the R value in RGB for the background color
@@ -142,6 +142,9 @@ void draw() {
   blocker3.display();
 
   // CHANGED
+  changeControlKeys();
+
+  // CHANGED
   // Display the scores
   displayScores();
 
@@ -150,11 +153,12 @@ void draw() {
   whoWins();
 
   // CHANGED
-  // Check if the gameOver function is NOT being called
+  // Check if gameOver is NOT true
   if (!gameOver) {
-    // If it is NOT being called, display the scrolling text
+    // If it is NOT true, display the scrolling text
     displayScrollingText();
   } else {
+    // If it is TRUE, the y coordinate of the ball will be half the height of the window 
     ball.y = height/2;
   }
 }
@@ -203,6 +207,27 @@ void drawStatic() {
 
     // Positions the static pixels randomly within the window
     rect(x, y, staticSize, staticSize);
+  }
+}
+
+// CHANGED
+// changeControlKeys()
+// 
+// Changes the control keys for the players.
+
+void changeControlKeys() {
+  // Check if the left score is more than or equal to half the winning score value
+  if (leftScore >= (winningScore/2)) {
+    // If it is, change the up and down keys for the RIGHT player
+    rightPaddle.upKey = '9';
+    rightPaddle.downKey = 'o';
+  }
+
+  // Check if the right score is more than or equal to half the winning score value
+  if (rightScore >= (winningScore/2)) {
+    // If it is, change the up and down keys for the LEFT player
+    leftPaddle.upKey = '2';
+    leftPaddle.downKey = 'w';
   }
 }
 
@@ -284,6 +309,11 @@ void resets() {
     // Set the paddle heights back to their default heights
     leftPaddle.HEIGHT = leftPaddle.defaultHEIGHT;
     rightPaddle.HEIGHT = rightPaddle.defaultHEIGHT;
+
+    leftPaddle.upKey = leftPaddle.defaultUpKey;
+    leftPaddle.downKey = leftPaddle.defaultDownKey;
+    rightPaddle.upKey = rightPaddle.defaultUpKey;
+    rightPaddle.downKey = rightPaddle.defaultDownKey;
 
     // Decrement x by 3
     // The scrolling text will start off the window again, 
