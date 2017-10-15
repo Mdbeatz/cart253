@@ -9,8 +9,8 @@ class Paddle {
 
   // Default values for speed and size
   int SPEED = 6; // CHANGED
-  int HEIGHT = 80;
-  int defaultHEIGHT = 80;
+  int HEIGHT = 80; // CHANGED
+  int defaultHEIGHT = 80; // CHANGED
   int WIDTH = 16;
 
   // The position and velocity of the paddle (note that vx isn't really used right now)
@@ -18,7 +18,8 @@ class Paddle {
   int y;
   int vx;
   int vy;
-  
+
+  // CHANGED
   // The fill color of the paddle
   color paddleColor = color(0);
 
@@ -26,6 +27,8 @@ class Paddle {
   char upKey;
   char downKey;
 
+  char defaultUpKey;
+  char defaultDownKey;
 
   /////////////// Constructor ///////////////
 
@@ -40,8 +43,13 @@ class Paddle {
     vx = 0;
     vy = 0;
 
-    upKey = _upKey;
-    downKey = _downKey;
+    defaultUpKey = _upKey;
+
+    upKey = defaultUpKey;
+
+    defaultDownKey = _downKey;
+
+    downKey = defaultDownKey;
   }
 
 
@@ -57,28 +65,28 @@ class Paddle {
     y += vy;
 
     // Constrain the paddle's y position to be in the window
-    y = constrain(y,0 + HEIGHT/2,height - HEIGHT/2);
+    y = constrain(y, 0 + HEIGHT/2, height - HEIGHT/2);
   }
 
   // display()
   //
   // Display the paddle at its location
-  
+
   void display() {
     // Set display properties
     //noStroke();
-    
+
     // CHANGED
     // Set stroke color
     stroke(255);
-    
+
     // CHANGED
     // Set stroke weight/thickness
     strokeWeight(3);
-    
+
     fill(paddleColor);
     rectMode(CENTER);
-    
+
     // Draw the paddle as a rectangle
     rect(x, y, WIDTH, HEIGHT);
   }
@@ -86,7 +94,7 @@ class Paddle {
   // keyPressed()
   //
   // Called when keyPressed is called in the main program
-  
+
   void keyPressed() {
     // Check if the key is our up key
     if (key == upKey) {
