@@ -45,7 +45,7 @@ int rightScore;
 
 // CHANGED
 // The winning score
-int winningScore = 8;
+int winningScore = 10;
 
 // CHANGED
 // The floating-point number for the R value in RGB for the background color
@@ -119,7 +119,7 @@ void draw() {
   ball.collide(rightPaddle);
 
   // CHANGED
-  // Check if the ball has collided with either blocker
+  // Check if the ball has collided with a blocker
   ball.collidesWithBlocker(blocker1);
   ball.collidesWithBlocker(blocker2);
   ball.collidesWithBlocker(blocker3);
@@ -134,12 +134,6 @@ void draw() {
   leftPaddle.display();
   rightPaddle.display();
   ball.display();
-
-  // CHANGED
-  // Display the blockers
-  blocker1.display();
-  blocker2.display();
-  blocker3.display();
 
   // CHANGED
   changeControlKeys();
@@ -157,6 +151,11 @@ void draw() {
   if (!gameOver) {
     // If it is NOT true, display the scrolling text
     displayScrollingText();
+    
+    // If if it NOT true, display the blockers
+    blocker1.display();
+    blocker2.display();
+    blocker3.display();
   } else {
     // If it is TRUE, the y coordinate of the ball will be half the height of the window 
     ball.y = height/2;
@@ -361,7 +360,7 @@ void displayGameOver(String whoWinsText, color whoWinsColor) {
 void displayScrollingText() {
   // An array of text
   String[] scrollingText = {
-    "PEEK-A-BOO! Reach 5 to win.", 
+    "PEEK-A-BOO! Reach 10 to win.", 
     "KEEP CALM AND PLAY PONG!"
   };
 
@@ -373,7 +372,7 @@ void displayScrollingText() {
     // Align the text to the left
     textAlign(LEFT);
     // Display a string from the array based on the index value
-    text(scrollingText[index], x, height - 30);
+    text(scrollingText[index], x, height - 10);
 
     // Decrement x by 3
     x = x - 3;
