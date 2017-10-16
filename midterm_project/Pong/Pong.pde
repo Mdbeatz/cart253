@@ -18,13 +18,13 @@ Blocker blocker3;
 
 // CHANGED
 // The number of pixels for the static
-int numStatic = 700;
+int numStatic = 100;
 // The minimum size for the static pixels
-int staticSizeMin = 1; 
+int staticSizeMin = 50; 
 // The maximum size for the static pixels
-int staticSizeMax = 2;
+int staticSizeMax = 80;
 // The color for the static pixels
-color staticColor = color(255);
+color staticColor = color(220,220,220,20);
 
 // CHANGED
 // The variable checking if the gameOver text is displayed
