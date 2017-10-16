@@ -17,6 +17,7 @@ class Ball {
   int newSPEED = 6;
 
   // CHANGED
+  // Noise variables for the size of the ball. 
   float time = 0.1;
   float increment = 0.04;
 
@@ -199,13 +200,14 @@ class Ball {
     fill(ballColor);
 
     // CHANGED
-    // 
-    float noiseValue = noise(time) * (width/7);
+    // Set a noise value based on time and scale it according to the window's width divided by 7
+    float n = noise(time) * (width/7);
 
     // CHANGED rect to ellipse
     // Draw the ball
-    ellipse(x, y, noiseValue, noiseValue);
+    ellipse(x, y, n, n);
 
+    // Increment time with each cycle
     time += increment;
   }
 }
