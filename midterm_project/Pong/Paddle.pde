@@ -23,12 +23,14 @@ class Paddle {
   // The fill color of the paddle
   color paddleColor = color(0);
 
-  // The characters used to make the paddle move up and down, defined in constructor
-  char upKey;
-  char downKey;
-
+  // CHANGED
+  // The default characters used to make the paddle move up and down, defined in constructor
   char defaultUpKey;
   char defaultDownKey;
+  
+  // The characters used to make the paddle move up and down
+  char upKey;
+  char downKey;
 
   /////////////// Constructor ///////////////
 
@@ -38,17 +40,30 @@ class Paddle {
   // starts the velocity at 0
 
   Paddle(int _x, int _y, char _upKey, char _downKey) {
+    // Set x value to the new temp value in _x
     x = _x;
+    
+    // Set y value to the new temp value in _y
     y = _y;
+    
+    // Set the velocity for vx and vy to 0
     vx = 0;
     vy = 0;
 
+    // CHANGED
+    // Set the default key to the control passed by the _upKey argument
     defaultUpKey = _upKey;
 
+    // CHANGED
+    // Set upKey to the new value stored in defaultUpKey
     upKey = defaultUpKey;
-
+    
+    // CHANGED
+    // Set the default key to the new control passed by the _downKey argument
     defaultDownKey = _downKey;
 
+    // CHANGED
+    // Set upKey to the new value stored in defaultDownKey
     downKey = defaultDownKey;
   }
 
@@ -74,7 +89,6 @@ class Paddle {
 
   void display() {
     // Set display properties
-    //noStroke();
 
     // CHANGED
     // Set stroke color

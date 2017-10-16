@@ -7,6 +7,7 @@ class Ball {
 
   /////////////// Properties ///////////////
 
+  // CHANGED
   // Default values for speed and size
   int SPEED = 5;
   int SIZE;
@@ -15,6 +16,7 @@ class Ball {
   // The new velocity for the newly restarted game
   int newSPEED = 6;
 
+  // CHANGED
   float time = 0.1;
   float increment = 0.04;
 
@@ -77,7 +79,7 @@ class Ball {
 
   void reset() {
     x = width/2;
-    
+
     // CHANGED
     // Set the y coordinate to a random integer within the height of the window
     y = (int) random(height);
@@ -89,42 +91,47 @@ class Ball {
   // Returns true if the ball is off the left or right side of the window, otherwise false.
   // Adds 1 to the right player's score if the ball is off the left side of the window.
   // Adds 1 to the left player's score if the ball is off the right side of the window. 
+  // A player's paddle will decrement in height when the other player's score increments, 
+  // but this will only happen as long as the paddle is more than 40 pixels in height. 
+  // We don't want the paddle to disappear completely — that would be mean.
 
   boolean isOffScreen() {
-    //return (x + SIZE/2 < 0 || x - SIZE/2 > width);
-
-    // CHANGED
     // Check if the ball is off the left side of the window by checking if it's location is less than 0.
     if (x + SIZE/2 < 0) {
       // If it is, make the right player's score increase by 1
       rightScore++;
 
+      // Check if the left paddle's height is more than 40
       if (leftPaddle.HEIGHT > 40) {
+        // If it is, the left paddle's height will decrement by 10
         leftPaddle.HEIGHT = leftPaddle.HEIGHT-10;
-      }    
+      } 
 
+      // Return true from function
       return true;
     } // Check if the ball is off the right side of the window by checking if it's location is greater than the width of the window.
     else if (x - SIZE/2 > width) {
       // If it is, make the left player's score increase by 1
       leftScore++;
 
+      // Check if the right paddle's height is more than 40
       if (rightPaddle.HEIGHT > 40) {
+        // If it is, the right paddle's height will decrement by 10
         rightPaddle.HEIGHT = rightPaddle.HEIGHT-10;
       }
 
+      // Return true from function
       return true;
     } else {
-      // If all is not true, return false.
+      // If not true, return false from function
       return false;
     }
   }
 
   // collide(Paddle paddle)
   //
-  // Checks whether this ball is colliding with the paddle passed as an argument
-  // If it is, it makes the ball bounce away from the paddle by reversing its
-  // x velocity
+  // Checks whether this ball is colliding with the paddle passed as an argument.
+  // If it is, it makes the ball bounce away from the paddle by reversing its x velocity.
 
   void collide(Paddle paddle) {
     // Calculate possible overlaps with the paddle side by side
@@ -156,7 +163,13 @@ class Ball {
     }
   }
 
+  // collidesWithBlocker(Blocker blocker)
+  //
+  // Checks whether this ball is colliding with the blocker passed as an argument.
+  // If it is, it makes the ball bounce away from the blocker by reversing its x velocity.
+
   void collidesWithBlocker(Blocker blocker) {
+    // Calculate possible overlaps with the blocker side by side
     boolean hitsLeft = (x + SIZE/2 > blocker.x - blocker.blockerWidth/2);
     boolean hitsRight = (x - SIZE/2 < blocker.x + blocker.blockerWidth/2);
     boolean hitsTop = (y + SIZE/2 > blocker.y - blocker.blockerHeight/2);
@@ -165,10 +178,10 @@ class Ball {
     if (hitsLeft && hitsRight && hitsTop && hitsBottom) {
       // If it was moving to the left
       if (vx < 0) {
-        // Reset its position to align with the right side of the paddle
+        // Reset its position to align with the right side of the blocker
         x = blocker.x + blocker.blockerWidth/2 + SIZE/2;
       } else if (vx > 0) {
-        // Reset its position to align with the left side of the paddle
+        // Reset its position to align with the left side of the blocker
         x = blocker.x - blocker.blockerWidth/2 - SIZE/2;
       }
       // And make it bounce

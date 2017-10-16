@@ -26,10 +26,16 @@ class Blocker {
   // passed through (from the main program).
   
   Blocker(int tempX, int tempY, int tempBlockerWidth, int tempBlockerHeight) {
+    // Set x to new temp x value
     x = tempX;
+    
+    // Set y to new temp y value
     y = tempY;
 
+    // Set the blocker width to the new value in the temp blocker width
     blockerWidth = tempBlockerWidth;
+    
+    // Set the blocker height to the new value in the temp blocker height
     blockerHeight = tempBlockerHeight;
   }
 
@@ -38,12 +44,14 @@ class Blocker {
 
   // display()
   //
-  //
+  // Display the blocker at its location
+  
   void display() {
     // Set display properties
     noStroke();
     rectMode(CENTER);
 
+    // Set the center X and Y coordinates of the rectangle, and call its width and height values
     rect(x, y, blockerWidth, blockerHeight);
   }
 }

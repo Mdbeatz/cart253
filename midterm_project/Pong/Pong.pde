@@ -24,11 +24,11 @@ int staticSizeMin = 50;
 // The maximum size for the static pixels
 int staticSizeMax = 80;
 // The color for the static pixels
-color staticColor = color(220,220,220,20);
+color staticColor = color(220, 220, 220, 20);
 
 // CHANGED
-// The variable checking if the gameOver text is displayed
-// Set to false when game starts
+// The variable checking if the gameOver text is displayed.
+// Is set to false when game starts.
 boolean gameOver = false;
 
 // CHANGED
@@ -63,6 +63,8 @@ float x;
 // index for scrollingText array
 int index = 0;
 
+// CHANGED
+// Counters for the amount of frames the changing control keys text is displayed for
 int frameRateCountLeft = 0;
 int frameRateCountRight = 0;
 
@@ -164,6 +166,7 @@ void draw() {
     // If it is TRUE, the y coordinate of the ball will be half the height of the window 
     ball.y = height/2;  
 
+    // Set counters back to 0
     frameRateCountLeft = 0;
     frameRateCountRight = 0;
   }
@@ -219,12 +222,13 @@ void drawStatic() {
 // CHANGED
 // changeControlKeys()
 // 
+// Displays text to change control keys.
 // Changes the control keys for the players.
 
 void changeControlKeys() {
   // Check if the left score is more than or equal to half the winning score value
   if (leftScore >= (winningScore/2)) {
-
+    // Check if frameRateCountLeft is less than 0
     if (frameRateCountLeft < 100) {
       // If it is, display the change control key text
       textSize(30);
@@ -232,6 +236,7 @@ void changeControlKeys() {
       fill(0);
       text("RIGHT PLAYER\nChange keys\nUP: 9\nDOWN: o", width - (width/3), height/2);
 
+      // Increment frameRateCountLeft by 1 each frame
       frameRateCountLeft++;
     }
 
@@ -242,6 +247,7 @@ void changeControlKeys() {
 
   // Check if the right score is more than or equal to half the winning score value
   if (rightScore >= (winningScore/2)) {
+    // Check if frameRateCountRight is less than 0
     if (frameRateCountRight < 100) {
       // If it is, display the change control key text
       textSize(30);
@@ -249,6 +255,7 @@ void changeControlKeys() {
       fill(0);
       text("LEFT PLAYER\nChange keys\nUP: 9\nDOWN: o", width/3, height/2);
 
+      // Increment frameRateCountRight by 1 each frame
       frameRateCountRight++;
     }
 
