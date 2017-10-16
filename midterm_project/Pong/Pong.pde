@@ -63,6 +63,9 @@ float x;
 // index for scrollingText array
 int index = 0;
 
+int frameRateCountLeft = 0;
+int frameRateCountRight = 0;
+
 // setup()
 //
 // Sets the size and creates the paddles and ball
@@ -135,8 +138,6 @@ void draw() {
   rightPaddle.display();
   ball.display();
 
-  // CHANGED
-  changeControlKeys();
 
   // CHANGED
   // Display the scores
@@ -151,14 +152,20 @@ void draw() {
   if (!gameOver) {
     // If it is NOT true, display the scrolling text
     displayScrollingText();
-    
+
+    // CHANGED
+    changeControlKeys();
+
     // If if it NOT true, display the blockers
     blocker1.display();
     blocker2.display();
     blocker3.display();
   } else {
     // If it is TRUE, the y coordinate of the ball will be half the height of the window 
-    ball.y = height/2;
+    ball.y = height/2;  
+
+    frameRateCountLeft = 0;
+    frameRateCountRight = 0;
   }
 }
 
@@ -217,14 +224,35 @@ void drawStatic() {
 void changeControlKeys() {
   // Check if the left score is more than or equal to half the winning score value
   if (leftScore >= (winningScore/2)) {
-    // If it is, change the up and down keys for the RIGHT player
+
+    if (frameRateCountLeft < 100) {
+      // If it is, display the change control key text
+      textSize(30);
+      textAlign(CENTER);
+      fill(0);
+      text("RIGHT PLAYER\nChange keys\nUP: 9\nDOWN: o", width - (width/3), height/2);
+
+      frameRateCountLeft++;
+    }
+
+    // Change the up and down keys for the RIGHT player
     rightPaddle.upKey = '9';
     rightPaddle.downKey = 'o';
   }
 
   // Check if the right score is more than or equal to half the winning score value
   if (rightScore >= (winningScore/2)) {
-    // If it is, change the up and down keys for the LEFT player
+    if (frameRateCountRight < 100) {
+      // If it is, display the change control key text
+      textSize(30);
+      textAlign(CENTER);
+      fill(0);
+      text("LEFT PLAYER\nChange keys\nUP: 9\nDOWN: o", width/3, height/2);
+
+      frameRateCountRight++;
+    }
+
+    // Change the up and down keys for the LEFT player
     leftPaddle.upKey = '2';
     leftPaddle.downKey = 'w';
   }
