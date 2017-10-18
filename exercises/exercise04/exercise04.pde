@@ -1,6 +1,6 @@
 // Griddies
 // by Pippin Barr
-// MODIFIED BY: 
+// MODIFIED BY: Marianne De Bonis
 //
 // A simple artificial life system on a grid. The "griddies" are squares that move
 // around randomly, using energy to do so. They gain energy by overlapping with
@@ -9,7 +9,7 @@
 // The size of a single grid element
 int gridSize = 20;
 // An array storing all the griddies
-Griddie[] griddies = new Griddie[100];
+Griddie[] griddies = new Griddie[50];
 
 // setup()
 //
@@ -21,6 +21,8 @@ void setup() {
   frameRate(10);
 
   // QUESTION: What does this for loop do?
+  // Creates the amount of griddies that are in the array at random locations 
+  // within the window and sets their sizes.
   for (int i = 0; i < griddies.length; i++) {
     int x = floor(random(0, width/gridSize));
     int y = floor(random(0, height/gridSize));
@@ -44,8 +46,12 @@ void draw() {
     // Now go through all the griddies a second time...
     for (int j = 0; j < griddies.length; j++) {
       // QUESTION: What is this if-statement for?
+      // Checks if the j indexed number is NOT EQUAL to the i indexed number.
+      // If they are not the same value, that means they will be indexing two different Griddies,
+      // and the method to check if they are colliding can be called.
       if (j != i) {
         // QUESTION: What does this line check?
+        // Checks if the Griddie indexed by i has collided with the Griddie indexed by j. 
         griddies[i].collide(griddies[j]);
       }
     }
