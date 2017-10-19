@@ -11,6 +11,14 @@ int gridSize = 20;
 // An array storing all the griddies
 Griddie[] griddies = new Griddie[50];
 
+// ADDED
+// The size of a single dottie
+int dotSize = 20;
+
+// ADDED 
+// An Array storing all the dotties
+Dottie[] dotties = new Dottie[50];
+
 // setup()
 //
 // Set up the window and the griddies
@@ -21,12 +29,18 @@ void setup() {
   frameRate(10);
 
   // QUESTION: What does this for loop do?
-  // Creates the amount of griddies that are in the array at random locations 
+  // Creates the amount of griddies that are stored in the array at random locations 
   // within the window and sets their sizes.
   for (int i = 0; i < griddies.length; i++) {
     int x = floor(random(0, width/gridSize));
     int y = floor(random(0, height/gridSize));
     griddies[i] = new Griddie(x * gridSize, y * gridSize, gridSize);
+  }
+
+  for (int i = 0; i < dotties.length; i++) {
+    int x = floor(random(0, width/gridSize));
+    int y = floor(random(0, height/gridSize));
+    dotties[i] = new Dottie(x * dotSize, y * dotSize, dotSize);
   }
 }
 
@@ -58,5 +72,28 @@ void draw() {
 
     // Display the griddies
     griddies[i].display();
+  }
+
+  // We need to loop through all the dotties one by one
+  for (int i = 0; i < dotties.length; i++) {
+
+    // Update the dotties
+    dotties[i].update();
+
+    //// Now go through all the griddies a second time...
+    //for (int j = 0; j < dotties.length; j++) {
+    //  // QUESTION: What is this if-statement for?
+    //  // Checks if the j indexed number is NOT EQUAL to the i indexed number.
+    //  // If they are not the same value, that means they will be indexing two different Griddies,
+    //  // and the method to check if they are colliding can be called.
+    //  if (j != i) {
+    //    // QUESTION: What does this line check?
+    //    // Checks if the Griddie indexed by i has collided with the Griddie indexed by j. 
+    //    dotties[i].collide(griddies[j]);
+    //  }
+    //}
+
+    // Display the griddies
+    dotties[i].display();
   }
 }
