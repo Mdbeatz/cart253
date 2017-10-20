@@ -3,25 +3,39 @@
 // A class defining the behaviour of a single Dottie.
 
 class Dottie {
-  // Position, size, and fill color
+  // Position, size, energy, and fill color
   int x;
   int y;
   int size;
-  color fill = color(255);
+  int energy;
+  color fill = color(127,255,212);
+
+  // Limits for energy level and gains/losses
+  int maxEnergy = 255;
+  int moveEnergy = -1;
+  int collideEnergy = 10;
 
   // Dottie (tempX, tempY, tempSize)
   //
-  // Set up the Griddie with the specified location and size
+  // Set up the Dottie with the specified location and size.
+  // Initialise energy to the maximum
   Dottie (int tempX, int tempY, int tempSize) {
     x = tempX;
     y = tempY;
     size = tempSize;
+    energy = maxEnergy;
   }
 
   // update()
   //
   // Move the Dottie
   void update() {
+    // Checks if the Dottie ran out of energy / has died. 
+    // Returns TRUE is it did, returns FALSE if it did not.
+    if (energy == 0) {
+      return;
+    }
+
     // Set the griddies movement to update randomly 
     int xMoveType = floor(random(-1, 2));
     int yMoveType = floor(random(-1, 2));
@@ -40,13 +54,41 @@ class Dottie {
     } else if (y >= height) {
       y -= height;
     }
+
+    // Update the Griddie's energy
+    // Note that moveEnergy is negative, so this _loses_ energy
+    energy += moveEnergy;
+
+    // Constrain the Griddies energy level to be within the defined bounds
+    energy = constrain(energy, 0, maxEnergy);
+  }
+
+  // collide(other)
+  //
+  // Checks for collision with the other Dottie and updates energy level
+  void collide(Dottie other) {
+    // Checks if the Dottie's energy is EQUAL to 0 OR if the other Dottie's
+    // energy is EQUAL to 0. If either of them are true, this statement will return TRUE.
+    // If a Dottie is dead, then another Dottie cannot gain energy from it.
+    if (energy == 0 || other.energy == 0) {
+      return;
+    }
+
+    // Checks if the Dottie's x and y coordinates are EQUAL to the 
+    // x and y coordinates of the "other" Dottie it is colliding with.
+    if (x == other.x && y == other.y) {
+      // Increase this Griddie's energy
+      energy += collideEnergy;
+      // Constrain the energy level to be within bounds
+      energy = constrain(energy, 0, maxEnergy);
+    }
   }
 
   // display()
   //
   // Draw the Dottie on the screen as a circle
   void display() {
-    fill(fill);
+    fill(fill, energy);
     noStroke();
     ellipse(x, y, size, size);
   }

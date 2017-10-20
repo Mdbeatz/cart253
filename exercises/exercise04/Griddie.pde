@@ -74,7 +74,6 @@ class Griddie {
   //
   // Checks for collision with the other Griddie
   // and updates energy level
-
   void collide(Griddie other) {
     // QUESTION: What is this if-statement for?
     // Checks if the Griddie's energy is EQUAL to 0 OR if the other Griddie's
