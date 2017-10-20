@@ -3,12 +3,17 @@
 // A class defining the behaviour of a single Dottie.
 
 class Dottie {
-  // Position, size, energy, and fill color
+  // Position, size, and energy
   int x;
   int y;
   int size;
   int energy;
-  color fill = color(127,255,212);
+
+  // Array of colors
+  color[] dottieColors = {color(211, 96, 931), color(136, 212, 197), color(237, 196, 85)};
+  
+  // Set the fill to be a random color from the array of dottieColors
+  color fill = dottieColors[(int)random(3)];
 
   // Limits for energy level and gains/losses
   int maxEnergy = 255;
@@ -89,7 +94,9 @@ class Dottie {
   // Draw the Dottie on the screen as a circle
   void display() {
     fill(fill, energy);
-    noStroke();
+    //noStroke();
+    stroke(255, energy);
+    strokeWeight(1);
     ellipse(x, y, size, size);
   }
 }
