@@ -95,9 +95,9 @@ class Griddie {
     }
 
     // ADDED
-    // Checks if a Griddie has collided with a cyan Dottie
+    // Checks if a Griddie (with energy not equal to 0) has collided with a cyan Dottie
     // If they have collided, the Griddie's fill color will change to orange and the Griddie will get bigger.
-    if (x == dotties[(int)random(0, 100)].x && y == dotties[(int)random(0, 100)].y && dotties[(int)random(0, 100)].fill == color(0, 255, 255)) {
+    if (energy != 0 && x == dotties[(int)random(0, 100)].x && y == dotties[(int)random(0, 100)].y && dotties[(int)random(0, 100)].fill == color(0, 255, 255)) {
       // Set fill color to orange
       fill = color(255, 165, 0);
 
@@ -106,9 +106,9 @@ class Griddie {
     }
 
     // ADDED
-    // Checks if a Griddie has collided with a magenta Dottie
+    // Checks if a Griddie (with energy not equal to 0) has collided with a magenta Dottie
     // If they have collided, the Griddie's fill color will change to lime green and the Griddie will get bigger.
-    if (x == dotties[(int)random(0, 100)].x && y == dotties[(int)random(0, 100)].y && dotties[(int)random(0, 100)].fill == color(255, 0, 255)) {
+    if (energy != 0 && x == dotties[(int)random(0, 100)].x && y == dotties[(int)random(0, 100)].y && dotties[(int)random(0, 100)].fill == color(255, 0, 255)) {
       // Set fill color to lime green
       fill = color(0, 255, 0);
 
@@ -117,9 +117,9 @@ class Griddie {
     }
 
     // ADDED
-    // Checks if a Griddie has collided with a yellow Dottie
+    // Checks if a Griddie (with energy not equal to 0) has collided with a yellow Dottie
     // If they have collided, the Griddie's fill color will change to white and the Griddie will get bigger.
-    if (x == dotties[(int)random(0, 100)].x && y == dotties[(int)random(0, 100)].y && dotties[(int)random(0, 100)].fill == color(255, 255, 0)) {
+    if (energy != 0 && x == dotties[(int)random(0, 100)].x && y == dotties[(int)random(0, 100)].y && dotties[(int)random(0, 100)].fill == color(255, 255, 0)) {
       // Set fill color to white
       fill = color(255);
 
