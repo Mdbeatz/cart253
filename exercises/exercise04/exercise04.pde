@@ -24,7 +24,7 @@ int dotSize = 25;
 
 // ADDED 
 // An Array storing all the dotties
-Dottie[] dotties = new Dottie[100];
+Dottie[] dotties = new Dottie[150];
 
 // setup()
 //
@@ -78,6 +78,13 @@ void draw() {
         // Checks if the Griddie indexed by i has collided with the Griddie indexed by j. 
         griddies[i].collide(griddies[j]);
       }
+    }
+    
+    // ADDED
+    // Now go through all the dotties to check for collision with the griddies...
+    for (int j = 0; j < dotties.length; j++) {
+      // Checks if the griddie indexed by i has collided with the dottie indexed by j.
+        griddies[i].collide(dotties[j]);
     }
 
     // Display the griddies
