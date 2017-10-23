@@ -33,22 +33,19 @@ class Griddie {
   //
   // Move the Griddie and update its energy levels
   void update() {
-
-    // QUESTION: What is this if-statement for?
+    
     // Checks if the griddie ran out of energy / has died. 
     // Returns TRUE is it did, returns FALSE if it did not.
     if (energy == 0) {
       return;
     }
 
-    // QUESTION: How does the Griddie movement updating work?
     // The griddies movement is updated randomly 
     int xMoveType = floor(random(-1, 2));
     int yMoveType = floor(random(-1, 2));
     x += size * xMoveType;
     y += size * yMoveType;
 
-    // QUESTION: What are these if statements doing?
     // Checking if the griddie is exiting the window. If it goes off the left side,
     // it'll come back through the right side, and vice versa. If it goes off the top of the window, 
     // it'll come back through the bottom of the window, and vice versa.
@@ -76,7 +73,6 @@ class Griddie {
   // Checks for collision with the other Griddie
   // and updates energy level
   void collide(Griddie other) {
-    // QUESTION: What is this if-statement for?
     // Checks if the Griddie's energy is EQUAL to 0 OR if the other Griddie's
     // energy is EQUAL to 0. If either of them are true, this statement will return TRUE.
     // If a griddie is dead, then another griddie cannot gain energy from it.
@@ -84,7 +80,6 @@ class Griddie {
       return;
     }
 
-    // QUESTION: What does this if-statement check?
     // Checks if the Griddie's x and y coordinates are EQUAL to the 
     // x and y coordinates of the "other" Griddie it is colliding with.
     if (x == other.x && y == other.y) {
@@ -94,10 +89,9 @@ class Griddie {
       energy = constrain(energy, 0, maxEnergy);
     }
 
-    // ADDED
     // Checks if a Griddie (with energy not equal to 0) has collided with a cyan Dottie
     // If they have collided, the Griddie's fill color will change to orange and the Griddie will get bigger.
-    if (energy != 0 && x == dotties[(int)random(0, 100)].x && y == dotties[(int)random(0, 100)].y && dotties[(int)random(0, 100)].fill == color(0, 255, 255)) {
+    if (energy != 0 && x == dotties[(int)random(0, 200)].x && y == dotties[(int)random(0, 200)].y && dotties[(int)random(0, 100)].randomFill == color(0, 255, 255)) {
       // Set fill color to orange
       fill = color(255, 165, 0);
 
@@ -105,10 +99,9 @@ class Griddie {
       size = newGridSize;
     }
 
-    // ADDED
     // Checks if a Griddie (with energy not equal to 0) has collided with a magenta Dottie
     // If they have collided, the Griddie's fill color will change to lime green and the Griddie will get bigger.
-    if (energy != 0 && x == dotties[(int)random(0, 100)].x && y == dotties[(int)random(0, 100)].y && dotties[(int)random(0, 100)].fill == color(255, 0, 255)) {
+    if (energy != 0 && x == dotties[(int)random(0, 200)].x && y == dotties[(int)random(0, 200)].y && dotties[(int)random(0, 100)].randomFill == color(255, 0, 255)) {
       // Set fill color to lime green
       fill = color(0, 255, 0);
 
@@ -116,10 +109,9 @@ class Griddie {
       size = newGridSize;
     }
 
-    // ADDED
     // Checks if a Griddie (with energy not equal to 0) has collided with a yellow Dottie
     // If they have collided, the Griddie's fill color will change to white and the Griddie will get bigger.
-    if (energy != 0 && x == dotties[(int)random(0, 100)].x && y == dotties[(int)random(0, 100)].y && dotties[(int)random(0, 100)].fill == color(255, 255, 0)) {
+    if (energy != 0 && x == dotties[(int)random(0, 200)].x && y == dotties[(int)random(0, 200)].y && dotties[(int)random(0, 100)].randomFill == color(255, 255, 0)) {
       // Set fill color to white
       fill = color(255);
 
@@ -132,10 +124,8 @@ class Griddie {
   //
   // Draw the Griddie on the screen as a rectangle
   void display() {
-    // ADDED
     rectMode(CENTER);
     
-    // QUESTION: What does this fill line do?
     // Sets the fill color for the Griddie. Uses the RGB values stored in the fill property, 
     // and uses the value stored in the energy property for the alpha value (the opacity of the fill).
     // and basically displays how much energy the griddie has left. 

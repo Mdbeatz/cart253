@@ -11,11 +11,17 @@ class Dottie {
   int size;
   int energy;
 
-  // Array of colors
-  color[] dottieColors = {color(0, 255, 255), color(255, 0, 255), color(255, 255, 0)};
+  // ADDED
+  // Probabilities for 3 different cases
+  float cyanProbability = 0.25;      // 25% chance of cyan color
+  float magentaProbability = 0.60;   // 60% chance of magenta color
+  float yellowProbability = 0.15;    // 15% chance of yellow color
 
-  // Set the fill to be a random color from the array of dottieColors
-  color fill = dottieColors[(int)random(3)];
+  // ADDED
+  // Sets a random number between 0 and 1
+  float num = random(1);
+
+  int randomFill;
 
   // Limits for energy level and gains/losses
   int maxEnergy = 255;
@@ -96,8 +102,24 @@ class Dottie {
   //
   // Draw the Dottie on the screen as a circle
   void display() {
-    fill(fill, energy);
-    //noStroke();
+
+    // Check if the random num is less than 0.25
+    if (num < cyanProbability) {
+      // If it is, change randomFill to cyan
+      randomFill = color(0, 255, 255);
+
+      // Check if the random num is between 0.60 and 0.25
+    } else if (num < magentaProbability + cyanProbability) {
+      // If it is, change randomFill to magenta
+      randomFill = color(255, 0, 255);
+
+      // Check for all other cases, between 0.85 and 1.00
+    } else {
+      // If it is, change randomFill to yellow
+      randomFill = color(255, 255, 0);
+    }
+
+    fill(randomFill, energy);
     stroke(255, energy);
     strokeWeight(1);
     ellipse(x, y, size, size);
