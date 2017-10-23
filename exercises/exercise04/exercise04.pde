@@ -6,9 +6,15 @@
 // around randomly, using energy to do so. They gain energy by overlapping with
 // other griddies. If a griddie loses all its energy it dies.
 
+// CHANGED
 // The size of a single grid element
 int gridSize = 22;
+
+// ADDED
+// The new size of a single grid element
 int newGridSize = 50;
+
+// CHANGED
 // An array storing all the griddies
 Griddie[] griddies = new Griddie[300];
 
@@ -24,6 +30,7 @@ Dottie[] dotties = new Dottie[100];
 //
 // Set up the window and the griddies
 void setup() {
+  // CHANGED
   // Set up the window size and framerate (lower so we can watch easier)
   size(800, 600);
   frameRate(10);
@@ -37,6 +44,9 @@ void setup() {
     griddies[i] = new Griddie(x * gridSize, y * gridSize, gridSize);
   }
 
+  // ADDED
+  // Creates the amount of dotties that are stored in the array at random locations 
+  // within the window and sets their sizes.
   for (int i = 0; i < dotties.length; i++) {
     int x = floor(random(0, width/gridSize));
     int y = floor(random(0, height/gridSize));
@@ -47,7 +57,9 @@ void setup() {
 // draw()
 //
 // Update all the griddies, check for collisions between them, display them.
+// Update all the dotties, check for collisions between them, display them.
 void draw() {
+  // CHANGED
   background(30);
 
   // We need to loop through all the griddies one by one
@@ -88,7 +100,7 @@ void draw() {
       }
     }
 
-    // Display the griddies
+    // Display the dotties
     dotties[i].display();
   }
 }
