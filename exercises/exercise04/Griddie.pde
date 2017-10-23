@@ -93,11 +93,16 @@ class Griddie {
       // Constrain the energy level to be within bounds
       energy = constrain(energy, 0, maxEnergy);
     }
+  }
 
-    // ADDED
+  // ADDED
+  // collide(other)
+  //
+  // 
+  void collide (Dottie other) {
     // Checks if a Griddie (with energy not equal to 0) has collided with a cyan Dottie
     // If they have collided, the Griddie's fill color will change to orange and the Griddie will get bigger.
-    if (energy != 0 && x == dotties[(int)random(0, 100)].x && y == dotties[(int)random(0, 100)].y && dotties[(int)random(0, 100)].fill == color(0, 255, 255)) {
+    if (energy != 0 && x == other.x && y == other.y && other.fill == color(0, 255, 255)) {
       // Set fill color to orange
       fill = color(255, 165, 0);
 
@@ -105,10 +110,9 @@ class Griddie {
       size = newGridSize;
     }
 
-    // ADDED
     // Checks if a Griddie (with energy not equal to 0) has collided with a magenta Dottie
     // If they have collided, the Griddie's fill color will change to lime green and the Griddie will get bigger.
-    if (energy != 0 && x == dotties[(int)random(0, 100)].x && y == dotties[(int)random(0, 100)].y && dotties[(int)random(0, 100)].fill == color(255, 0, 255)) {
+    if (energy != 0 && x == other.x && y == other.y && other.fill == color(255, 0, 255)) {
       // Set fill color to lime green
       fill = color(0, 255, 0);
 
@@ -116,10 +120,9 @@ class Griddie {
       size = newGridSize;
     }
 
-    // ADDED
     // Checks if a Griddie (with energy not equal to 0) has collided with a yellow Dottie
     // If they have collided, the Griddie's fill color will change to white and the Griddie will get bigger.
-    if (energy != 0 && x == dotties[(int)random(0, 100)].x && y == dotties[(int)random(0, 100)].y && dotties[(int)random(0, 100)].fill == color(255, 255, 0)) {
+    if (energy != 0 && x == other.x && y == other.y && other.fill == color(255, 255, 0)) {
       // Set fill color to white
       fill = color(255);
 
@@ -134,7 +137,7 @@ class Griddie {
   void display() {
     // ADDED
     rectMode(CENTER);
-    
+
     // QUESTION: What does this fill line do?
     // Sets the fill color for the Griddie. Uses the RGB values stored in the fill property, 
     // and uses the value stored in the energy property for the alpha value (the opacity of the fill).
