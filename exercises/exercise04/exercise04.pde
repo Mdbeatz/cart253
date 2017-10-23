@@ -8,8 +8,9 @@
 
 // The size of a single grid element
 int gridSize = 22;
+int newGridSize = 50;
 // An array storing all the griddies
-Griddie[] griddies = new Griddie[200];
+Griddie[] griddies = new Griddie[300];
 
 // ADDED
 // The size of a single dottie
