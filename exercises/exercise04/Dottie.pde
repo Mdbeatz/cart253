@@ -1,6 +1,8 @@
 // Dottie
 //
-// A class defining the behaviour of a single Dottie.
+// A class defining the behaviour of a single Dottie
+// which can move randomly in the window, loses energy per move,
+// and gains energy from overlapping with another Dottie.
 
 class Dottie {
   // Position, size, and energy
@@ -10,8 +12,8 @@ class Dottie {
   int energy;
 
   // Array of colors
-  color[] dottieColors = {color(211, 96, 931), color(136, 212, 197), color(237, 196, 85)};
-  
+  color[] dottieColors = {color(0, 255, 255), color(255, 0, 255), color(255, 255, 0)};
+
   // Set the fill to be a random color from the array of dottieColors
   color fill = dottieColors[(int)random(3)];
 
