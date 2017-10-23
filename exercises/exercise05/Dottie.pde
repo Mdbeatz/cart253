@@ -11,6 +11,12 @@ class Dottie {
   int size;
   int energy;
 
+  float tx = random(0, 100);
+  float ty = random(0, 100);
+  
+  int newTempX;
+  int newTempY;
+
   // ADDED
   // Probabilities for 3 different cases
   float cyanProbability = 0.25;      // 25% chance of cyan color
@@ -20,7 +26,7 @@ class Dottie {
   // ADDED
   // Sets a random number between 0 and 1
   float num = random(1);
-  
+
   // ADDED
   // The random fill color of the dottie
   int randomFill;
@@ -37,6 +43,10 @@ class Dottie {
   Dottie (int tempX, int tempY, int tempSize) {
     x = tempX;
     y = tempY;
+    
+    tempX = newTempX;
+    tempY = newTempY;
+
     size = tempSize;
     energy = maxEnergy;
   }
@@ -109,7 +119,14 @@ class Dottie {
     fill(randomFill, energy);
     stroke(255, energy);
     strokeWeight(1);
-    ellipse(x, y, size, size);
+
+    newTempX = floor(width * noise(tx));
+    newTempY = floor(height * noise(ty));
+
+    ellipse(newTempX, newTempY, size, size);
+    
+    tx += 0.01;
+    ty += 0.01;
   }
 
   // ADDED  
