@@ -6,25 +6,20 @@
 // around randomly, using energy to do so. They gain energy by overlapping with
 // other griddies. If a griddie loses all its energy it dies.
 
-// CHANGED
 // The size of a single grid element
 int gridSize = 22;
 
-// ADDED
 // The new size of a single grid element
 int newGridSize = 50;
 
-// CHANGED
 // An array storing all the griddies
 Griddie[] griddies = new Griddie[300];
 
-// ADDED
 // The size of a single dottie
 int dotSize = 25;
 
-// ADDED 
 // An Array storing all the dotties
-Dottie[] dotties = new Dottie[100];
+Dottie[] dotties = new Dottie[200];
 
 // setup()
 //
@@ -35,7 +30,6 @@ void setup() {
   size(800, 600);
   frameRate(10);
 
-  // QUESTION: What does this for loop do?
   // Creates the amount of griddies that are stored in the array at random locations 
   // within the window and sets their sizes.
   for (int i = 0; i < griddies.length; i++) {
@@ -44,7 +38,6 @@ void setup() {
     griddies[i] = new Griddie(x * gridSize, y * gridSize, gridSize);
   }
 
-  // ADDED
   // Creates the amount of dotties that are stored in the array at random locations 
   // within the window and sets their sizes.
   for (int i = 0; i < dotties.length; i++) {
@@ -59,7 +52,6 @@ void setup() {
 // Update all the griddies, check for collisions between them, display them.
 // Update all the dotties, check for collisions between them, display them.
 void draw() {
-  // CHANGED
   background(30);
 
   // We need to loop through all the griddies one by one
@@ -69,12 +61,10 @@ void draw() {
 
     // Now go through all the griddies a second time...
     for (int j = 0; j < griddies.length; j++) {
-      // QUESTION: What is this if-statement for?
       // Checks if the j indexed number is NOT EQUAL to the i indexed number.
       // If they are not the same value, that means they will be indexing two different Griddies,
       // and the method to check if they are colliding can be called.
       if (j != i) {
-        // QUESTION: What does this line check?
         // Checks if the Griddie indexed by i has collided with the Griddie indexed by j. 
         griddies[i].collide(griddies[j]);
       }
