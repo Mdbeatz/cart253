@@ -49,8 +49,9 @@ class Dottie {
     x += size * xMoveType;
     y += size * yMoveType;
 
-    // Checking if the Dottie is exiting the window and if it is,
-    // it will be put back inside the bounds of the window.
+    // Checking if the dottie is exiting the window. If it goes off the left side,
+    // it'll come back through the right side, and vice versa. If it goes off the top of the window, 
+    // it'll come back through the bottom of the window, and vice versa.
     if (x < 0) {
       x += width;
     } else if (x >= width) {

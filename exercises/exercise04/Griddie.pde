@@ -49,8 +49,9 @@ class Griddie {
     y += size * yMoveType;
 
     // QUESTION: What are these if statements doing?
-    // Checking if the griddie is exiting the window and if they are they
-    // will be put back inside the bounds of the window.
+    // Checking if the griddie is exiting the window. If it goes off the left side,
+    // it'll come back through the right side, and vice versa. If it goes off the top of the window, 
+    // it'll come back through the bottom of the window, and vice versa.
     if (x < 0) {
       x += width;
     } else if (x >= width) {
