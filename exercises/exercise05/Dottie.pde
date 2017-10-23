@@ -20,7 +20,9 @@ class Dottie {
   // ADDED
   // Sets a random number between 0 and 1
   float num = random(1);
-
+  
+  // ADDED
+  // The random fill color of the dottie
   int randomFill;
 
   // Limits for energy level and gains/losses
@@ -102,7 +104,19 @@ class Dottie {
   //
   // Draw the Dottie on the screen as a circle
   void display() {
+    randomDottieColor();
 
+    fill(randomFill, energy);
+    stroke(255, energy);
+    strokeWeight(1);
+    ellipse(x, y, size, size);
+  }
+
+  // ADDED  
+  // randomDottieColor()
+  //
+  // Probabilities for 3 different cases / colors
+  void randomDottieColor() {
     // Check if the random num is less than 0.25
     if (num < cyanProbability) {
       // If it is, change randomFill to cyan
@@ -118,10 +132,5 @@ class Dottie {
       // If it is, change randomFill to yellow
       randomFill = color(255, 255, 0);
     }
-
-    fill(randomFill, energy);
-    stroke(255, energy);
-    strokeWeight(1);
-    ellipse(x, y, size, size);
   }
 }
