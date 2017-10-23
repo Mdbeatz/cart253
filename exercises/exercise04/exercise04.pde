@@ -4,7 +4,11 @@
 //
 // A simple artificial life system on a grid. The "griddies" are squares that move
 // around randomly, using energy to do so. They gain energy by overlapping with
-// other griddies. If a griddie loses all its energy it dies.
+// other griddies. If a griddie loses all its energy it dies. 
+// The "dotties" are circles that move around randomly, using energy to do so.
+// They gain energy by overlapping with other dotties. If a dottie loses all its 
+// energy it dies. Depending which dottie a griddie overlaps with, the griddie will
+// change color and get bigger in size.
 
 // CHANGED
 // The size of a single grid element
