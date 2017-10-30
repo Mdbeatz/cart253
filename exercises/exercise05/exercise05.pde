@@ -28,7 +28,11 @@ void setup() {
   // CHANGED
   // Set up the window size and framerate (lower so we can watch easier)
   size(800, 600);
+  
   frameRate(10);
+  
+  // ADDED
+  //surface.setResizable(true);
 
   // Creates the amount of griddies that are stored in the array at random locations 
   // within the window and sets their sizes.
