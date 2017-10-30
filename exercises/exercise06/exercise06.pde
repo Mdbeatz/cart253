@@ -1,5 +1,7 @@
 // Exercise 06
 //
+// MODIFIED BY: Marianne De Bonis
+//
 // Using the webcam as input to play with Bouncers.
 
 // Import the video library
@@ -27,7 +29,8 @@ void setup() {
   // array adding new objects to it (Bouncers in this case)
   for (int i = 0; i < bouncers.length; i++) {
     // Each Bouncer just starts with random values 
-    bouncers[i] = new Bouncer(random(0, width), random(0, height), random(-10, 10), random(-10, 10), random(20, 50), color(random(255)));
+    // CHANGED color
+    bouncers[i] = new Bouncer(random(0, width), random(0, height), random(-10, 10), random(-10, 10), random(20, 50), color(0, 0, (random(255))));
   }
 
   // Start up the webcam
@@ -103,6 +106,17 @@ void handleVideoInput() {
         brightestPixel.x = x;
         brightestPixel.y = y;
       }
+    }
+  }
+
+  // ADDED
+  //
+  // Go through all the bouncers
+  for (int i = 0; i < bouncers.length; i++) {
+    // Check if a bouncer collides with the brightest pixel
+    if ((dist(bouncers[i].x, bouncers[i].y, brightestPixel.x, brightestPixel.y) < bouncers[i].size/2)) {
+      // If it does, change the bouncer's fill color to a random color
+      bouncers[i].fillColor = color(255, random(255), random(255));
     }
   }
 }
