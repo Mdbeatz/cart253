@@ -3,7 +3,8 @@
 // A class defining the behaviour of a single Griddie
 // which can move randomly in the window (within the grid),
 // loses energy per move, and gains energy from overlapping
-// with another Griddie.
+// with another Griddie. It also gets bigger in size and
+// changes color from overlapping with a Dottie.
 
 class Griddie {
   // Limits for energy level and gains/losses

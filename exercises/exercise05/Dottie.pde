@@ -1,8 +1,8 @@
 // Dottie
 //
-// A class defining the behaviour of a single Dottie
-// which can move randomly in the window, loses energy per move,
-// and gains energy from overlapping with another Dottie.
+// A class defining the behaviour of a single Dottie which can move organically 
+// based on the window's width and height, loses energy per move, and gains energy 
+// from overlapping with another Dottie.
 
 class Dottie {
   // Position, size, and energy
@@ -11,9 +11,9 @@ class Dottie {
   int size;
   int energy;
 
+  // ADDED
   float tx = random(0, 100);
   float ty = random(0, 100);
-  
   int newTempX;
   int newTempY;
 
@@ -43,7 +43,9 @@ class Dottie {
   Dottie (int tempX, int tempY, int tempSize) {
     x = tempX;
     y = tempY;
-    
+
+    // ADDED
+    // Set temp x and y positions to new temp x and y positions
     tempX = newTempX;
     tempY = newTempY;
 
@@ -114,17 +116,28 @@ class Dottie {
   //
   // Draw the Dottie on the screen as a circle
   void display() {
+    // Probabilities for 3 different colors
     randomDottieColor();
 
     fill(randomFill, energy);
     stroke(255, energy);
     strokeWeight(1);
 
-    newTempX = floor(width * noise(tx));
-    newTempY = floor(height * noise(ty));
-
+    // ADDED
+    // Get a noise value based on tx and scale it according to the window's width
+    newTempX = floor(noise(tx) * width);
+    
+    // ADDED    
+    // Get a noise value based on ty and scale it according to the window's height. 
+    // Add 1 to prevent synchronous xy-movement (a diagonal line) to get different noise values for x and y.
+    newTempY = floor(1 + (noise(ty) * height));
+    
+    // ADDED
+    // Set x and y to the new temp x and y values
     ellipse(newTempX, newTempY, size, size);
     
+    // ADDED
+    // With each cycle, increment tx and ty
     tx += 0.01;
     ty += 0.01;
   }
