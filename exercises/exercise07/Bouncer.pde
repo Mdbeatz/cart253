@@ -25,7 +25,6 @@ class Bouncer {
   // Bouncer(tempX,tempY,tempVX,tempVY,tempSize,tempDefaultColor)
   //
   // Creates a Bouncer with the provided values by remembering them.
-
   Bouncer(float tempX, float tempY, float tempVX, float tempVY, float tempSize, color tempDefaultColor) {
     x = tempX;
     y = tempY;
@@ -47,11 +46,20 @@ class Bouncer {
     handleBounce();
   }
 
+  // ADDED
+  // collide (Bouncer other)
+  //
+  void collide(Bouncer other) {
+    if ((dist(x, y, other.x, other.y) < size)) {
+      vx = (x-other.x)/8;
+      vy = (y-other.y)/8;
+    }
+  }
+
   // handleBounce()
   //
   // Checks if the bouncer is overlapping a side of the window
   // and if so reverses its velocity appropriately
-
   void handleBounce() {
     // Check the left and right
     if (x - size/2 < 0 || x + size/2 > width) {
