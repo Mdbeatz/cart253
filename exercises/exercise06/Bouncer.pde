@@ -15,6 +15,9 @@ class Bouncer {
 
   // The size of the Bouncer
   float size;
+  
+  // ADDED
+  // The new random size of the Bouncer
   float newSize = random(50,100);
 
   // The current fill colour of the Bouncer
