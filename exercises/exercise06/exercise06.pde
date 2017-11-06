@@ -3,6 +3,10 @@
 // MODIFIED BY: Marianne De Bonis
 //
 // Using the webcam as input to play with Bouncers.
+// Bouncers change colour and change size when they collide with the brighest pixel.
+// Depending on where the brightest pixel is in the window, the video gets brighter or darker.
+//
+// Note: The brightest pixel is best controlled by using a flashlight.
 
 // Import the video library
 import processing.video.*;
@@ -15,8 +19,9 @@ Capture video;
 // as a default value)
 PVector brightestPixel = new PVector(-1, -1);
 
+// CHANGED bouncer amount
 // An array of bouncers to play with
-Bouncer[] bouncers = new Bouncer[10];
+Bouncer[] bouncers = new Bouncer[15];
 
 // setup()
 //
@@ -36,6 +41,11 @@ void setup() {
   // Start up the webcam
   video = new Capture(this, 640, 480, 30);
   video.start();
+  
+  // ADDED
+  // Load the pixels[] array so they can be manipulated inside draw()
+  video.loadPixels();
+  loadPixels();
 }
 
 // draw()
@@ -50,6 +60,10 @@ void draw() {
 
   // Draw the video frame to the screen
   image(video, 0, 0);
+
+  // ADDED
+  // A function that adjusts the brightness of the video
+  videoBrightness();
 
   // Our old friend the for-loop running through the length of an array to
   // update and display objects, in this case Bouncers.
@@ -117,9 +131,50 @@ void handleVideoInput() {
     if ((dist(bouncers[i].x, bouncers[i].y, brightestPixel.x, brightestPixel.y) < bouncers[i].size/2)) {
       // If it does, change the bouncer's fill color to a random color
       bouncers[i].fillColor = color(255, random(255), random(255));
-      
+
       // Change the bouncer's size
       bouncers[i].size = bouncers[i].newSize;
     }
   }
+}
+
+// ADDED
+// videoBrightness()
+//
+// Changes the brightness of the video based on the location of the brightest pixel.
+// The video gets darker if the brightest pixel is more towards the left and if if it is
+// more towards the right side of the window the video gets brighter. 
+
+void videoBrightness() {
+  // Go through the video pixels 
+  for (int x = 0; x < video.width; x++ ) {
+    for (int y = 0; y < video.height; y++ ) {
+
+      // Calculate the 1D pixel location
+      int loc = x + y*video.width;
+
+      // Get the RGB values from the video
+      float r = red  (video.pixels[loc]);
+      float g = green (video.pixels[loc]);
+      float b = blue (video.pixels[loc]);
+
+      // Calculate an amount to change brightness based on the brightestPixel.x location 
+      float adjustBrightness = map(brightestPixel.x, 0, width, 0, 20);      
+      r *= adjustBrightness;
+      g *= adjustBrightness;
+      b *= adjustBrightness;
+
+      // Constrain RGB values to make sure they are within 0-255 color range      
+      r = constrain(r, 0, 255); 
+      g = constrain(g, 0, 255);
+      b = constrain(b, 0, 255);
+
+      // Make a new color and set pixel in the window
+      color c = color(r, g, b);
+      pixels[loc] = c;
+    }
+  }
+
+  // Apply changes
+  updatePixels();
 }
