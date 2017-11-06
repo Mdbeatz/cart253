@@ -117,6 +117,9 @@ void handleVideoInput() {
     if ((dist(bouncers[i].x, bouncers[i].y, brightestPixel.x, brightestPixel.y) < bouncers[i].size/2)) {
       // If it does, change the bouncer's fill color to a random color
       bouncers[i].fillColor = color(255, random(255), random(255));
+      
+      // Change the bouncer's size
+      bouncers[i].size = bouncers[i].newSize;
     }
   }
 }
