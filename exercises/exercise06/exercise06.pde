@@ -63,7 +63,7 @@ void draw() {
 
   // ADDED
   // A function that adjusts the brightness of the video
-  videoBrightness();
+  changeVideoBrightness();
 
   // Our old friend the for-loop running through the length of an array to
   // update and display objects, in this case Bouncers.
@@ -139,13 +139,13 @@ void handleVideoInput() {
 }
 
 // ADDED
-// videoBrightness()
+// changeVideoBrightness()
 //
 // Changes the brightness of the video based on the location of the brightest pixel.
 // The video gets darker if the brightest pixel is more towards the left and if if it is
 // more towards the right side of the window the video gets brighter. 
 
-void videoBrightness() {
+void changeVideoBrightness() {
   // Go through the video pixels 
   for (int x = 0; x < video.width; x++ ) {
     for (int y = 0; y < video.height; y++ ) {
