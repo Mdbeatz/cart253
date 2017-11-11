@@ -1,3 +1,5 @@
+// Marine, the Superhero
+
 class Marine {
 
   /////////////// Properties ///////////////
