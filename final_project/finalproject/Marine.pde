@@ -4,12 +4,17 @@ class Marine {
 
   /////////////// Properties ///////////////
 
+  // Location of Marine
   int x;
   int y;
 
+  // Velocity of Marine
   int vx;
+  
+  // Speed of Marine
   int speed = 10;
 
+  // Width and height of Marine
   int marineWidth = 60;
   int marineHeight = 60;
 
