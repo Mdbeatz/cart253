@@ -3,7 +3,7 @@
 //
 
 class Bubble {
-  
+
   /////////////// Properties ///////////////
 
   int x;
@@ -18,4 +18,20 @@ class Bubble {
 
   // Set the fill to be a random color from the array of dottieColors
   color fill = dottieColors[(int)random(3)];
+
+
+  /////////////// Constructor ///////////////
+
+  // Bubble (int tempX, int tempY, int tempVY, int tempSize)
+  //
+  //
+
+  Bubble (int tempX, int tempY, int tempVY, int tempSize) {
+    x = tempX;
+    y = tempY;
+
+    vy = tempVY;
+
+    size = tempSize;
+  }
 }
