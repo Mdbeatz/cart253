@@ -44,9 +44,14 @@ class Bubble {
   // Move the Bubble.
   void update() {
     y += vy;
-
+    
+    // Check if the y value is greater than the value of the height + size.
+    // Basically checks if the bubble has exited the window by the bottom 
+    // and if it has, it will come back again through the top.
     if (y > height + size) {
+      // If it is, the y alue is given the negative size value
       y = -size;
+      
       x = floor(random(width));
 
       vy = floor(random(3, 7));

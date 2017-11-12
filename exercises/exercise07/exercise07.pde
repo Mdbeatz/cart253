@@ -19,6 +19,7 @@ color backgroundColor = color(0, 26, 51);
 void setup() {
   size(400, 600);
 
+  // Create the amount of bubbles that are stored in the array
   for (int i = 0; i < bubbles.length; i++) {
     int x = floor(random(width));
     int y = floor(random(height));
@@ -35,8 +36,12 @@ void setup() {
 void draw() {
   background(backgroundColor);
 
+  // Loop through all the bubbles one by one
   for (int i = 0; i < bubbles.length; i++) {
+    // Update the bubbles
     bubbles[i].update();
+    
+    // Display the bubbles
     bubbles[i].display();
   }
 }
