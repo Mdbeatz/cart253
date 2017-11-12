@@ -14,7 +14,7 @@ class Bubble {
   int vy;
   int size;
 
-  // Array of colors
+  // Array of colors (rose & mustard yellow & mint green)
   color[] bubbleColors = {color(230, 132, 156), color(230, 206, 132), color(132, 230, 206)};
 
   // Set the fill to be a random color from the array of bubbleColors
@@ -44,14 +44,14 @@ class Bubble {
   // Move the Bubble.
   void update() {
     y += vy;
-    
+
     // Check if the y value is greater than the value of the height + size.
     // Basically checks if the bubble has exited the window by the bottom 
     // and if it has, it will come back again through the top.
     if (y > height + size) {
       // If it is, the y alue is given the negative size value
       y = -size;
-      
+
       x = floor(random(width));
 
       vy = floor(random(3, 7));
@@ -65,5 +65,29 @@ class Bubble {
     noStroke();
     fill(fill);
     ellipse(x, y, size, size);
+  }
+
+
+  // playSound()
+  //
+  // Plays a sound when the mouse is over a bubble.
+  void playSound() {
+    // Checks if the mouse is over a rose colored bubble
+    if ((dist(mouseX, mouseY, x, y) < size/2) && fill == color(230, 132, 156)) {
+      // If it is, tone01 will play
+      tone01.play();
+    }
+
+    // Checks if the mouse is over a mustard yellow colored bubble
+    if ((dist(mouseX, mouseY, x, y) < size/2) && fill == color(230, 206, 132)) {
+      // If it is, tone02 will play
+      tone02.play();
+    }
+
+    // Checks if the mouse is over a mint green colored bubble
+    if ((dist(mouseX, mouseY, x, y) < size/2) && fill == color(132, 230, 206)) {
+      // If it is, tone03 will play
+      tone03.play();
+    }
   }
 }
