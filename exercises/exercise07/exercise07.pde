@@ -13,7 +13,7 @@ SoundFile tone02;
 SoundFile tone03;
 
 // Array storing all the bubbles
-Bubble[] bubbles = new Bubble[40];
+Bubble[] bubbles = new Bubble[20];
 
 // Background color
 color backgroundColor = color(0, 26, 51);
@@ -52,5 +52,8 @@ void draw() {
 
     // Display the bubbles
     bubbles[i].display();
+
+    // Play sounds
+    bubbles[i].playSound();
   }
 }
