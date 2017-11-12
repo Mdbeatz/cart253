@@ -1,5 +1,7 @@
 import processing.sound.*;
 
+Bubble[] bubbles = new Bubble[40];
+
 void setup() {
   size(400, 600);
   
