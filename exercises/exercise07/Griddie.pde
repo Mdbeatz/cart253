@@ -1,7 +1,8 @@
 // Griddie
 //
 // A class defining the behaviour of a single Griddie
-// which can move through the x-axis within the window.
+// which can move through the x-axis within the window,
+// and can make a sound once a griddie is created.
 
 
 class Griddie {
@@ -23,7 +24,7 @@ class Griddie {
 
   /////////////// Constructor ///////////////
 
-  // Griddie (int tempX, int tempY, int tempVY, int tempSize)
+  // Griddie (int tempX, int tempY, int tempVX, int tempSize)
   //
   // Sets the position, velocity and size based on arguments.
 
@@ -70,7 +71,7 @@ class Griddie {
 
   // playSound()
   //
-  // Plays the kick or snare sound depending on which griddie is chosen.
+  // Plays the kick or snare sound depending on which griddie is displayed.
   void playSound() {
     // Checks if the griddie is white 
     if (fill == color(255, 255, 255)) {

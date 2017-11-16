@@ -1,7 +1,10 @@
-// Exercise07 - Sound
+// Exercise07
 // 
 // PREPARED BY: Marianne De Bonis
 //
+// Each Bubble plays its own sound when you hover over it,
+// and the each Griddie is displayed one by one by pressing any key.
+// A sound will also play once a Griddie is displayed.
 //
 
 // Import the sound library
@@ -28,11 +31,12 @@ color backgroundColor = color(0, 26, 51);
 
 // setup()
 //
-// 
+// Set up the sound files, bubbles and griddies.
 void setup() {
+  // Set the size
   size(500, 600);
 
-  // Create the sound files
+  // Create the different sound files
   tone01 = new SoundFile(this, "sounds/tone01.wav");
   tone02 = new SoundFile(this, "sounds/tone03.wav");
   tone03 = new SoundFile(this, "sounds/tone05.wav");
@@ -62,7 +66,7 @@ void setup() {
 
 // draw()
 //
-//
+// Update the bubbles and griddies, and display them.
 void draw() {
   background(backgroundColor);
 
@@ -80,25 +84,27 @@ void draw() {
 
   // Loop through the griddiesCounter
   for (int i = 0; i < griddiesCounter; i++) {
-    // Update the bubbles
+    // Update the griddies
     griddies[i].update();
 
-    // Display the bubbles
+    // Display the griddies
     griddies[i].display();
   }
 }
 
-// void keyPressed()
+// keyPressed()
 //
-//
+// The griddies appear (one by one) and make sound based on any key being pressed.
 void keyPressed() {
-
+  // Increment the counter by 1
   griddiesCounter++;
 
+  // Checks if the griddies counter equals to the griddies array length
   if (griddiesCounter == griddies.length) {
+    // If it is, the counter becomes the griddies length value - 1
     griddiesCounter = griddies.length-1;
   } else {
+    // Otherwise, display the griddie that is references by the counte and play the sound
     griddies[griddiesCounter].playSound();
   }
-
 }

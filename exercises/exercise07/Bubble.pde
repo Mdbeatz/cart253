@@ -1,7 +1,8 @@
 // Bubble
 //
 // A class defining the behaviour of a single Bubble
-// which can move down the y-axis within the window.
+// which can move down the y-axis within the window,
+// and can make sounds once the mouse is over a bubble.
 
 
 class Bubble {
