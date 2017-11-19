@@ -5,17 +5,32 @@
 //
 
 
+// Array storing all the stars for the starfield
+Starfield[] starfieldBackground = new Starfield[200];
+
 // Global variable for the superhero
 Superhero superhero;
 
 // Space between Superhero and the bottom of the window
 int superheroInset = 170;
 
+color backgroundColor = color (8, 5, 45);
+
 // setup()
 //
 // Sets the size and creates the Superhero
 void setup() {
   size(640, 800);
+
+  // Create the amount of stars that are stored in the starfield background array
+  for (int i = 0; i < starfieldBackground.length; i++) {
+    int x = floor(random(width));
+    int y = floor(random(height));
+    int vy = floor(random(1, 2));
+    int size = floor(random(3, 5));
+
+    starfieldBackground[i] = new Starfield(x, y, vy, size);
+  }  
 
   superhero = new Superhero(width/2, height - superheroInset);
 }
@@ -24,12 +39,27 @@ void setup() {
 //
 // Handles all the magic of making the Superhero move.
 void draw() {
-  background(8, 5, 45);
+  background(backgroundColor);  
+  displayStarfieldBackground();
 
   displayPlanet();
 
   superhero.update();
   superhero.display();
+}
+
+// displayStarfieldBackground()
+//
+// Display the starfield background.
+void displayStarfieldBackground() {
+  // Loop through all the stars one by one
+  for (int i = 0; i < starfieldBackground.length; i++) {
+    // Update the starfield background
+    starfieldBackground[i].update();
+
+    // Display the starfield background
+    starfieldBackground[i].display();
+  }
 }
 
 // displayPlanet()
