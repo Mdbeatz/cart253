@@ -1,4 +1,6 @@
-// The Superhero
+// Superhero
+//
+// 
 
 class Superhero {
 
@@ -10,7 +12,7 @@ class Superhero {
 
   // Velocity of Superhero
   int vx;
-  
+
   // Speed of Superhero
   int speed = 10;
 
@@ -26,9 +28,9 @@ class Superhero {
   // Sets the position and controls based on arguments.
   // Starts velocity at 0.
 
-  Superhero (int tempX, int tempY) {
-    x = tempX;
-    y = tempY;
+  Superhero (int x, int y) {
+    this.x = x;
+    this.y = y;
 
     vx = 0;
   }
