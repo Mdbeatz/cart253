@@ -11,6 +11,9 @@ StarBackground[] starBackground = new StarBackground[400];
 // Global variable for the superhero
 Superhero superhero;
 
+// ArrayList to be filled with Laser objects
+ArrayList<Laser> lasers = new ArrayList<Laser>();
+
 // Space between Superhero and the bottom of the window
 int superheroInset = 170;
 
@@ -45,6 +48,13 @@ void draw() {
 
   displayPlanet();
 
+  // Loop through the array list size and create the lasers
+  for (int i = 0; i < lasers.size(); i++) {
+    Laser l = (Laser)lasers.get(i);
+    l.update(); 
+    l.display();
+  }
+
   superhero.update();
   superhero.display();
 }
@@ -57,7 +67,7 @@ void displayStarBackground() {
   for (int i = 0; i < starBackground.length; i++) {
     // Update the stars
     starBackground[i].update();
-    
+
     // Display the stars
     starBackground[i].display();
   }
@@ -78,6 +88,12 @@ void displayPlanet() {
 // so when the keypress is detected in the main program we need to tell the superhero.
 void keyPressed() {
   superhero.keyPressed();
+
+  // Checks if the spacebar is being pressed (spacebar keycode: 32)
+  if (keyCode == 32) {
+    // If it is, a new laser will be added to the array list
+    lasers.add(new Laser());
+  }
 }
 
 // keyReleased()
