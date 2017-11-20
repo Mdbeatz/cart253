@@ -12,11 +12,13 @@ Starfield[] starfieldBackground = new Starfield[300];
 // Global variable for the superhero
 Superhero superhero;
 
-Laser laser;
+// ArrayList to be filled with Laser objects
+ArrayList<Laser> lasers = new ArrayList<Laser>();
 
 // Space between Superhero and the bottom of the window
 int superheroInset = 170;
 
+// Background color
 color backgroundColor = color (8, 5, 45);
 
 // setup()
@@ -36,26 +38,27 @@ void setup() {
   }  
 
   superhero = new Superhero(width/2, height - superheroInset);
-
-  laser = new Laser();
 }
 
 // draw()
 //
-// Handles all the magic of making the Superhero move.
+// Handles all the magic of creating the background, 
+// making the Superhero move and shoot lasers.
 void draw() {
   background(backgroundColor);  
   displayStarfieldBackground();
 
   displayPlanet();
 
+  // Loop through the array list size and create the lasers
+  for (int i = 0; i < lasers.size(); i++) {
+    Laser l = (Laser)lasers.get(i);
+    l.update(); 
+    l.display();
+  }
+
   superhero.update();
   superhero.display();
-
-  if (keyCode == 32) {
-    laser.update(); 
-    laser.display();
-  } 
 }
 
 // displayStarfieldBackground()
@@ -87,6 +90,12 @@ void displayPlanet() {
 // so when the keypress is detected in the main program we need to tell the superhero.
 void keyPressed() {
   superhero.keyPressed();
+
+  // Checks if the spacebar is being pressed (spacebar keycode: 32)
+  if (keyCode == 32) {
+    // If it is, a new laser will be added to the array list
+    lasers.add(new Laser());
+  }
 }
 
 // keyReleased()
