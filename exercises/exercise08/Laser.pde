@@ -29,15 +29,14 @@ class Laser {
 
   // update()
   //
-  //
+  // Move the laser.
   void update() {
     y -= speed;
-
   }
 
   // display()
   //
-  //
+  // Display the laser.
   void display() {
     stroke(255, 255, 0);
     strokeWeight(8);

@@ -34,7 +34,7 @@ class Superhero {
 
   // update()
   //
-  //  
+  // Move the Superhero and contain it within the window width.
   void update() {
     // Update position with velocity (to move the Superhero)
     x += vx;
@@ -45,7 +45,7 @@ class Superhero {
 
   // display()
   //
-  //  
+  // Diplay the Superhero.
   void display() {
     rectMode(CENTER);
     noStroke();
@@ -55,7 +55,7 @@ class Superhero {
 
   // keyPressed()
   //
-  // 
+  // Control keys to move the Superhero.
   void keyPressed() {
     // Check if the key is our left key
     if (keyCode == LEFT) {
@@ -70,7 +70,7 @@ class Superhero {
 
   // keyReleased()
   //
-  // 
+  // Control keys to move the Superhero.
   void keyReleased() {
     // Check if the key is our left key and if the Superhero is moving to the left
     if (keyCode == LEFT && vx < 0) {
