@@ -33,9 +33,6 @@ class Laser {
   void update() {
     y -= speed;
 
-    if (y < 0) {
-      y = superhero.y;
-    }
   }
 
   // display()
