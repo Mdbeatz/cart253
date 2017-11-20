@@ -1,6 +1,11 @@
+// Laser
+//
+//
+
 class Laser {  
   /////////////// Properties ///////////////
 
+  // Location, size and speed of the laser
   int x;
   int y;
   int size;
@@ -10,12 +15,13 @@ class Laser {
   /////////////// Constructor ///////////////
 
   // Starfield (int tempX, int tempY, int tempVY, int tempSize)
-  Laser (int x, int y, int speed) {
-    this.x = x;
-    this.y = y;
-    this.speed = speed;
-
-    size = 4;
+  //
+  //
+  Laser () {
+    x = superhero.x;
+    y = superhero.y;
+    size = 20;
+    speed = 8;
   }
 
 
@@ -25,14 +31,19 @@ class Laser {
   //
   //
   void update() {
-    y = y - speed;
+    y -= speed;
+
+    if (y < 0) {
+      y = superhero.y;
+    }
   }
 
   // display()
   //
   //
   void display() {
-    noStroke();
+    stroke(255, 255, 0);
+    strokeWeight(8);
     fill(255, 0, 0);
     ellipse(x, y, size, size);
   }
