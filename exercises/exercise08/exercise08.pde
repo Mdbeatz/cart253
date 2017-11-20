@@ -20,7 +20,7 @@ color backgroundColor = color (8, 5, 45);
 //
 // Sets the size and creates the Superhero
 void setup() {
-  size(640, 800);
+  size(640, 900);
 
   // Create the amount of stars that are stored in the starfield background array
   for (int i = 0; i < starfieldBackground.length; i++) {
