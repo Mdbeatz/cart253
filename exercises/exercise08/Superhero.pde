@@ -6,17 +6,11 @@ class Superhero {
 
   /////////////// Properties ///////////////
 
-  // Location of Superhero
+  // Location, x-velocity, speed, and appearance of Superhero
   int x;
   int y;
-
-  // Velocity of Superhero
   int vx;
-
-  // Speed of Superhero
   int speed = 10;
-
-  // Width and height of Superhero
   int superheroWidth = 60;
   int superheroHeight = 60;
 

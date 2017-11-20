@@ -5,17 +5,17 @@
 class Starfield {
   /////////////// Properties ///////////////
 
-  // Position, velocity and size
+  // Position, y-velocity and size of the stars
   int x;
   int y;
   int vy;
   int size;
 
-  // Array of colors (white & yellowish-white)
-  color[] starColors = {color(255, 255, 255), color(255, 255, 196)};
+  // Array of colors (white & yellowish-white & light-cyan)
+  color[] starColors = {color(255, 255, 255), color(255, 255, 235), color(200, 255, 255)};
 
   // Set the fill to be a random color from the array of bubbleColors
-  color fill = starColors[(int)random(2)];
+  color fill = starColors[(int)random(3)];
 
 
   /////////////// Constructor ///////////////
@@ -44,9 +44,10 @@ class Starfield {
     // Basically checks if the star has exited the window by the bottom 
     // and if it has, it will come back again through the top.
     if (y > height + size) {
-      // If it is, the y alue is given the negative size value
+      // If it is, the y value is assigned the negative size value
       y = -size;
-
+      
+      // The x value is assigned a random number within the width of the window
       x = floor(random(width));
     }
   }
@@ -55,11 +56,13 @@ class Starfield {
   //
   // Create the stars on screen as little circles.
   void display() {
+    // The radius of the circle(star). 
+    // This is done to ensure that the width and height of the circle are the same value,
+    // so we have a perfect circle instead of an oval. 
+    int starRadius = size;
+
     noStroke();
     fill(fill);
-
-    int size2 = size;
-
-    ellipse(x, y, size, size2);
+    ellipse(x, y, starRadius, starRadius);
   }
 }
