@@ -7,11 +7,11 @@ class Starfield {
   int vy;
   int size;
 
-  // Array of colors (blueish-white & almost-white & yellowish-white & yellowish-orange & orange-redish)
-  color[] starColors = {color(191, 204, 255), color(247, 243, 255), color(255, 241, 229), color(253, 200, 147), color(253, 192, 96)};
+  // Array of colors (white & yellowish-white)
+  color[] starColors = {color(255, 255, 255), color(255, 255, 196)};
 
   // Set the fill to be a random color from the array of bubbleColors
-  color fill = starColors[(int)random(5)];
+  color fill = starColors[(int)random(2)];
 
 
   /////////////// Constructor ///////////////
@@ -44,8 +44,6 @@ class Starfield {
       y = -size;
 
       x = floor(random(width));
-
-      vy = floor(random(3, 7));
     }
   }
 
@@ -55,6 +53,9 @@ class Starfield {
   void display() {
     noStroke();
     fill(fill);
-    ellipse(x, y, size, size);
+
+    int size2 = size;
+
+    ellipse(x, y, size, size2);
   }
 }
