@@ -1,5 +1,4 @@
-class Laser {
-
+class Laser {  
   /////////////// Properties ///////////////
 
   int x;
