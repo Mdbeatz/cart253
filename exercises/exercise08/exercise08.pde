@@ -1,4 +1,5 @@
 // Exercise08
+// Final Project Prototype
 //
 // PREPARED BY: Marianne De Bonis
 //
@@ -10,6 +11,8 @@ Starfield[] starfieldBackground = new Starfield[300];
 
 // Global variable for the superhero
 Superhero superhero;
+
+Laser laser;
 
 // Space between Superhero and the bottom of the window
 int superheroInset = 170;
@@ -33,6 +36,8 @@ void setup() {
   }  
 
   superhero = new Superhero(width/2, height - superheroInset);
+
+  laser = new Laser();
 }
 
 // draw()
@@ -46,6 +51,11 @@ void draw() {
 
   superhero.update();
   superhero.display();
+
+  if (keyCode == 32) {
+    laser.update(); 
+    laser.display();
+  } 
 }
 
 // displayStarfieldBackground()
