@@ -6,7 +6,7 @@
 
 
 // Array storing all the stars for the starfield
-Starfield[] starfieldBackground = new Starfield[200];
+Starfield[] starfieldBackground = new Starfield[300];
 
 // Global variable for the superhero
 Superhero superhero;
@@ -26,8 +26,8 @@ void setup() {
   for (int i = 0; i < starfieldBackground.length; i++) {
     int x = floor(random(width));
     int y = floor(random(height));
-    int vy = floor(random(1, 2));
-    int size = floor(random(3, 5));
+    int vy = floor(random(1, 3));
+    int size = floor(random(1, 4));
 
     starfieldBackground[i] = new Starfield(x, y, vy, size);
   }  
