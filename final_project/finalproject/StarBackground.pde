@@ -30,4 +30,40 @@ class StarBackground {
     this.vy = vy;
     this.size = size;
   }
+
+
+  /////////////// Methods ///////////////
+
+  // update()
+  //
+  // Move the stars.
+  void update() {
+    // Add the star's current y-velocity to its y-position
+    y += vy;
+
+    // Check if the y value is greater than the value of the height + size.
+    // Basically checks if the star has exited the window by the bottom 
+    // and if it has, it will come back again through the top.
+    if (y > height + size) {
+      // If it is, the y value is assigned the negative size value
+      y = -size;
+
+      // The x value is assigned a random number within the width of the window
+      x = floor(random(width));
+    }
+  }
+
+  // display()
+  //
+  // Create the stars on screen as little circles.
+  void display() {
+    // The radius of the circle(star). 
+    // This is done to ensure that the width and height of the circle are the same value,
+    // so we have a perfect circle instead of an oval. 
+    int starRadius = size;
+
+    noStroke();
+    fill(fill);
+    ellipse(x, y, starRadius, starRadius);
+  }
 }
