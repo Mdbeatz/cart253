@@ -22,7 +22,7 @@ void setup() {
 
 // draw()
 //
-// Handles all the magic of making the superhero, Marine, move.
+// Handles all the magic of making the superhero move.
 void draw() {
   background(backgroundColor);
 
