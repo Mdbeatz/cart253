@@ -3,30 +3,33 @@
 // PREPARED BY: Marianne De Bonis
 
 // Global variable for the superhero
-Marine marine;
+Superhero superhero;
 
-// Space between Marine and the bottom of the window
-int marineInset = 170;
+// Space between Superhero and the bottom of the window
+int superheroInset = 170;
+
+// Background color
+color backgroundColor = color (8, 5, 45);
 
 // setup()
 //
-// Sets the size and creates the superhero Marine
+// Sets the size and creates the Superhero
 void setup() {
   size(640, 800);
 
-  marine = new Marine(width/2, height - marineInset);
+  superhero = new Superhero(width/2, height - superheroInset);
 }
 
 // draw()
 //
 // Handles all the magic of making the superhero, Marine, move.
 void draw() {
-  background(8, 5, 45);
+  background(backgroundColor);
 
   displayPlanet();
 
-  marine.update();
-  marine.display();
+  superhero.update();
+  superhero.display();
 }
 
 // displayPlanet()
@@ -43,12 +46,12 @@ void displayPlanet() {
 // The superhero needs to know if it should move based on keypress,
 // so when the keypress is detected in the main program we need to tell the superhero.
 void keyPressed() {
-  marine.keyPressed();
+  superhero.keyPressed();
 }
 
 // keyReleased()
 //
 // Same as KeyPressed, except for released.
 void keyReleased() {
-  marine.keyReleased();
+  superhero.keyReleased();
 }
