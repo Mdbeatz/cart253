@@ -1,3 +1,7 @@
+// Starfield
+//
+// The starfield background.
+
 class Starfield {
   /////////////// Properties ///////////////
 
