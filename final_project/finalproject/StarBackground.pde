@@ -47,9 +47,6 @@ class StarBackground {
     if (y > height + size) {
       // If it is, the y value is assigned the negative size value
       y = -size;
-
-      // The x value is assigned a random number within the width of the window
-      x = floor(random(width));
     }
   }
 
