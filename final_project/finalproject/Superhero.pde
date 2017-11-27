@@ -13,6 +13,9 @@ class Superhero {
   int speed = 10;
   int superheroWidth = 60;
   int superheroHeight = 60;
+  int superheroSize = 75;
+
+  color fill = color(51, 206, 219);
 
 
   /////////////// Constructor ///////////////
@@ -49,8 +52,8 @@ class Superhero {
   void display() {
     rectMode(CENTER);
     noStroke();
-    fill(51, 206, 219);
-    rect(x, y, superheroWidth, superheroHeight);
+    fill(fill);
+    ellipse(x, y, superheroSize, superheroSize);
   }
 
   // keyPressed()
