@@ -70,6 +70,7 @@ void draw() {
     for (int j = 0; j < villains.length; j++) {
       if (l.hits(villains[j])) {
         villains[j].dies();
+        l.disappear();
       }
     }
   }
@@ -77,6 +78,8 @@ void draw() {
   superhero.update();
   superhero.display();
 
+  // Variable for checking if a villain hits the edge of the window.
+  // Set to false when game starts.
   boolean hitsEdge = false;
 
   // Loop through the villains one by one
@@ -84,7 +87,10 @@ void draw() {
     villains[i].update();
     villains[i].display();
 
+    // Check if the villain's position is greater than the width OR less than 0.
+    // Basically checking if the villain has hit the right edge of the window OR the left edge.
     if (villains[i].x + villains[i].size/2 > width || villains[i].x - villains[i].size/2 < 0) {
+      // If it has, then hitsEdge is set to true
       hitsEdge = true;
     }
   }
@@ -92,6 +98,14 @@ void draw() {
   if (hitsEdge) {
     for (int i = 0; i < villains.length; i++) {
       villains[i].hitsWall();
+    }
+  }
+
+  for (int i = lasers.size()-1; i >= 0; i--) {
+    Laser l = lasers.get(i);
+
+    if (l.getRemoved) {
+      lasers.remove(i);
     }
   }
 }
