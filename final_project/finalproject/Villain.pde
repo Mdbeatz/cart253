@@ -21,13 +21,15 @@ class Villain {
   // Set the fill to be a random color from the array of villainColors
   color fill = villainColors[(int)random(3)];
 
+  ArrayList<VillainLaser> villainLaser = new ArrayList<VillainLaser>();
+
 
   /////////////// Constructor ///////////////
 
   // Villain (int x, int y, int speed, int size)
   //
   // Sets the position, speed and size based on arguments.
-  
+
   Villain(int x, int y, int speed, int size) {
     this.x = x;
     this.y = y;
@@ -46,6 +48,37 @@ class Villain {
   //
   void update() {
     x += vx;
+
+    shootsLaser();
+  }
+
+  // shootsLaser()
+  //
+  //
+  void shootsLaser() {
+    if (frameCount % floor(random(50, 800)) == 0) {
+      villainLaser.add(new VillainLaser(x, y));
+    }
+
+    for (int i = 0; i < villainLaser.size(); i++) {
+      villainLaser.get(i).update();
+      villainLaser.get(i).display();
+
+      //if (villainLaser.get(i).y > height) {
+      //  villainLaser.remove(i);
+      //}
+
+      // A laser gets removed if it hits the planet, the superhero or the shield.
+      if (dist(villainLaser.get(i).x, villainLaser.get(i).y, planetX, planetY) < planetSize/2) {
+        villainLaser.remove(i);
+        int planetFillAlpha = 100;
+        planetFill = color (238, 174, 121, planetFillAlpha);
+      } else if (dist(villainLaser.get(i).x, villainLaser.get(i).y, superhero.x, superhero.y) < superhero.superheroSize/2) {
+        villainLaser.remove(i);
+      } else if (abs(villainLaser.get(i).y - shieldY) < shieldHeight/2 && shieldOn == true){        
+        villainLaser.remove(i);
+      }
+    }
   }
 
   // hitsWall()
@@ -56,9 +89,12 @@ class Villain {
     y += (size/2);
   }
 
+  // dies()
+  //
+  //
   void dies() {
     energy = 0;
-    fill = color(255,0);
+    fill = color(255, 0);
   }
 
   // display()
