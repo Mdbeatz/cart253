@@ -85,6 +85,10 @@ void draw() {
 
   // Loop through the villains one by one
   for (int i = 0; i < villains.length; i++) {
+    if (villains[i].energy == 0) {
+      continue;
+    }
+    
     villains[i].update();
     villains[i].display();
 
