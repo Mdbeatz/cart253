@@ -15,9 +15,10 @@ class VillainLaser {
 
   /////////////// Constructor ///////////////
 
-  // Laser()
+  // Laser(int newX, int newY)
   //
-  //
+  // Sets the position based on arguments from the Villain class.
+  // Sets the size and speed.
 
   VillainLaser (int newX, int newY) {
     x = newX;
@@ -33,9 +34,9 @@ class VillainLaser {
 
   // update()
   //
-  // Move the laser upwards.
+  // Move the laser downwards.
   void update() {
-    // Subtract the laser's current speed from its y-position
+    // Adds the laser's current speed to its y-position
     y += speed;
   }
 
