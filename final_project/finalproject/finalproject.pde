@@ -8,6 +8,9 @@
 // Array storing all the stars for the starBackground
 StarBackground[] starBackground = new StarBackground[400];
 
+// Array storing all the villlains
+Villain[] villains = new Villain[5];
+
 // Global variable for the superhero
 Superhero superhero;
 
@@ -36,12 +39,22 @@ void setup() {
     starBackground[i] = new StarBackground(x, y, vy, size);
   }
 
+  // Create the amount of villains that are stored in the villains array
+  for (int i = 0; i < villains.length; i++) {
+    int x = i * 80 + 80;
+    int y = 60;
+    int speed = 2;
+    int size = floor(random(50, 70));
+
+    villains[i] = new Villain(x, y, speed, size);
+  }
+
   superhero = new Superhero(width/2, height - superheroInset);
 }
 
 // draw()
 //
-// Handles all the magic of making the superhero move.
+// Handles all the magic.
 void draw() {
   background(backgroundColor);
   displayStarBackground();
@@ -53,10 +66,34 @@ void draw() {
     Laser l = (Laser)lasers.get(i);
     l.update(); 
     l.display();
+
+    for (int j = 0; j < villains.length; j++) {
+      if (l.hits(villains[j])) {
+        villains[j].dies();
+      }
+    }
   }
 
   superhero.update();
   superhero.display();
+
+  boolean hitsEdge = false;
+
+  // Loop through the villains one by one
+  for (int i = 0; i < villains.length; i++) {
+    villains[i].update();
+    villains[i].display();
+
+    if (villains[i].x + villains[i].size/2 > width || villains[i].x - villains[i].size/2 < 0) {
+      hitsEdge = true;
+    }
+  }
+
+  if (hitsEdge) {
+    for (int i = 0; i < villains.length; i++) {
+      villains[i].hitsWall();
+    }
+  }
 }
 
 // displayStarBackground
@@ -78,7 +115,7 @@ void displayStarBackground() {
 // Creates the Superhero's planet.
 void displayPlanet() {
   noStroke();
-  fill(238, 174, 121);
+  fill(238, 174, 121, 255);
   ellipse(width/2, height + 375, 1000, 1000);
 }
 
