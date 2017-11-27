@@ -49,6 +49,9 @@ class Laser {
     }
   }
 
+  // disappear()
+  //
+  //
   void disappear() {
     getRemoved = true;
   }

@@ -23,6 +23,7 @@ int superheroInset = 170;
 // Background color
 color backgroundColor = color (8, 5, 45);
 
+
 // setup()
 //
 // Sets the size and creates the Superhero
@@ -61,7 +62,7 @@ void draw() {
 
   displayPlanet();
 
-  // Loop through the array list size and create the lasers
+  // Loop through the lasers array list size and create the lasers
   for (int i = 0; i < lasers.size(); i++) {
     Laser l = (Laser)lasers.get(i);
     l.update(); 
@@ -95,16 +96,23 @@ void draw() {
     }
   }
 
+  // Check if hitsEdge is true.
   if (hitsEdge) {
+    // If it is, loop through the villains one by one
     for (int i = 0; i < villains.length; i++) {
+      // hitsWall() method is called.
+      // The villains will move in the opposite direction and shift downwards.
       villains[i].hitsWall();
     }
   }
 
+  // Loop through the lasers array list size backwards
   for (int i = lasers.size()-1; i >= 0; i--) {
     Laser l = lasers.get(i);
 
+    // Check if the getRemoved variable is true
     if (l.getRemoved) {
+      // If it is, remove the laser being referenced from the array list
       lasers.remove(i);
     }
   }
@@ -116,10 +124,7 @@ void draw() {
 void displayStarBackground() {
   // Loop through all the stars one by one
   for (int i = 0; i < starBackground.length; i++) {
-    // Update the stars
     starBackground[i].update();
-
-    // Display the stars
     starBackground[i].display();
   }
 }
