@@ -11,6 +11,8 @@ class Laser {
   int size;
   int speed;
 
+  boolean getRemoved;
+
 
   /////////////// Constructor ///////////////
 
@@ -45,6 +47,10 @@ class Laser {
     } else {
       return false;
     }
+  }
+
+  void disappear() {
+    getRemoved = true;
   }
 
   // display()
