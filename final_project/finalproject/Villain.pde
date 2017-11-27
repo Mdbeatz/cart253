@@ -58,6 +58,7 @@ class Villain {
 
   void dies() {
     energy = 0;
+    fill = color(255,0);
   }
 
   // display()
