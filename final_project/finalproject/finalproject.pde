@@ -9,9 +9,10 @@
 StarBackground[] starBackground = new StarBackground[400];
 
 // Array storing all the villlains
-Villain[] villains = new Villain[5];
+Villain[] villains = new Villain[6];
 
-Villain[] villains2 = new Villain[5];
+// Array storing all the villains2 for the 2nd row of villains
+Villain[] villains2 = new Villain[6];
 
 // Global variable for the superhero
 Superhero superhero;
@@ -25,17 +26,23 @@ int superheroInset = 170;
 // Background color
 color backgroundColor = color (8, 5, 45);
 
+int planetX;
+int planetY;
+int planetSize;
+color planetFill = color(238, 174, 121, 255);
+
 int shieldX;
 int shieldY;
 int shieldWidth;
 int shieldHeight;
+boolean shieldOn = false;
 
 
 // setup()
 //
 // Sets the size and creates the Superhero
 void setup() {
-  size(640, 850);
+  size(700, 850);
 
   // Create the amount of stars that are stored in the starBackground array
   for (int i = 0; i < starBackground.length; i++) {
@@ -79,6 +86,65 @@ void draw() {
 
   displayPlanet();
 
+  // Variable for checking if a villain hits the edge of the window.
+  // Set to false when game starts.
+  boolean hitsEdge = false;
+  boolean hitsEdge2 = false;
+
+  // Loop through the villains one by one
+  for (int i = 0; i < villains.length; i++) {
+    if (villains[i].energy == 0) {
+      continue;
+    }
+
+    villains[i].update();
+    villains[i].display();
+
+    // Check if the villain's position is greater than the width OR less than 0.
+    // Basically checking if the villain has hit the right edge of the window OR the left edge.
+    if (villains[i].x + villains[i].size/2 > width || villains[i].x - villains[i].size/2 < 0) {
+      // If it has, then hitsEdge is set to true
+      hitsEdge = true;
+    }
+  }
+
+  // Check if hitsEdge is true.
+  if (hitsEdge) {
+    // If it is, loop through the villains one by one
+    for (int i = 0; i < villains.length; i++) {
+      // hitsWall() method is called.
+      // The villains will move in the opposite direction and shift downwards.
+      villains[i].hitsWall();
+    }
+  }
+
+  // Loop through the villains one by one for 2nd row of villains
+  for (int i = 0; i < villains2.length; i++) {
+    if (villains2[i].energy == 0) {
+      continue;
+    }
+
+    villains2[i].update();
+    villains2[i].display();
+
+    // Check if the villain's position is greater than the width OR less than 0.
+    // Basically checking if the villain has hit the right edge of the window OR the left edge.
+    if (villains2[i].x + villains2[i].size/2 > width || villains2[i].x - villains2[i].size/2 < 0) {
+      // If it has, then hitsEdge is set to true
+      hitsEdge2 = true;
+    }
+  }
+
+  // Check if hitsEdge is true for 2nd row of villains.
+  if (hitsEdge2) {
+    // If it is, loop through the villains one by one
+    for (int i = 0; i < villains2.length; i++) {
+      // hitsWall() method is called.
+      // The villains will move in the opposite direction and shift downwards.
+      villains2[i].hitsWall();
+    }
+  }
+
   // Loop through the lasers array list size and create the lasers
   for (int i = 0; i < lasers.size(); i++) {
     Laser l = (Laser)lasers.get(i);
@@ -100,67 +166,6 @@ void draw() {
     }
   }
 
-  superhero.update();
-  superhero.display();
-
-  // Variable for checking if a villain hits the edge of the window.
-  // Set to false when game starts.
-  boolean hitsEdge = false;
-
-  // Loop through the villains one by one
-  for (int i = 0; i < villains.length; i++) {
-    if (villains[i].energy == 0) {
-      continue;
-    }
-
-    villains[i].update();
-    villains[i].display();
-
-    // Check if the villain's position is greater than the width OR less than 0.
-    // Basically checking if the villain has hit the right edge of the window OR the left edge.
-    if (villains[i].x + villains[i].size/2 > width || villains[i].x - villains[i].size/2 < 0) {
-      // If it has, then hitsEdge is set to true
-      hitsEdge = true;
-    }
-  }
-
-  // Loop through the villains one by one for 2nd row of villains
-  for (int i = 0; i < villains2.length; i++) {
-    if (villains2[i].energy == 0) {
-      continue;
-    }
-
-    villains2[i].update();
-    villains2[i].display();
-
-    // Check if the villain's position is greater than the width OR less than 0.
-    // Basically checking if the villain has hit the right edge of the window OR the left edge.
-    if (villains2[i].x + villains2[i].size/2 > width || villains2[i].x - villains2[i].size/2 < 0) {
-      // If it has, then hitsEdge is set to true
-      hitsEdge = true;
-    }
-  }
-
-  // Check if hitsEdge is true.
-  if (hitsEdge) {
-    // If it is, loop through the villains one by one
-    for (int i = 0; i < villains.length; i++) {
-      // hitsWall() method is called.
-      // The villains will move in the opposite direction and shift downwards.
-      villains[i].hitsWall();
-    }
-  }
-
-  // Check if hitsEdge is true for 2nd row of villains.
-  if (hitsEdge) {
-    // If it is, loop through the villains one by one
-    for (int i = 0; i < villains2.length; i++) {
-      // hitsWall() method is called.
-      // The villains will move in the opposite direction and shift downwards.
-      villains2[i].hitsWall();
-    }
-  }
-
   // Loop through the lasers array list size backwards
   for (int i = lasers.size()-1; i >= 0; i--) {
     Laser l = lasers.get(i);
@@ -172,7 +177,10 @@ void draw() {
     }
   }
 
-  if (keyCode == 's' || keyCode == 'S') {
+  superhero.update();
+  superhero.display();
+
+  if (shieldOn) {
     displayShield();
   }
 }
@@ -192,9 +200,13 @@ void displayStarBackground() {
 //
 // Creates the Superhero's planet.
 void displayPlanet() {
+  planetX = width/2;
+  planetY = height + 375;
+  planetSize = 1000;
+
   noStroke();
-  fill(238, 174, 121, 255);
-  ellipse(width/2, height + 375, 1000, 1000);
+  fill(planetFill);
+  ellipse(planetX, planetY, planetSize, planetSize);
 }
 
 // displayShield()
@@ -202,8 +214,8 @@ void displayPlanet() {
 //
 void displayShield() {
   shieldX = superhero.x;
-  shieldY = superhero.y - superhero.superheroHeight/2 - 15;  
-  shieldWidth = 200;
+  shieldY = superhero.y - superhero.superheroHeight/2 - 25;  
+  shieldWidth = width + width;
   shieldHeight = 15;
 
   rectMode(CENTER);
@@ -224,6 +236,11 @@ void keyPressed() {
     // If it is, a new laser will be added to the array list
     lasers.add(new Laser());
   }
+
+  if (keyCode == 's' || keyCode == 'S') {
+    shieldOn = true;
+    superhero.speed = 0;
+  }
 }
 
 // keyReleased()
@@ -231,4 +248,9 @@ void keyPressed() {
 // Same as KeyPressed, except for released.
 void keyReleased() {
   superhero.keyReleased();
+ 
+  if (keyCode == 's' || keyCode == 'S') {
+    shieldOn = false;  
+    superhero.speed = superhero.defaultSpeed;
+  }
 }
