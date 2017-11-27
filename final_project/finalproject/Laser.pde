@@ -24,7 +24,7 @@ class Laser {
     x = superhero.x;
     y = superhero.y;
     size = 20;
-    speed = 10;
+    speed = 15;
   }
 
 
@@ -42,7 +42,7 @@ class Laser {
   //
   //
   boolean hits(Villain villain) {
-    if (dist(x, y, villain.x, villain.y) < size + villain.size/2) {
+    if (dist(x, y, villain.x, villain.y) < size + villain.size/2 && villain.energy != 0) {
       return true;
     } else {
       return false;
