@@ -7,6 +7,9 @@
 
 int gameScreen = 0;
 
+// Loads a .vlw formatted font into a PFont object
+PFont font;
+
 // Array storing all the stars for the starBackground
 StarBackground[] starBackground = new StarBackground[400];
 
@@ -110,9 +113,11 @@ void initScreen() {
   rectMode(CENTER);
   stroke(255);
   strokeWeight(20);
-  fill(255,200);
-  rect(width/2, height/3, 500, 300);
-  
+  fill(255, 200);
+  rect(width/2, height/3, 500, 200);
+
+  font = loadFont("AmericanTypewriter-CondensedBold-48.vlw");
+  textFont(font, 60); // sets which font is chosen and the size
   textAlign(CENTER);
   textSize(50);
   fill(backgroundColor);
