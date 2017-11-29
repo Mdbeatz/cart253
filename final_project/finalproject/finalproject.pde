@@ -5,6 +5,8 @@
 //
 
 
+int gameScreen = 0;
+
 // Array storing all the stars for the starBackground
 StarBackground[] starBackground = new StarBackground[400];
 
@@ -92,6 +94,35 @@ void draw() {
   background(backgroundColor);
   displayStarBackground();
 
+  if (gameScreen == 0) {
+    initScreen();
+  } else if (gameScreen == 1) {
+    gameScreen();
+  } else if (gameScreen == 2) {
+    gameOverScreen();
+  }
+}
+
+// initScreen()
+//
+//
+void initScreen() {
+  rectMode(CENTER);
+  stroke(255);
+  strokeWeight(20);
+  fill(255,200);
+  rect(width/2, height/3, 500, 300);
+  
+  textAlign(CENTER);
+  textSize(50);
+  fill(backgroundColor);
+  text("GAME TITLE", width/2, height/3);
+}
+
+// gameScreen()
+//
+//
+void gameScreen() {
   displayPlanet();
 
   // Variable for checking if a villain hits the edge of the window.
@@ -195,6 +226,15 @@ void draw() {
   displayHeader();
 }
 
+// gameOverScreen()
+//
+//
+void gameOverScreen() {
+}
+
+// displayHeader()
+//
+//
 void displayHeader() {
   rectMode(CENTER);
   fill(255);
@@ -278,4 +318,14 @@ void keyReleased() {
     shieldOn = false;  
     superhero.speed = superhero.defaultSpeed;
   }
+}
+
+void mousePressed() {
+  if (gameScreen == 0) {
+    startGame();
+  }
+}
+
+void startGame() {
+  gameScreen = 1;
 }
