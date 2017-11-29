@@ -8,6 +8,10 @@
 // Array storing all the stars for the starBackground
 StarBackground[] starBackground = new StarBackground[400];
 
+PImage heart1;
+PImage heart2;
+PImage heart3;
+
 // Array storing all the villlains
 Villain[] villains = new Villain[6];
 
@@ -44,6 +48,10 @@ boolean shieldOn = false;
 void setup() {
   size(700, 850);
 
+  heart1 = loadImage("heart.png");
+  heart2 = loadImage("heart.png");
+  heart3 = loadImage("heart.png");
+
   // Create the amount of stars that are stored in the starBackground array
   for (int i = 0; i < starBackground.length; i++) {
     int x = floor(random(width));
@@ -57,7 +65,7 @@ void setup() {
   // Create the amount of villains that are stored in the villains array
   for (int i = 0; i < villains.length; i++) {
     int x = i * 80 + 80;
-    int y = 60;
+    int y = 70;
     int speed = 2;
     int size = floor(random(50, 70));
 
@@ -183,6 +191,23 @@ void draw() {
   if (shieldOn) {
     displayShield();
   }
+
+  displayHeader();
+}
+
+void displayHeader() {
+  rectMode(CENTER);
+  fill(255);
+  rect(width/2, 0, width, 65);
+
+  textSize(16);
+  fill(0);
+  text("LIVES:", 10, 20);
+
+  imageMode(CENTER);
+  image(heart1, 75, 15, 25, 25);
+  image(heart2, 105, 15, 25, 25);
+  image(heart3, 135, 15, 25, 25);
 }
 
 // displayStarBackground
@@ -201,8 +226,8 @@ void displayStarBackground() {
 // Creates the Superhero's planet.
 void displayPlanet() {
   planetX = width/2;
-  planetY = height + 375;
-  planetSize = 1000;
+  planetY = height + 150;
+  planetSize = 500;
 
   noStroke();
   fill(planetFill);
@@ -215,7 +240,7 @@ void displayPlanet() {
 void displayShield() {
   shieldX = superhero.x;
   shieldY = superhero.y - superhero.superheroHeight/2 - 25;  
-  shieldWidth = width + width;
+  shieldWidth = 300;
   shieldHeight = 15;
 
   rectMode(CENTER);
@@ -248,7 +273,7 @@ void keyPressed() {
 // Same as KeyPressed, except for released.
 void keyReleased() {
   superhero.keyReleased();
- 
+
   if (keyCode == 's' || keyCode == 'S') {
     shieldOn = false;  
     superhero.speed = superhero.defaultSpeed;
