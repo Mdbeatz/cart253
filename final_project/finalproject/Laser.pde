@@ -23,7 +23,7 @@ class Laser {
   Laser () {
     x = superhero.x;
     y = superhero.y;
-    size = 20;
+    size = 15;
     speed = 15;
   }
 

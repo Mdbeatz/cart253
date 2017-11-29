@@ -14,7 +14,7 @@ class Superhero {
   int speed = defaultSpeed;
   int superheroWidth = 60;
   int superheroHeight = 60;
-  int superheroSize = 75;
+  int superheroSize = 70;
 
   color fill = color(51, 206, 219);
 
