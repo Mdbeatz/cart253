@@ -5,17 +5,11 @@
 //
 
 
-int gameScreen = 0;
-
 // Loads a .vlw formatted font into a PFont object
 PFont font;
 
 // Array storing all the stars for the starBackground
 StarBackground[] starBackground = new StarBackground[400];
-
-PImage heart1;
-PImage heart2;
-PImage heart3;
 
 // Array storing all the villlains
 Villain[] villains = new Villain[6];
@@ -26,8 +20,22 @@ Villain[] villains2 = new Villain[6];
 // Global variable for the superhero
 Superhero superhero;
 
+// ArrayList to be filled with image objects
+ArrayList<PImage> hearts = new ArrayList<PImage>();
+
+// Global variables for the heart image objects
+PImage heart1;
+PImage heart2;
+PImage heart3;
+
 // ArrayList to be filled with Laser objects
 ArrayList<Laser> lasers = new ArrayList<Laser>();
+
+// Variable to control which screen is active, according to the value of this variable...
+// 0: Start screen
+// 1: Game screen
+// 2: Game over screen
+int gameScreen = 0;
 
 // Space between Superhero and the bottom of the window
 int superheroInset = 170;
@@ -35,11 +43,13 @@ int superheroInset = 170;
 // Background color
 color backgroundColor = color (8, 5, 45);
 
+// Position, size and fill of the superhero's planet
 int planetX;
 int planetY;
 int planetSize;
 color planetFill = color(238, 174, 121, 255);
 
+// Position, size and control statement for the superhero's shield
 int shieldX;
 int shieldY;
 int shieldWidth;
@@ -51,11 +61,17 @@ boolean shieldOn = false;
 //
 // Sets the size and creates the Superhero
 void setup() {
-  size(700, 850);
+  size(700, 900);
 
+  // Load the heart images in to the global variables
   heart1 = loadImage("heart.png");
   heart2 = loadImage("heart.png");
   heart3 = loadImage("heart.png");
+
+  // Add the global variables of the heart images to the hearts ArrayList
+  hearts.add(heart1);
+  hearts.add(heart2);
+  hearts.add(heart3);
 
   // Create the amount of stars that are stored in the starBackground array
   for (int i = 0; i < starBackground.length; i++) {
@@ -87,6 +103,7 @@ void setup() {
     villains2[i] = new Villain(x, y, speed, size);
   }
 
+  // Create the superhero
   superhero = new Superhero(width/2, height - superheroInset);
 }
 
@@ -97,19 +114,35 @@ void draw() {
   background(backgroundColor);
   displayStarBackground();
 
+  // Check for the gameScreen value and display contents of the chosen screen...
+  // If gameScreen value is 0, display startScreen content...
+  // If gameScreen value is 1, display gameScreen content...
+  // If gameScreen value is 2, display gameOverScreen content...
   if (gameScreen == 0) {
-    initScreen();
+    startScreen();
   } else if (gameScreen == 1) {
     gameScreen();
+    displayHeader();
   } else if (gameScreen == 2) {
     gameOverScreen();
   }
 }
 
-// initScreen()
+// displayStarBackground
+//
+// Display the star background.
+void displayStarBackground() {
+  // Loop through all the stars one by one
+  for (int i = 0; i < starBackground.length; i++) {
+    starBackground[i].update();
+    starBackground[i].display();
+  }
+}
+
+// startScreen()
 //
 //
-void initScreen() {
+void startScreen() {
   rectMode(CENTER);
   stroke(255);
   strokeWeight(20);
@@ -221,20 +254,36 @@ void gameScreen() {
     }
   }
 
+  // Loop through the lasers array list
+  for (int i = 0; i < lasers.size(); i++) {
+    // Check if the laser hits the shield
+    if (abs(lasers.get(i).y - shieldY) < shieldHeight/2 && shieldOn == true) { 
+      // If it does, remove the indexed laser
+      lasers.remove(i);
+    }
+  }
+
   superhero.update();
   superhero.display();
 
   if (shieldOn) {
     displayShield();
   }
-
-  displayHeader();
 }
 
-// gameOverScreen()
+// displayShield()
 //
 //
-void gameOverScreen() {
+void displayShield() {
+  shieldX = superhero.x;
+  shieldY = superhero.y - superhero.superheroHeight/2 - 25;  
+  shieldWidth = 300;
+  shieldHeight = 15;
+
+  rectMode(CENTER);
+  noStroke();
+  fill(255);
+  rect(shieldX, shieldY, shieldWidth, shieldHeight);
 }
 
 // displayHeader()
@@ -247,22 +296,21 @@ void displayHeader() {
 
   textSize(16);
   fill(0);
-  text("LIVES:", 10, 20);
+  text("LIVES:", 20, 20);
 
-  imageMode(CENTER);
-  image(heart1, 75, 15, 25, 25);
-  image(heart2, 105, 15, 25, 25);
-  image(heart3, 135, 15, 25, 25);
+  displayHearts();
 }
 
-// displayStarBackground
+// displayHearts()
 //
-// Display the star background.
-void displayStarBackground() {
-  // Loop through all the stars one by one
-  for (int i = 0; i < starBackground.length; i++) {
-    starBackground[i].update();
-    starBackground[i].display();
+//
+void displayHearts() {
+  imageMode(CENTER);
+  
+  // Loop through the hearts ArrayList
+  for (int i=0; i<hearts.size(); i++) {
+    // Display each heart next to each other
+    image(hearts.get(i), 75 + 30*i, 15, 25, 25);
   }
 }
 
@@ -279,19 +327,13 @@ void displayPlanet() {
   ellipse(planetX, planetY, planetSize, planetSize);
 }
 
-// displayShield()
+// gameOverScreen()
 //
 //
-void displayShield() {
-  shieldX = superhero.x;
-  shieldY = superhero.y - superhero.superheroHeight/2 - 25;  
-  shieldWidth = 300;
-  shieldHeight = 15;
-
-  rectMode(CENTER);
-  noStroke();
-  fill(255);
-  rect(shieldX, shieldY, shieldWidth, shieldHeight);
+void gameOverScreen() {
+  fill(255, 0, 0);
+  textSize(100);
+  text("GAME OVER", width/2, height/2);
 }
 
 // keyPressed()
