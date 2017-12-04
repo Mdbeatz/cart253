@@ -20,6 +20,9 @@ Villain[] villains2 = new Villain[6];
 // Global variable for the superhero
 Superhero superhero;
 
+// Global variable for the planet
+Planet planet;
+
 // ArrayList to be filled with image objects
 ArrayList<PImage> hearts = new ArrayList<PImage>();
 
@@ -27,6 +30,7 @@ ArrayList<PImage> hearts = new ArrayList<PImage>();
 PImage heart1;
 PImage heart2;
 PImage heart3;
+int heartsSize = 3;
 
 // ArrayList to be filled with Laser objects
 ArrayList<Laser> lasers = new ArrayList<Laser>();
@@ -42,12 +46,6 @@ int superheroInset = 170;
 
 // Background color
 color backgroundColor = color (8, 5, 45);
-
-// Position, size and fill of the superhero's planet
-int planetX;
-int planetY;
-int planetSize;
-color planetFill = color(238, 174, 121, 255);
 
 // Position, size and control statement for the superhero's shield
 int shieldX;
@@ -107,7 +105,9 @@ void setup() {
 
   // Create the superhero
   superhero = new Superhero(width/2, height - superheroInset);
-  
+
+  planet = new Planet();
+
   meme = loadImage("picardmeme.jpg");
 }
 
@@ -127,6 +127,8 @@ void draw() {
   } else if (gameScreen == 1) {
     gameScreen();
     displayHeader();
+    planet.update();
+    planet.display();
   } else if (gameScreen == 2) {
     gameOverScreen();
   }
@@ -151,14 +153,15 @@ void startScreen() {
   stroke(255);
   strokeWeight(10);
   fill(255, 150);
-  rect(width/2, height/3, 500, 150, 10);
+  rect(width/2, height/3, 600, 150, 10);
 
   font = loadFont("AmericanTypewriter-CondensedBold-48.vlw");
   textFont(font, 60); // sets which font is chosen and the size
   textAlign(CENTER, CENTER);
-  textSize(100);
+  textSize(50);
   fill(255);
-  text("untitled", width/2, 300);
+  text("A weird space invaders game", width/2, 275);
+  text("with a shield", width/2, 330);
 
   textAlign(CENTER, CENTER);
   textSize(50);
@@ -168,18 +171,21 @@ void startScreen() {
   textAlign(CENTER, CENTER);
   textSize(40);
   fill(255);
-  text("Controls:", width/2, 600);
+  text("Controls:", width/2, 590);
   textSize(30);
-  text("Left + right arrow keys to move", width/2, 640);
-  text("Space bar to shoot lasers", width/2, 675);
-  text("'s' key to use shield", width/2, 710);
+  text("Left + right arrow keys to move", width/2, 630);
+  text("Space bar to shoot lasers", width/2, 665);
+  text("'s' key to use shield", width/2, 700);
+
+  text("Get shot 3 times: YOU LOSE", width/2, 765);
+  text("The planet completely fades away: YOU LOSE", width/2, 800);
 }
 
 // gameScreen()
 //
 //
 void gameScreen() {
-  displayPlanet();
+  //displayPlanet();
 
   // Variable for checking if a villain hits the edge of the window.
   // Set to false when game starts.
@@ -194,6 +200,7 @@ void gameScreen() {
 
     villains[i].update();
     villains[i].display();
+    villains[i].reachesSuperhero();
 
     // Check if the villain's position is greater than the width OR less than 0.
     // Basically checking if the villain has hit the right edge of the window OR the left edge.
@@ -314,7 +321,7 @@ void displayHeader() {
 
   textSize(16);
   fill(0);
-  text("LIVES:", 20, 20);
+  text("LIVES:", 30, 15);
 
   displayHearts();
 }
@@ -326,23 +333,10 @@ void displayHearts() {
   imageMode(CENTER);
 
   // Loop through the hearts ArrayList
-  for (int i=0; i<hearts.size(); i++) {
+  for (int i=0; i<heartsSize; i++) {
     // Display each heart next to each other
     image(hearts.get(i), 75 + 30*i, 15, 25, 25);
   }
-}
-
-// displayPlanet()
-//
-// Creates the Superhero's planet.
-void displayPlanet() {
-  planetX = width/2;
-  planetY = height + 150;
-  planetSize = 500;
-
-  noStroke();
-  fill(planetFill);
-  ellipse(planetX, planetY, planetSize, planetSize);
 }
 
 // gameOverScreen()
@@ -352,23 +346,8 @@ void gameOverScreen() {
   fill(255, 0, 0);
   textSize(100);
   text("GAME OVER", width/2, 200);
-  
+
   image(meme, width/2, 500, 500, 383);
-
-  //int tryAgainBtnX = width/2;
-  //int tryAgainBtnY = 500;
-  //int tryAgainBtnWidth = 400;
-  //int tryAgainBtnHeight = 100;
-
-  //stroke(255);
-  //strokeWeight(8);
-  //fill(255, 255, 255, 150);
-  //rectMode(CENTER);
-  //rect(tryAgainBtnX, tryAgainBtnY, tryAgainBtnWidth, tryAgainBtnHeight, 10);
-  //fill(255, 255, 255);
-  //textSize(70);
-  //textAlign(CENTER, CENTER);
-  //text("TRY AGAIN", tryAgainBtnX, tryAgainBtnY);
 
   textSize(50);
   text("Click to restart", width/2, 750);
@@ -405,17 +384,72 @@ void keyReleased() {
   }
 }
 
+// mousePressed()
+//
+//
 void mousePressed() {
+  // Click to start game
   if (gameScreen == 0) {
     startGame();
   }
 
-  // Click to reset game
-  //if (gameScreen == 2) {
-  //  startGame();
-  //}
+  // Click to restart game
+  if (gameScreen == 2) {
+    resetGame();
+  }
 }
 
+// startGame()
+//
+//
 void startGame() {
   gameScreen = 1;
+}
+
+// resetGame()
+//
+//
+void resetGame() {
+  // Reset the 1st row of villains
+  // Create the amount of villains that are stored in the villains array
+  for (int i = 0; i < villains.length; i++) {
+    int x = i * 80 + 80;
+    int y = 70;
+    int speed = 2;
+    int size = floor(random(50, 70));
+
+    villains[i] = new Villain(x, y, speed, size);
+  }
+
+  // Reset the 2nd row of villains
+  // Create the amount of villains that are stored in the villains2 array for the 2nd row of villains
+  for (int i = 0; i < villains2.length; i++) {
+    int x = i * 80 + 80;
+    int y = 150;
+    int speed = 2;
+    int size = floor(random(50, 70));
+
+    villains2[i] = new Villain(x, y, speed, size);
+  }
+
+  // Reset superhero location
+  superhero.x = width/2;
+  superhero.y = height - superheroInset;
+
+  // Reset hearts
+  heartsSize = 3;
+
+  // Reset planet
+  planet.planetFillAlpha = 255;
+  planet.display();
+
+  // Start the game
+  startGame();
+}
+
+// playerWins()
+//
+//
+void playerWins() {
+  
 }
