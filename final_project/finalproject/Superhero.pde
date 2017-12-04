@@ -10,7 +10,7 @@ class Superhero {
   int x;
   int y;
   int vx;
-  int defaultSpeed = 10;
+  int defaultSpeed = 6;
   int speed = defaultSpeed;
   int superheroWidth = 60;
   int superheroHeight = 60;
