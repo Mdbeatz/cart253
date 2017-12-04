@@ -23,8 +23,6 @@ class Villain {
 
   ArrayList<VillainLaser> villainLaser = new ArrayList<VillainLaser>();
 
-  int planetFillAlpha = 255;
-
 
   /////////////// Constructor ///////////////
 
@@ -67,23 +65,38 @@ class Villain {
       villainLaser.get(i).display();
 
       // A laser gets removed if it hits the planet, the superhero or the shield.
-      if (dist(villainLaser.get(i).x, villainLaser.get(i).y, planetX, planetY) < planetSize/2 ) {
-        villainLaser.remove(i);
-        planetFill = color (238, 174, 121, planetFillAlpha);
-      } else if (dist(villainLaser.get(i).x, villainLaser.get(i).y, superhero.x, superhero.y) < superhero.superheroSize/2) {
+      if (dist(villainLaser.get(i).x, villainLaser.get(i).y, planet.planetX, planet.planetY) < planet.planetSize/2 ) {
         villainLaser.remove(i);
         
+        if (planet.planetFillAlpha > 0) {
+          planet.planetFillAlpha = planet.planetFillAlpha - 15;
+        } else {
+          gameScreen = 2;
+        }
+      } else if (dist(villainLaser.get(i).x, villainLaser.get(i).y, superhero.x, superhero.y) < superhero.superheroSize/2) {
+        villainLaser.remove(i);
+
         // Check if the hearts ArrayList is EQUAL to 1
-        if (hearts.size() == 1) {
+        if (heartsSize == 1) {
           // If it is, the gameScreen value becomes 2 (therefore displays the gameOverScreen)
           gameScreen = 2;
         } else {
           // Otherwise, remove a heart from the hearts ArrayList
-          hearts.remove(hearts.size()-1);
+          // Loop through the hearts ArrayList
+          heartsSize--;
         }
-      } else if (abs(villainLaser.get(i).y - shieldY) < shieldHeight/2 && shieldOn == true) {        
+      } else if (abs(villainLaser.get(i).y - shieldY) < shieldHeight/2 && shieldOn == true && villainLaser.get(i).x > shieldX - shieldWidth/2 && villainLaser.get(i).x < shieldX + shieldWidth/2) {        
         villainLaser.remove(i);
       }
+    }
+  }
+
+  // reachesSuperhero()
+  //
+  //
+  void reachesSuperhero() {
+    if (y > 600) {
+      gameScreen = 2;
     }
   }
 

@@ -10,9 +10,8 @@ class VillainLaser {
   int y;
   int size;
   int speed;
-
-
-
+  
+  
   /////////////// Constructor ///////////////
 
   // Laser(int newX, int newY)
