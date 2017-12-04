@@ -56,6 +56,8 @@ int shieldWidth;
 int shieldHeight;
 boolean shieldOn = false;
 
+PImage meme;
+
 
 // setup()
 //
@@ -105,6 +107,8 @@ void setup() {
 
   // Create the superhero
   superhero = new Superhero(width/2, height - superheroInset);
+  
+  meme = loadImage("picardmeme.jpg");
 }
 
 // draw()
@@ -155,12 +159,12 @@ void startScreen() {
   textSize(100);
   fill(255);
   text("untitled", width/2, 300);
-  
+
   textAlign(CENTER, CENTER);
   textSize(50);
   fill(255);
   text("Click to start", width/2, 475);
-  
+
   textAlign(CENTER, CENTER);
   textSize(40);
   fill(255);
@@ -347,22 +351,27 @@ void displayPlanet() {
 void gameOverScreen() {
   fill(255, 0, 0);
   textSize(100);
-  text("GAME OVER", width/2, height/3);
+  text("GAME OVER", width/2, 200);
+  
+  image(meme, width/2, 500, 500, 383);
 
-  int tryAgainBtnX = width/2;
-  int tryAgainBtnY = 500;
-  int tryAgainBtnWidth = 400;
-  int tryAgainBtnHeight = 100;
+  //int tryAgainBtnX = width/2;
+  //int tryAgainBtnY = 500;
+  //int tryAgainBtnWidth = 400;
+  //int tryAgainBtnHeight = 100;
 
-  stroke(255);
-  strokeWeight(8);
-  fill(255, 255, 255, 150);
-  rectMode(CENTER);
-  rect(tryAgainBtnX, tryAgainBtnY, tryAgainBtnWidth, tryAgainBtnHeight, 10);
-  fill(255, 255, 255);
-  textSize(70);
-  textAlign(CENTER, CENTER);
-  text("TRY AGAIN", tryAgainBtnX, tryAgainBtnY);
+  //stroke(255);
+  //strokeWeight(8);
+  //fill(255, 255, 255, 150);
+  //rectMode(CENTER);
+  //rect(tryAgainBtnX, tryAgainBtnY, tryAgainBtnWidth, tryAgainBtnHeight, 10);
+  //fill(255, 255, 255);
+  //textSize(70);
+  //textAlign(CENTER, CENTER);
+  //text("TRY AGAIN", tryAgainBtnX, tryAgainBtnY);
+
+  textSize(50);
+  text("Click to restart", width/2, 750);
 }
 
 // keyPressed()
@@ -400,6 +409,11 @@ void mousePressed() {
   if (gameScreen == 0) {
     startGame();
   }
+
+  // Click to reset game
+  //if (gameScreen == 2) {
+  //  startGame();
+  //}
 }
 
 void startGame() {
