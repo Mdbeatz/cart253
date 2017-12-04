@@ -145,16 +145,30 @@ void displayStarBackground() {
 void startScreen() {
   rectMode(CENTER);
   stroke(255);
-  strokeWeight(20);
-  fill(255, 200);
-  rect(width/2, height/3, 500, 200);
+  strokeWeight(10);
+  fill(255, 150);
+  rect(width/2, height/3, 500, 150, 10);
 
   font = loadFont("AmericanTypewriter-CondensedBold-48.vlw");
   textFont(font, 60); // sets which font is chosen and the size
-  textAlign(CENTER);
+  textAlign(CENTER, CENTER);
+  textSize(100);
+  fill(255);
+  text("untitled", width/2, 300);
+  
+  textAlign(CENTER, CENTER);
   textSize(50);
-  fill(backgroundColor);
-  text("GAME TITLE", width/2, height/3);
+  fill(255);
+  text("Click to start", width/2, 475);
+  
+  textAlign(CENTER, CENTER);
+  textSize(40);
+  fill(255);
+  text("Controls:", width/2, 600);
+  textSize(30);
+  text("Left + right arrow keys to move", width/2, 640);
+  text("Space bar to shoot lasers", width/2, 675);
+  text("'s' key to use shield", width/2, 710);
 }
 
 // gameScreen()
@@ -306,7 +320,7 @@ void displayHeader() {
 //
 void displayHearts() {
   imageMode(CENTER);
-  
+
   // Loop through the hearts ArrayList
   for (int i=0; i<hearts.size(); i++) {
     // Display each heart next to each other
@@ -333,7 +347,22 @@ void displayPlanet() {
 void gameOverScreen() {
   fill(255, 0, 0);
   textSize(100);
-  text("GAME OVER", width/2, height/2);
+  text("GAME OVER", width/2, height/3);
+
+  int tryAgainBtnX = width/2;
+  int tryAgainBtnY = 500;
+  int tryAgainBtnWidth = 400;
+  int tryAgainBtnHeight = 100;
+
+  stroke(255);
+  strokeWeight(8);
+  fill(255, 255, 255, 150);
+  rectMode(CENTER);
+  rect(tryAgainBtnX, tryAgainBtnY, tryAgainBtnWidth, tryAgainBtnHeight, 10);
+  fill(255, 255, 255);
+  textSize(70);
+  textAlign(CENTER, CENTER);
+  text("TRY AGAIN", tryAgainBtnX, tryAgainBtnY);
 }
 
 // keyPressed()
