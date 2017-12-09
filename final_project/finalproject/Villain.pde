@@ -67,8 +67,8 @@ class Villain {
       // A laser gets removed if it hits the planet, the superhero or the shield.
       if (dist(villainLaser.get(i).x, villainLaser.get(i).y, planet.planetX, planet.planetY) < planet.planetSize/2 ) {
         villainLaser.remove(i);
-        
-        if (planet.planetFillAlpha > 0) {
+
+        if (planet.planetFillAlpha > 10) {
           planet.planetFillAlpha = planet.planetFillAlpha - 15;
         } else {
           gameScreen = 2;
@@ -95,7 +95,7 @@ class Villain {
   //
   //
   void reachesSuperhero() {
-    if (y > 600) {
+    if (y > height - superheroInset - 150) {
       gameScreen = 2;
     }
   }
@@ -122,6 +122,8 @@ class Villain {
   void display() {
     noStroke();
     fill(fill);
-    ellipse(x, y, size, size);
+    //ellipse(x, y, size, size);
+
+    image(villainSprite, x, y, size, size);
   }
 }
