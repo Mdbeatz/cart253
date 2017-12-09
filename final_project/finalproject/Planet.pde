@@ -6,7 +6,7 @@ class Planet {
   int planetY;
   int planetVX;
   int planetSize;
-  color planetFill = color(238, 174, 121);
+  color planetFill = color(52, 219, 219);
   int planetFillAlpha = 255;
 
 
@@ -20,7 +20,7 @@ class Planet {
     planetVX = 2;
     planetY = height + 150;
     planetSize = 500;
-    planetFill = color (238, 174, 121);
+    planetFill = color (52, 219, 219);
   }
 
 
