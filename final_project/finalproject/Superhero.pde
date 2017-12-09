@@ -14,7 +14,7 @@ class Superhero {
   int speed = defaultSpeed;
   int superheroWidth = 60;
   int superheroHeight = 60;
-  int superheroSize = 70;
+  int superheroSize = 100;
 
   color fill = color(51, 206, 219);
 
@@ -54,7 +54,9 @@ class Superhero {
     rectMode(CENTER);
     noStroke();
     fill(fill);
-    ellipse(x, y, superheroSize, superheroSize);
+    //ellipse(x, y, superheroSize, superheroSize);
+
+    image(superheroSprite, x, y, superheroSize-10, superheroSize-10);
   }
 
   // keyPressed()
