@@ -18,6 +18,13 @@
 
 // The moon level... Cause it's up there...
 
+import processing.sound.*;
+
+// Globa variables for the sound effects
+SoundFile backgroundMusic;
+SoundFile villainLaserSound;
+SoundFile superheroLaserSound;
+SoundFile gameOverSound;
 
 // Loads a .vlw formatted font into a PFont object
 PFont myFont;
@@ -110,14 +117,29 @@ int currentLvl = 1;
 // Sets the size and creates the Superhero
 void setup() {
   size(700, 800);
-  
+
   myFont = createFont("KGWhattheTeacherWants", 32);
+
+  // Create the villain and superhero laser sounds
+  villainLaserSound = new SoundFile(this, "villainLaserSound.mp3");
+  superheroLaserSound = new SoundFile(this, "superheroLaserSound.wav");
+  
+  // Create the background music sound
+  backgroundMusic = new SoundFile(this, "backgroundMusic.mp3");
+  
+  // Set the background music to loop through the game
+  backgroundMusic.loop();
+  
+  // Set the background music amplitude/volume lower
+  backgroundMusic.amp(0.6);
+  
+  gameOverSound = new SoundFile(this, "gameOverSound.wav");
 
   // Create the screens
   startScreen = new StartScreen();
   gameOverScreen = new GameOverScreen();
   playerWinsScreen = new PlayerWinsScreen();
-  
+
   level1Resets = new Level1Resets();
   level2Resets = new Level2Resets();
 
@@ -178,7 +200,7 @@ void setup() {
   villainSprite = loadImage("villain.png");
   superheroSprite = loadImage("superhero.png");
   meteorSprite = loadImage("meteor.png");
-  
+
   superheroVector = loadImage("superheroVector.png");
 }
 
@@ -196,12 +218,12 @@ void draw() {
     startScreen.display();
   } else if (gameScreen == 1) {
     gameScreen();
-    
+
     displayHeader();
-    
+
     planet.update();
     planet.display();
-    
+
     if (meteorOn) {
       meteor.update();
       meteor.display();
@@ -405,9 +427,11 @@ void keyPressed() {
   superhero.keyPressed();
 
   // Checks if the spacebar is being pressed (spacebar keycode: 32)
-  if (keyCode == 32) {
+  if (keyCode == 32 && gameScreen != 0 && gameScreen != 2 && gameScreen != 3) {
     // If it is, a new laser will be added to the array list
     lasers.add(new Laser());
+
+    superheroLaserSound.play();
   }
 
   // Check if the 's' key is being pressed in both lower and upper case states
