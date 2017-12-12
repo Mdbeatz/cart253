@@ -14,7 +14,7 @@ class StarBackground {
   // Array of colors (white & yellow & yellowish-white & light-cyan)
   color[] starColors = {color(255, 255, 255, 150), color(255, 255, 0, 150), color(255, 255, 235, 150), color(200, 255, 255, 150)};
 
-  // Set the fill to be a random color from the array of bubbleColors
+  // Set the fill to be a random color from the array of starColors
   color fill = starColors[(int)random(4)];
 
 
