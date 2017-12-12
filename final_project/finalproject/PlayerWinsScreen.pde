@@ -1,9 +1,12 @@
 // PlayerWinsScreen
 //
-//
+// A class that displays the player wins screen content.
 
 class PlayerWinsScreen {
 
+  // display()
+  //
+  // Display the text for the player wins screen
   void display() {
     textFont(myFont, 60);
     fill(255, 0, 0);

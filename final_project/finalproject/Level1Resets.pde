@@ -1,3 +1,7 @@
+// Level1Resets
+//
+// A class that resets values for level 1
+
 class Level1Resets {
 
   void display() {

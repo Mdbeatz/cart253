@@ -1,6 +1,6 @@
 // Laser
 //
-//
+// A class that defines the superhero's laser
 
 class Laser {
   /////////////// Properties ///////////////
@@ -11,6 +11,7 @@ class Laser {
   int size;
   int speed;
 
+  // Variable to remove a laser
   boolean getRemoved;
 
 
@@ -18,7 +19,7 @@ class Laser {
 
   // Laser()
   //
-  //
+  // Sets the position, size and speed
 
   Laser () {
     x = superhero.x;
@@ -40,7 +41,7 @@ class Laser {
 
   // hits(Villain villain)
   //
-  //
+  // Returns true if the laser hits a villain that is alive. Otherwise, returns false
   boolean hits(Villain villain) {
     if (dist(x, y, villain.x, villain.y) < size + villain.size/2 && villain.energy != 0) {
       return true;
@@ -51,8 +52,9 @@ class Laser {
 
   // disappear()
   //
-  //
+  // Remove laser
   void disappear() {
+    // Set to true
     getRemoved = true;
   }
 

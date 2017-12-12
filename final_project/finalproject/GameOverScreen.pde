@@ -1,9 +1,12 @@
 // GameOverScreen
 //
-//
+// A class that displays the game over screen content.
 
 class GameOverScreen {
   
+  // display()
+  //
+  // Display the text for the game over screen
   void display() {
     textFont(myFont, 60);
     fill(255, 0, 0);
