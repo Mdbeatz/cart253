@@ -1,24 +1,57 @@
-// FINAL PROJECT
+// ***FINAL PROJECT***
 //
 // A WEIRD SPACE INVADERS GAME WITH A SHIELD AND A HARD LEVEL 2 (THAT IS LIKE PONG BUT WITH A METEOR)
 //
 // PREPARED BY: Marianne De Bonis
 //
-// ABOUT THE GAME:
-//    blablabla....
+// ***LEVEL 1***
+// Protect the planet from the villains by killing them with lasers and using your shield. 
+// You lose a life every time you get hit by a laser (you only have three lives) and the planet
+// loses energy every time it gets hit by a villain's laser. Do not let the planet disappear.
 //
-// CONTROLS:
-//    Left arrow key - Move left
-//    Right arrow key - Move right
-//    'S' or 's' - Turn shield on 
-//    Spacebar - Shoot lasers
+// ***LEVEL 2***
+// Same as level 2, but with a meteor flying around that acts like a Pong ball, and the villains
+// are a bit faster. Use your shield to deflect the meteor away from the planet. If the meteor 
+// hits the planet, YOU LOSE.
 //
-// ACKNOWLEDGEMENTS:
-//    blablabla...
+// ***CONTROLS***
+// Left arrow key - Move left
+// Right arrow key - Move right
+// 'S' or 's' - Turn shield on 
+// Spacebar - Shoot lasers
+//
+// ***ARTIST'S STATEMENT***
+// The theme I was aiming for was a vibrant, tacky-looking space game; and I think I achieved that look. 
+// I had a lot of fun creating the animated star background. My first idea was to just create a seamless image 
+// of a star background and have it keep scrolling vertically through the window, but then looking back on 
+// exercise07, I realized I can implement the same technique I used. I created bubbles that move downwards on 
+// the y-axis within the window, and then once they exit b the bottom, they reset and spawn above the window 
+// and come back downwards. For the bubbles to look like stars, I just had to make the sizes smaller and have 
+// an Array of different star colors. The stars are also random sizes (between 1-4) and random speeds (between 1-3) 
+// and this gives the impression of depth, that some stars are closer and some are farther away. I created the 
+// superhero, villain, and heart sprites myself by using Piskel, a free online sprite editor. For the startScreen, 
+// I created the superhero vector myself using Illustrator, and yes, I intentionally designed the superhero to look 
+// like a Powerpuff Girl. For level 1, it’s pretty much a simple space invaders game, but to be more creative, 
+// I added a few twists. I wanted the user to be able to use a shield (by simply displaying a rect when pressing the 
+// spacebar) but to not make it too easy, I made it that the user cannot move nor can they shoot lasers when using 
+// the shield (when spacebar is being pressed). Once the spacebar is released, the user can resume to moving around 
+// and shooting lasers. Also, by using the energy technique (using alpha channels) from exercise04 with the griddie 
+// life system, I used this to make the planet slowly disappear whenever it gets hit by a villain’s laser (alpha 
+// channel decrements by 15 with every hit). The most challenging aspect for coding this game was to understand how 
+// ArrayLists worked. Using ArrayLists was essential for both the superhero and villain lasers. I soon realized it 
+// wasn’t that complicated; it was similar to making an array of objects, but with a list, you can add and remove 
+// items from the list and it is resized dynamically. The lasers were simply added with the add() function, they were 
+// indexed with the get() function, and are simply removed with the remove() function. 
+// Shout out to Freesound.org for the great, free sound effects used in my game!
 
-// The moon level... Cause it's up there...
 
 import processing.sound.*;
+import ddf.minim.*;
+import ddf.minim.analysis.*;
+import ddf.minim.effects.*;
+import ddf.minim.signals.*;
+import ddf.minim.spi.*;
+import ddf.minim.ugens.*;
 
 // Globa variables for the sound effects
 SoundFile backgroundMusic;
