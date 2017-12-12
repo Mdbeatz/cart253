@@ -59,6 +59,9 @@ class Villain {
   void shootsLaser() {
     if (frameCount % floor(random(100, 200)) == 0) {
       villainLaser.add(new VillainLaser(x, y));
+      
+      villainLaserSound.play();
+      villainLaserSound.amp(0.5);
     }
 
     for (int i = 0; i < villainLaser.size(); i++) {
@@ -73,6 +76,8 @@ class Villain {
           planet.planetFillAlpha = planet.planetFillAlpha - 15;
         } else {
           gameScreen = 2;
+          
+          gameOverSound.play();
         }
       } else if (dist(villainLaser.get(i).x, villainLaser.get(i).y, superhero.x, superhero.y) < superhero.superheroSize/2) {
         villainLaser.remove(i);
@@ -81,6 +86,8 @@ class Villain {
         if (heartsSize == 1) {
           // If it is, the gameScreen value becomes 2 (therefore displays the gameOverScreen)
           gameScreen = 2;
+          
+          gameOverSound.play();
         } else {
           // Otherwise, remove a heart from the hearts ArrayList
           // Loop through the hearts ArrayList
