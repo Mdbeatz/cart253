@@ -10,7 +10,7 @@
 // loses energy every time it gets hit by a villain's laser. Do not let the planet disappear.
 //
 // ***LEVEL 2***
-// Same as level 2, but with a meteor flying around that acts like a Pong ball, and the villains
+// Same as level 1, but with a meteor flying around that acts like a Pong ball, and the villains
 // are a bit faster. Use your shield to deflect the meteor away from the planet. If the meteor 
 // hits the planet, YOU LOSE.
 //
