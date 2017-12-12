@@ -5,6 +5,7 @@
 class GameOverScreen {
   
   void display() {
+    textFont(myFont, 60);
     fill(255, 0, 0);
     textSize(100);
     text("GAME OVER", width/2, 200);

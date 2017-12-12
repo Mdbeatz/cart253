@@ -20,7 +20,7 @@
 
 
 // Loads a .vlw formatted font into a PFont object
-PFont font;
+PFont myFont;
 
 // Global variables for the start screen, game over screen and player wins screen
 StartScreen startScreen;
@@ -107,7 +107,9 @@ int currentLvl = 1;
 //
 // Sets the size and creates the Superhero
 void setup() {
-  size(700, 900);
+  size(700, 800);
+  
+  myFont = createFont("KGWhattheTeacherWants", 32);
 
   // Create the screens
   startScreen = new StartScreen();

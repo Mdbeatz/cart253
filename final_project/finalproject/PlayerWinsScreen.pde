@@ -5,6 +5,7 @@
 class PlayerWinsScreen {
 
   void display() {
+    textFont(myFont, 60);
     fill(255, 0, 0);
     textSize(100);
     text("YOU WON!", width/2, 200);
