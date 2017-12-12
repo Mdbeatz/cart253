@@ -1,3 +1,8 @@
+// Planet
+//
+// A class that defines the planet at the bottom of the screen
+// that constantly moves from right to left
+
 class Planet {
   /////////////// Properties ///////////////
 

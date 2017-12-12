@@ -1,16 +1,16 @@
 // FINAL PROJECT
 //
+// A WEIRD SPACE INVADERS GAME WITH A SHIELD AND A HARD LEVEL 2 (THAT IS LIKE PONG BUT WITH A METEOR)
+//
 // PREPARED BY: Marianne De Bonis
 //
-// A WEIRD SPACE INVADERS GAME WITH A SHIELD AND A HARD LEVEL 2
-//
-// ABOUT:
+// ABOUT THE GAME:
 //    blablabla....
 //
 // CONTROLS:
 //    Left arrow key - Move left
 //    Right arrow key - Move right
-//    S - Turn shield on 
+//    'S' or 's' - Turn shield on 
 //    Spacebar - Shoot lasers
 //
 // ACKNOWLEDGEMENTS:

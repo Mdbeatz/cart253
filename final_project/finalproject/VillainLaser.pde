@@ -1,6 +1,6 @@
 // Laser
 //
-//
+// A class that defines a villain laser that moves downwards on the y-axis
 
 class VillainLaser {
   /////////////// Properties ///////////////

@@ -1,6 +1,7 @@
 // Superhero
 //
-// 
+// A class that defines the superhero that can be moved left and right on the screen,
+// shoot lasers and use a shield using keys passed through from the main program 
 
 class Superhero {
 

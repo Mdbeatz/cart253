@@ -1,6 +1,6 @@
 // StarBackground
 //
-// The star background.
+// A class that defines the animated star background.
 
 class StarBackground {
   /////////////// Properties ///////////////

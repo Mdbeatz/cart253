@@ -1,6 +1,7 @@
 // Villain
 //
-//
+// A class that defines a villain that moves along the x-axis and shifts downwards
+// every time it collides with the left or right wall of the window
 
 class Villain {
   /////////////// Properties ///////////////
