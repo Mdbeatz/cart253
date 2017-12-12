@@ -461,6 +461,7 @@ void displayShield() {
 void displayHeader() {
   // Draw rect using CENTER mode, with a white fill and up at the top of the window
   rectMode(CENTER);
+  noStroke();
   fill(255);
   rect(width/2, 0, width, 65);
 
