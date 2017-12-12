@@ -62,14 +62,14 @@ class Laser {
   //
   // Display the laser.
   void display() {
-    // Red stroke
-    stroke(255, 255, 0);
+    // Yellow stroke
+    stroke(224, 227, 57);
 
     // Stroke thickness
-    strokeWeight(8);
+    strokeWeight(6);
 
-    // Yellow fill
-    fill(255, 0, 0);
+    // Pink fill
+    fill(235, 45, 120);
 
     ellipse(x, y, size, size);
   }
