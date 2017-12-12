@@ -10,8 +10,10 @@ class StartScreen {
   void display() {
     // Black transparent rect behind the game title
     rectMode(CENTER);
+    strokeWeight(5);
+    stroke(111, 192, 68);
     fill(0, 180);
-    rect(350, 178, 660, 140); 
+    rect(350, 180, 660, 140); 
 
     // Game title
     textFont(myFont, 60);
@@ -30,6 +32,7 @@ class StartScreen {
     fill(89, 197, 203);
     text("Click to start", width/2, 340);
     rectMode(CENTER);
+    noStroke();
     rect(width/2, 368, 200, 5);
 
     textAlign(CENTER, CENTER);

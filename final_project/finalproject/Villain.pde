@@ -61,7 +61,7 @@ class Villain {
       villainLaser.add(new VillainLaser(x, y));
       
       villainLaserSound.play();
-      villainLaserSound.amp(0.5);
+      villainLaserSound.amp(0.4);
     }
 
     for (int i = 0; i < villainLaser.size(); i++) {
