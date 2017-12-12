@@ -63,7 +63,7 @@ SoundFile winSound;
 SoundFile superheroGetsHitSound;
 SoundFile planetGetsHitSound;
 
-// Loads a .vlw formatted font into a PFont object
+// Loads a formatted font into a PFont object
 PFont myFont;
 
 // Global variables for the start screen, game over screen and player wins screen
@@ -71,6 +71,7 @@ StartScreen startScreen;
 GameOverScreen gameOverScreen;
 PlayerWinsScreen playerWinsScreen;
 
+// Global variables for the resets for level 1 and resets for level 2
 Level1Resets level1Resets;
 Level2Resets level2Resets;
 
@@ -87,13 +88,9 @@ Villain[] villains2 = new Villain[6];
 int deadVillainsRow1Count;
 int deadVillainsRow2Count;
 
-// Global variable for the superhero
+// Global variables for the superhero, planet and meteor
 Superhero superhero;
-
-// Global variable for the planet
 Planet planet;
-
-// Global variable for the meteor
 Meteor meteor;
 
 // Boolean variable to display the meteor only for level 2
@@ -141,9 +138,8 @@ PImage loseMeme;
 // Global variables for the villain, superhero and meteor images
 PImage villainSprite;
 PImage superheroSprite;
-PImage meteorSprite;
-
 PImage superheroVector;
+PImage meteorSprite;
 
 // Variable for displaying current level
 int currentLvl = 1;
@@ -151,41 +147,61 @@ int currentLvl = 1;
 
 // setup()
 //
-// Sets the size and creates the Superhero
+// Sets the size of the window, creates the font, the sounds, the screens, the superhero,
+// the planet, the meteor, loads the hearts and character sprites, creates the star background,
+// and the two rows of villains
 void setup() {
+  // Set the window size
   size(700, 800);
 
+  // Create the font
   myFont = createFont("KGWhattheTeacherWants", 32);
 
-  // Create the villain and superhero laser sounds
+  // Create all the sounds
   villainLaserSound = new SoundFile(this, "villainLaserSound.mp3");
-  superheroLaserSound = new SoundFile(this, "superheroLaserSound.wav");
-  
   villainDiesSound = new SoundFile(this, "villainDiesSound.wav");
-
+  superheroLaserSound = new SoundFile(this, "superheroLaserSound.wav");
   superheroGetsHitSound = new SoundFile(this, "superheroGetsHitSound.wav");
-
-  // Create the background music sound
-  backgroundMusic = new SoundFile(this, "backgroundMusic.mp3");
-  
-  // Set the background music to loop through the game
-  backgroundMusic.loop();
-  
-  // Set the background music amplitude/volume lower
-  backgroundMusic.amp(0.6);
-  
+  planetGetsHitSound = new SoundFile(this, "planetGetsHitSounds.wav");
   gameOverSound = new SoundFile(this, "gameOverSound.wav");
   winSound = new SoundFile(this, "winSound.wav");
-  
-  planetGetsHitSound = new SoundFile(this, "planetGetsHitSounds.wav");
+  backgroundMusic = new SoundFile(this, "backgroundMusic.mp3");
+
+  // Set the background music to loop through the game with a lower amplitude/volume
+  backgroundMusic.loop();
+  backgroundMusic.amp(0.6);
 
   // Create the screens
   startScreen = new StartScreen();
   gameOverScreen = new GameOverScreen();
   playerWinsScreen = new PlayerWinsScreen();
 
+  // Create the level resets for levels 1 and 2
   level1Resets = new Level1Resets();
   level2Resets = new Level2Resets();
+
+  // Create the superhero, planet and the meteor
+  superhero = new Superhero(width/2, height - superheroInset);
+  planet = new Planet();
+  meteor = new Meteor();
+
+  // Load the heart images into the global variables
+  heart1 = loadImage("heart.png");
+  heart2 = loadImage("heart.png");
+  heart3 = loadImage("heart.png");
+
+  // Add the global variables of the heart images to the hearts ArrayList
+  hearts.add(heart1);
+  hearts.add(heart2);
+  hearts.add(heart3);  
+
+  // Load the meme images and character images into their variables
+  loseMeme = loadImage("picardmeme.jpg");
+  winMeme = loadImage("gatsbymeme.jpg");
+  villainSprite = loadImage("villain.png");
+  superheroSprite = loadImage("superhero.png");
+  superheroVector = loadImage("superheroVector.png");
+  meteorSprite = loadImage("meteor.png");
 
   // Create the amount of stars that are stored in the starBackground array
   for (int i = 0; i < starBackground.length; i++) {
@@ -216,43 +232,16 @@ void setup() {
 
     villains2[i] = new Villain(x, y, speed, size);
   }
-
-  // Create the superhero
-  superhero = new Superhero(width/2, height - superheroInset);
-
-  // Load the heart images into the global variables
-  heart1 = loadImage("heart.png");
-  heart2 = loadImage("heart.png");
-  heart3 = loadImage("heart.png");
-
-  // Add the global variables of the heart images to the hearts ArrayList
-  hearts.add(heart1);
-  hearts.add(heart2);
-  hearts.add(heart3);
-
-  // Create the planet
-  planet = new Planet();
-
-  // Create the meteor
-  meteor = new Meteor();
-
-  // Load the meme images into their variables
-  loseMeme = loadImage("picardmeme.jpg");
-  winMeme = loadImage("gatsbymeme.jpg");
-
-  // Load the character images into their variables
-  villainSprite = loadImage("villain.png");
-  superheroSprite = loadImage("superhero.png");
-  meteorSprite = loadImage("meteor.png");
-
-  superheroVector = loadImage("superheroVector.png");
 }
 
 // draw()
 //
 // Handles all the magic.
 void draw() {
+  // Display background color
   background(backgroundColor);
+
+  // Display star background
   displayStarBackground();
 
   // Check for the gameScreen value and display contents of the chosen screen...
@@ -261,21 +250,28 @@ void draw() {
   if (gameScreen == 0) {
     startScreen.display();
   } else if (gameScreen == 1) {
+    // Display the game
     gameScreen();
 
+    // Display the header
     displayHeader();
 
+    // Update and display the planet
     planet.update();
     planet.display();
 
+    // Check if meteorOn == true,
     if (meteorOn) {
+      // If it is, update and display the meteor, and check for collisions
       meteor.update();
       meteor.display();
       meteor.collide();
     }
   } else if (gameScreen == 2) {
+    // Display the game over screen contents
     gameOverScreen.display();
   } else if (gameScreen == 3) {
+    // Display the player wins screen contents
     playerWinsScreen.display();
   }
 }
@@ -286,26 +282,42 @@ void draw() {
 void displayStarBackground() {
   // Loop through all the stars one by one
   for (int i = 0; i < starBackground.length; i++) {
+    // Update the star
     starBackground[i].update();
+
+    // Display the star
     starBackground[i].display();
   }
 }
 
 // gameScreen()
 //
-//
+// Display the game
 void gameScreen() {  
-  // Variable for checking if a villain hits the edge of the window.
-  // Set to false when game starts.
+  // Update and display the superhero
+  superhero.update();
+  superhero.display();
+
+  // Check if shieldOn == true,
+  if (shieldOn) {
+    // If it is, display the shield
+    displayShield();
+  }
+  
+  // Variables for checking if a villain hits the edge of the window.
+  // hitsEdge is for villains and hitsEdge2 is for villains2. Both are set to false when game starts.
   boolean hitsEdge = false;
   boolean hitsEdge2 = false;
 
   // Loop through the villains one by one
   for (int i = 0; i < villains.length; i++) {
+    // Check if the indexed villain's energy is equal to 0
     if (villains[i].energy == 0) {
+      // If it is, start the next iteration
       continue;
     }
 
+    // Update and display the indexed villain, and check if it reaches the superhero
     villains[i].update();
     villains[i].display();
     villains[i].reachesSuperhero();
@@ -330,17 +342,21 @@ void gameScreen() {
 
   // Loop through the villains one by one for 2nd row of villains
   for (int i = 0; i < villains2.length; i++) {
+    // Check if the indexed villain's energy is equal to 0
     if (villains2[i].energy == 0) {
+      // If it is, start the next iteration
       continue;
     }
 
+    // Update and display the indexed villain, and check if it reaches the superhero
     villains2[i].update();
     villains2[i].display();
+    villains2[i].reachesSuperhero();
 
     // Check if the villain's position is greater than the width OR less than 0.
     // Basically checking if the villain has hit the right edge of the window OR the left edge.
     if (villains2[i].x + villains2[i].size/2 > width || villains2[i].x - villains2[i].size/2 < 0) {
-      // If it has, then hitsEdge is set to true
+      // If it has, then hitsEdge2 is set to true
       hitsEdge2 = true;
     }
   }
@@ -358,29 +374,46 @@ void gameScreen() {
   // Loop through the lasers array list size and create the lasers
   for (int i = 0; i < lasers.size(); i++) {
     Laser l = (Laser)lasers.get(i);
+    
+    // Update and display the laser
     l.update(); 
     l.display();
-
+    
+    // Loop through the first row of villains
     for (int j = 0; j < villains.length; j++) {
       if (l.hits(villains[j])) {
+        // Indexed villain dies
         villains[j].dies();
+        
+        // Remove laser that hits the indexed villain
         l.disappear();
+        
+        // Increment the deadVillainsRow1Count by 1
         deadVillainsRow1Count++;
       }
     }
 
+    // Loop through the second row of villains
     for (int j = 0; j < villains2.length; j++) {
       if (l.hits(villains2[j])) {
+        // Indexed villain dies
         villains2[j].dies();
+        
+        // Remove laser that hits the indexed villain
         l.disappear();
+        
+        // Increment the deadVillainsRow2Count by 1
         deadVillainsRow2Count++;
       }
     }
   }
 
+  // Check if all the villains are dead
   if (deadVillainsRow1Count == villains.length && deadVillainsRow2Count == villains2.length && deadVillainsRow1Count == deadVillainsRow2Count) {
+    // If they are all dead, gameScreen is set to 3, therefore showing displaying the player wins screen
     gameScreen = 3;
-    
+
+    // Play the win sound
     winSound.play();
   }
 
@@ -403,24 +436,19 @@ void gameScreen() {
       lasers.remove(i);
     }
   }
-
-  superhero.update();
-  superhero.display();
-
-  if (shieldOn) {
-    displayShield();
-  }
 }
 
 // displayShield()
 //
-//
+// Display the shield
 void displayShield() {
+  // Set the position and size of the shield
   shieldX = superhero.x;
   shieldY = superhero.y - superhero.superheroHeight/2 - 25;  
   shieldWidth = 350;
   shieldHeight = 15;
 
+  // Draw rect using CENTER mode, no stroke, and a white fill
   rectMode(CENTER);
   noStroke();
   fill(255);
@@ -429,29 +457,32 @@ void displayShield() {
 
 // displayHeader()
 //
-//
+// Display the header
 void displayHeader() {
+  // Draw rect using CENTER mode, with a white fill and up at the top of the window
   rectMode(CENTER);
   fill(255);
   rect(width/2, 0, width, 65);
 
+  // Display the text for the lives and current level with text size of 16 and black fill
   textSize(16);
   fill(0);
   text("LIVES:", 30, 15);
-
-  displayHearts();
-
   text("LEVEL: " + currentLvl, 300, 15 );
+
+  // Display the hearts
+  displayHearts();
 }
 
 // displayHearts()
 //
-//
+// Display hearts/superhero lives
 void displayHearts() {
-  imageMode(CENTER);
-
   // Loop through the hearts ArrayList
   for (int i=0; i<heartsSize; i++) {
+    // Draw image using CENTER mode
+    imageMode(CENTER);
+
     // Display each heart next to each other
     image(hearts.get(i), 75 + 30*i, 15, 25, 25);
   }
@@ -459,9 +490,12 @@ void displayHearts() {
 
 // startGame()
 //
-//
+// Start the game
 void startGame() {
+  // set gameScreen to 1, so now the gameScreen will be displayed
   gameScreen = 1;
+
+  // set meteorOn to false, so the meteor does not display
   meteorOn = false;
 }
 
@@ -470,6 +504,7 @@ void startGame() {
 // The superhero needs to know if it should move based on keypress,
 // so when the keypress is detected in the main program we need to tell the superhero.
 void keyPressed() {
+  // Call the superhero's keyPressed method
   superhero.keyPressed();
 
   // Checks if the spacebar is being pressed (spacebar keycode: 32)
@@ -477,6 +512,7 @@ void keyPressed() {
     // If it is, a new laser will be added to the array list
     lasers.add(new Laser());
 
+    // Play the superhero laser sound
     superheroLaserSound.play();
   }
 
@@ -494,6 +530,7 @@ void keyPressed() {
 //
 // Same as KeyPressed, except for released.
 void keyReleased() {
+  // Call the superhero's keyReleased method
   superhero.keyReleased();
 
   // Check if the 's' key is being pressed in both lower and upper case states
@@ -508,22 +545,29 @@ void keyReleased() {
 
 // mousePressed()
 //
-// 
+// Checks for mouse clicks
 void mousePressed() {
-  // If the start screen is displayed, click to start game
+  // Check if the mouse is being clicked when gameScreen equals 0 / start screen is displayed
   if (gameScreen == 0) {
+    // If it is, start the game
     startGame();
   }
 
-  // If the game over screen is displayed, click to restart game
+  // Check if the mouse is being clicked when gameScreen equals 2 / game screen is displayed
   if (gameScreen == 2) {
+    // If it is, reset to play level 1 again
     level1Resets.display();
+
+    // Reset meteor
     meteor.reset();
   }
 
-  // If the win screen is displayed, click to restart game
+  // Check if the mouse is being clicked when gameScreen equals 3 / player wins screen is displayed
   if (gameScreen == 3) {
+    // If it is, reset to play level 2
     level2Resets.display();
+
+    // Set meteorOn to true, so the meteor will be displayed
     meteorOn = true;
   }
 }
