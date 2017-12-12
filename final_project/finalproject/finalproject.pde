@@ -99,6 +99,8 @@ PImage villainSprite;
 PImage superheroSprite;
 PImage meteorSprite;
 
+PImage superheroVector;
+
 // Variable for displaying current level
 int currentLvl = 1;
 
@@ -176,6 +178,8 @@ void setup() {
   villainSprite = loadImage("villain.png");
   superheroSprite = loadImage("superhero.png");
   meteorSprite = loadImage("meteor.png");
+  
+  superheroVector = loadImage("superheroVector.png");
 }
 
 // draw()
