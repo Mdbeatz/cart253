@@ -72,6 +72,8 @@ class Villain {
       if (dist(villainLaser.get(i).x, villainLaser.get(i).y, planet.planetX, planet.planetY) < planet.planetSize/2 ) {
         villainLaser.remove(i);
 
+        planetGetsHitSound.play();
+  
         if (planet.planetFillAlpha > 10) {
           planet.planetFillAlpha = planet.planetFillAlpha - 15;
         } else {
@@ -81,6 +83,8 @@ class Villain {
         }
       } else if (dist(villainLaser.get(i).x, villainLaser.get(i).y, superhero.x, superhero.y) < superhero.superheroSize/2) {
         villainLaser.remove(i);
+        
+        superheroGetsHitSound.play();
 
         // Check if the hearts ArrayList is EQUAL to 1
         if (heartsSize == 1) {
@@ -122,6 +126,8 @@ class Villain {
   void dies() {
     energy = 0;
     fill = color(255, 0);
+    
+    villainDiesSound.play();
   }
 
   // display()
