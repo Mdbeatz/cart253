@@ -23,8 +23,12 @@ import processing.sound.*;
 // Globa variables for the sound effects
 SoundFile backgroundMusic;
 SoundFile villainLaserSound;
+SoundFile villainDiesSound;
 SoundFile superheroLaserSound;
 SoundFile gameOverSound;
+SoundFile winSound;
+SoundFile superheroGetsHitSound;
+SoundFile planetGetsHitSound;
 
 // Loads a .vlw formatted font into a PFont object
 PFont myFont;
@@ -124,6 +128,10 @@ void setup() {
   villainLaserSound = new SoundFile(this, "villainLaserSound.mp3");
   superheroLaserSound = new SoundFile(this, "superheroLaserSound.wav");
   
+  villainDiesSound = new SoundFile(this, "villainDiesSound.wav");
+
+  superheroGetsHitSound = new SoundFile(this, "superheroGetsHitSound.wav");
+
   // Create the background music sound
   backgroundMusic = new SoundFile(this, "backgroundMusic.mp3");
   
@@ -134,6 +142,9 @@ void setup() {
   backgroundMusic.amp(0.6);
   
   gameOverSound = new SoundFile(this, "gameOverSound.wav");
+  winSound = new SoundFile(this, "winSound.wav");
+  
+  planetGetsHitSound = new SoundFile(this, "planetGetsHitSounds.wav");
 
   // Create the screens
   startScreen = new StartScreen();
@@ -336,6 +347,8 @@ void gameScreen() {
 
   if (deadVillainsRow1Count == villains.length && deadVillainsRow2Count == villains2.length && deadVillainsRow1Count == deadVillainsRow2Count) {
     gameScreen = 3;
+    
+    winSound.play();
   }
 
   // Loop through the lasers array list size backwards
