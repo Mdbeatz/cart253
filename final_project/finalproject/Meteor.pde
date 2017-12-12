@@ -23,7 +23,9 @@ class Meteor {
   //
   // Sets the position, speed, x and y velocities, and size
   Meteor() {
+    // Set to half the value of the width of the window
     x = width/2;
+    
     y = 0;
 
     speed = 5;

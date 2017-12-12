@@ -27,6 +27,7 @@ class StartScreen {
     fill(224, 227, 57);
     text("(THAT IS LIKE PONG BUT WITH A METEOR)", width/2, 217);
 
+    // "Click to start" text
     textAlign(CENTER, CENTER);
     textSize(40);
     fill(89, 197, 203);
@@ -35,6 +36,7 @@ class StartScreen {
     noStroke();
     rect(width/2, 368, 200, 5);
 
+    // CONtROLS text
     textAlign(CENTER, CENTER);
     textSize(30);
     fill(235, 45, 120);
@@ -45,6 +47,7 @@ class StartScreen {
     text("Space bar to shoot lasers", width/2, 505);
     text("'s' key to use shield", width/2, 530);
 
+    // WARNING text
     textSize(30);
     fill(235, 45, 120);
     text("*** WARNING ***", width/2, 600);
@@ -54,10 +57,12 @@ class StartScreen {
     text("The planet completely fades away: YOU LOSE", width/2, 655);
     text("Level 2: The planet gets hit by a meteor: YOU LOSE", width/2, 685);
 
+    // HAVE FUN text
     textSize(30);
     fill(89, 197, 203);
     text("HAVE FUN!!!", width/2, 740);
-
+    
+    // Display characters on screen
     image(superheroVector, 60, 280, 130, 140);
     image(villainSprite, 600, 290, 70, 70);
     image(villainSprite, 510, 270, 70, 70);

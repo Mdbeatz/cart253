@@ -3,7 +3,10 @@
 // A class that resets values for level 2
 
 class Level2Resets {
-
+  
+  // display()
+  //
+  // Resets to play Level 2
   void display() {
     currentLvl = 2;
 
@@ -29,6 +32,7 @@ class Level2Resets {
       villains2[i] = new Villain(x, y, speed, size);
     }
 
+    // Set the dead villains counts back to 0
     deadVillainsRow1Count = 0;
     deadVillainsRow2Count = 0;
 
@@ -43,8 +47,10 @@ class Level2Resets {
     planet.planetFillAlpha = 255;
     planet.display();
 
+    // Set to false
     meteorOn = false;
 
+    // Reset meteor
     meteor.reset();
 
     // Start the game

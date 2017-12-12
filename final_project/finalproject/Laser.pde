@@ -22,8 +22,10 @@ class Laser {
   // Sets the position, size and speed
 
   Laser () {
+    // Set the x and y values to the same values as the superhero's x and y
     x = superhero.x;
     y = superhero.y;
+    
     size = 15;
     speed = 15;
   }

@@ -4,7 +4,11 @@
 
 class Level1Resets {
 
+  // display()
+  //
+  // Resets to play Level 1
   void display() {
+    // Set currentLvl to 1
     currentLvl = 1;
 
     // Reset the 1st row of villains
@@ -29,6 +33,7 @@ class Level1Resets {
       villains2[i] = new Villain(x, y, speed, size);
     }
 
+    // Set the dead villains counts back to 0
     deadVillainsRow1Count = 0;
     deadVillainsRow2Count = 0;
 

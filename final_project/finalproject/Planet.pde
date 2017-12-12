@@ -21,10 +21,16 @@ class Planet {
   //
   //
   Planet() {
+    // Set to half the value of the width of the window
     planetX = width/2;
+    
     planetVX = 2;
+    
+    // Set to the height + 150
     planetY = height + 150;
+    
     planetSize = 500;
+    
     planetFill = color (52, 219, 219);
   }
 
@@ -35,9 +41,10 @@ class Planet {
   //
   // Move the planet left and right.
   void update() {
+    // Increment the x value with the vx value
     planetX += planetVX;
 
-    // Check for wall colli
+    // Make the planet continuously move left and right
     if (planetX - planetSize/2 < 0 ) {
       planetVX = -planetVX;
     } else if (planetX + planetSize/2 > width) {
@@ -47,10 +54,10 @@ class Planet {
 
   // display()
   //
-  // Displat the planet.
+  // Display the planet.
   void display() {
     noStroke();
-    fill(planetFill,planetFillAlpha);
+    fill(planetFill, planetFillAlpha);
     ellipse(planetX, planetY, planetSize, planetSize);
   }
 }
